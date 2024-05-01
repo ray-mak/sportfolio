@@ -32,6 +32,11 @@ const createNewUser = asyncHandler(async (req, res) => {
     if (duplicateEmail) {
         return res.status(409).json({ message: 'Duplicate email'})
     }
+
+    const duplicateDisplayName = await User.findOne({displayName}).lean().exec()
+    if (duplicateDisplayName) {
+        return res.status(409).json({message: 'Duplicate display name'})
+    }
     //Hash password
     const hashedPwd = await bcrypt.hash(password, 10) //salt rounds
 
@@ -61,6 +66,16 @@ const updateUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User not found'})
     }
 
+    const duplicateEmail = await User.findOne({ email }).lean().exec()
+    if (duplicateEmail && duplicateEmail?._id.toString() !== id) {
+        return res.status(409).json({ message: 'Duplicate email'})
+    }
+
+    const duplicateDisplayName = await User.findOne({displayName}).lean().exec()
+    if (duplicateDisplayName && duplicateDisplayName?._id.toString() !== id) {
+        return res.status(409).json({message: 'Duplicate display name'})
+    }
+
     user.displayName = displayName
     user.email = email
 
@@ -88,6 +103,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     if (!user) {
         return res.status(400).json({ message: 'User not found'})
     }
+    const result = await user.deleteOne()
     const reply = `Username ${user.username} with ID ${id} deleted`
 
     res.json(reply)
