@@ -96,9 +96,70 @@ const AddPick = () => {
         }
     }, [])
 
+    //set odds input and automatically update decimal/american/probability when one input changes
+    const [americanOdds, setAmericanOdds] = useState("")
+    const [decimalOdds, setDecimalOdds] = useState("")
+    const [probability, setProbability] = useState("")
+
+    function handleAmericanOddsChange(e) {
+        let newAmericanOdds = e.target.value
+        setAmericanOdds(newAmericanOdds)
+
+        //convert American odds to decimal odds.
+        if (newAmericanOdds.startsWith("-")) {
+            //remove the "-"
+            const number = parseFloat(newAmericanOdds.replace(/[^\d.]/g, ''))
+            const newDecimalOdds = (100 / number) + 1
+            const newProbability = 100 / (100 / number + 1)
+            setDecimalOdds(newDecimalOdds.toFixed(2))
+            setProbability(newProbability.toFixed(2))
+        } else {
+            const number = parseFloat(newAmericanOdds.replace(/[^\d.]/g, ''))
+            const newDecimalOdds = (number / 100) + 1
+            const newProbability = 100 / (number / 100 + 1)
+            setDecimalOdds(newDecimalOdds.toFixed(2))
+            setProbability(newProbability.toFixed(2))
+        }
+
+    }
+    console.log(americanOdds, decimalOdds, probability)
+
+    function handleDecimalOddsChange(e) {
+        const newDecimalOdds = e.target.value
+        setDecimalOdds(newDecimalOdds)
+        if (newDecimalOdds >= 2) {
+            const newAmericanOdds = (newDecimalOdds - 1) * 100
+            const newProbability = (1 - (1 / newDecimalOdds)) * 100
+            setAmericanOdds(newAmericanOdds.toFixed(0))
+            setProbability(newProbability.toFixed(2))
+        } else {
+            const newAmericanOdds = -100 / (newDecimalOdds - 1)
+            const newProbability = (1 / newDecimalOdds) * 100
+            setAmericanOdds(newAmericanOdds.toFixed(0))
+            setProbability(newProbability.toFixed(2))
+        }
+    }
+
+    function handleProbabilityChange(e) {
+        const newProbability = e.target.value
+        setProbability(newProbability)
+
+        if (newProbability >= 50) {
+            const newAmericanOdds = (newProbability / (100 - newProbability)) * 100
+            const newDecimalOdds = 100 / newProbability
+            setAmericanOdds(newAmericanOdds.toFixed(0))
+            setDecimalOdds(newDecimalOdds.toFixed(2))
+        } else {
+            const newAmericanOdds = -((100 - newProbability) / newProbability) * 100
+            const newDecimalOdds = (100 - newProbability) / newProbability
+            setAmericanOdds(newAmericanOdds.toFixed(0))
+            setDecimalOdds(newDecimalOdds.toFixed(2))
+        }
+    }
+
     return (
-        <form className='flex flex-col items-center'>
-            <div className='flex flex-col w-5/6 gap-6 border-2 p-4'>
+        <div className='flex flex-col items-center'>
+            <form className='flex flex-col w-5/6 gap-6 border-2 p-4 lg:w-3/5 2xl:w-1/2'>
                 <div ref={eventContainer}>
                     <p>Event</p>
                     <div className='relative'>
@@ -109,8 +170,6 @@ const AddPick = () => {
                         {eventDropdown && <div className='w-full mt-2 rounded-lg bg-white max-h-60 overflow-y-auto p-2 dropdown absolute'>
                             <ul>
                                 {eventNames}
-                                {/* <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer'>UFC 300</li>
-                                <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer'>UFC Fight Night: Nicolau vs Perez</li> */}
                             </ul>
                         </div>}
                     </div>
@@ -125,7 +184,7 @@ const AddPick = () => {
                         {matchupDropdown && <div className='w-full mt-2 rounded-lg bg-white  p-2 dropdown absolute'>
                             <ul className='options max-h-60 overflow-y-auto'>
                                 {matchupsList}
-                                {/* <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer'>UFC Fight Night: Nicolau vs Perez</li> */}
+
                             </ul>
                         </div>}
                     </div>
@@ -140,13 +199,50 @@ const AddPick = () => {
                         {pickDropdown && <div className='w-full mt-2 rounded-lg bg-white  p-2 dropdown absolute'>
                             <ul className='options max-h-60 overflow-y-auto'>
                                 {pickList}
-                                {/* <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer'>UFC Fight Night: Nicolau vs Perez</li> */}
                             </ul>
                         </div>}
                     </div>
                 </div>
-            </div>
-        </form>
+                <div>
+                    <p>Odds</p>
+                    <div className='w-full grid grid-cols-3 gap-6'>
+                        <label htmlFor='americanOdds'>
+                            American
+                            <input
+                                id='americanOdds'
+                                type='number'
+                                value={americanOdds}
+                                onChange={handleAmericanOddsChange}
+                                className='w-full px-4 py-2 rounded-lg'
+                            />
+                        </label>
+                        <label htmlFor='decimalnOdds'>
+                            Decimal
+                            <input
+                                id='decimalOdds'
+                                type='number'
+                                value={decimalOdds}
+                                onChange={handleDecimalOddsChange}
+                                className='w-full px-4 py-2 rounded-lg'
+                            />
+                        </label>
+                        <label htmlFor='probability'>
+                            Probability
+                            <div className='flex items-center gap-2'>
+                                <input
+                                    id='probability'
+                                    type='number'
+                                    value={probability}
+                                    onChange={handleProbabilityChange}
+                                    className='w-full px-4 py-2 rounded-lg'
+                                />
+                                <p className='text-2xl'>%</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
 
