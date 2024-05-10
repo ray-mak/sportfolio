@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dropdown {
+    z-index: 2;
+}
+
+.options::-webkit-scrollbar {
+    width: 6px
+}
+
+.options::-webkit-scrollbar-track {
+    background: #f0f0f0
+}
+
+.options::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 20px;
+}

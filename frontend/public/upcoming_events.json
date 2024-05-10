@@ -1,0 +1,40 @@
+[
+    {
+        "event": "UFC 300",
+        "eventDate": "4-13-2024",
+        "matchups": [
+            "Alex Pereira vs Jamahal Hill",
+            "Weili Zhang vs Yan Xianan",
+            "Justin Gaethje vs Max Holloway",
+            "Charles Oliveira vs Arman Tsarukyan",
+            "Bo Nickal vs Cody Brundage",
+            "Jiri Prochazka vs Aleksandar Rakic",
+            "Calvin Kattar vs Aljamain Sterling",
+            "Holly Holm vs Kayla Harrison",
+            "Sodiq Yusuff vs Diego Lopes",
+            "Kalin Turner vs Renato Moicano",
+            "Jessica Andrade vs Marina Rodriguez",
+            "Bobby Green vs Jim Miller",
+            "Deiveson Figueiredo vs Cody Garbrandt"
+        ]
+    },
+    {
+        "event": "UFC Fight Night: Nicolau vs Perez",
+        "eventDate": "4-27-2024",
+        "matchups": [
+            "Matheus Nicolau vs Alex Perex",
+            "Ryan Spann vs Bogdan Guskov",
+            "Ariane Lipski vs Karine Silva",
+            "Austen Lane vs Jhonata Diniz",
+            "Jonathan Pearce vs David Onama",
+            "Tim Means vs Uros Medic",
+            "Rani Yahya vs Victor Henry",
+            "Austin Hubbard vs Michal Figlak",
+            "Don'Tale Mayes vs Caio Machado",
+            "Marnic Mann vs Ketlen Souza",
+            "James Llontop vs Chris Padilla",
+            "Ivana Petrovic vs Liang Na",
+            "Gabriel Benitez vs Hayisaer Maheshate"
+        ]
+    }
+]

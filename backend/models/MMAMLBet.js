@@ -27,6 +27,10 @@ const mmaMLSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    betAmount: {
+        type: Number,
+        required: true
+    },
     notes: {
         type: String,
         required: false
