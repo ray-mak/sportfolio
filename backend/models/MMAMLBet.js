@@ -15,7 +15,7 @@ const mmaMLSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fight: {
+    matchup: {
         type: String,
         required: true
     },
