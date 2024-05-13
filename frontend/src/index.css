@@ -24,3 +24,70 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        flex-direction: column;
+        align-items: start;
+        width: 80%;
+        height: 100vh;
+        border: 1px solid black;
+        top: 0;
+        right: -100%;
+        z-index: 3;
+        background-color: #fff;
+        padding: 80px;
+        gap: 2em;
+        transition: .3s ease-in-out;
+    }
+
+    .nav-menu.opened {
+        right: 0;
+    }
+
+    .hamburger {
+        position: fixed;
+        display: block;
+        z-index: 4;
+        top: 24px;
+        right: 24px;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        border-radius: 8px;
+        transition: all .3s ease-in-out;
+    }
+
+    .hamburger.opened .bar:nth-child(2) {
+        opacity: 0
+    }
+
+    .hamburger.opened .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.opened .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .dimmer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        opacity: 0;
+        transition: .3s ease-in-out
+    }
+
+    .dimmer.opened {
+        opacity: .5;
+    }
+}

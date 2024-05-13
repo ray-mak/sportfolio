@@ -258,7 +258,7 @@ const AddPick = () => {
 
     // console.log(americanOdds, decimalOdds, probability, betAmount, selectedEvent, selectedEventMatchups, pickedFighter)
     return (
-        <div className='flex flex-col items-center justify-center text-sm sm:text-base'>
+        <div className='flex flex-col items-center justify-center text-sm mt-20 sm:text-base'>
             <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
                 <div ref={eventContainer}>
                     <div className='flex'>
