@@ -20,6 +20,14 @@ const AddPick = () => {
         pickDropdown: false
     })
 
+    const [formError, setFormError] = useState({
+        event: false,
+        matchup: false,
+        pick: false,
+        odds: false,
+        betAmount: false
+    })
+
     //updates form values
     function handleChange(e, name) {
         const { value, innerText, tagName } = e.target
@@ -37,8 +45,6 @@ const AddPick = () => {
             pickDropdown: false
         }))
     }
-
-    console.log(formData)
 
     //generate event names from JSON
     const eventNames = upcomingEvents.map(item => {
@@ -72,6 +78,23 @@ const AddPick = () => {
     } else {
         pickList = <li className='flex items-center p-2 rounded-md'>Please select a matchup first</li>
     }
+
+    //reset dropdown options when parent dropdown selection changes. (reset matchup and pick if event changes, reset pick if matchup changes.)
+
+    useEffect(() => {
+        setFormData(prevState => ({
+            ...prevState,
+            matchup: "Select Matchup",
+            pick: "Pick Fighter",
+        }))
+    }, [formData.event])
+
+    useEffect(() => {
+        setFormData(prevState => ({
+            ...prevState,
+            pick: "Pick Fighter",
+        }))
+    }, [formData.matchup])
 
     //toggle dropdowns and close dropdown when clicking outside of dropdown
     function toggleDropdown(dropdown) {
@@ -202,25 +225,48 @@ const AddPick = () => {
         }
     }, [betAmount, decimalOdds])
 
+    //check if inputs are valid
+    function checkError() {
+        formData.event === "Select Event" ? setFormError(prevState => ({ ...prevState, event: true })) : setFormError(prevState => ({ ...prevState, event: false }))
+        formData.matchup === "Select Matchup" ? setFormError(prevState => ({ ...prevState, matchup: true })) : setFormError(prevState => ({ ...prevState, matchup: false }))
+        formData.pick === "Pick Fighter" ? setFormError(prevState => ({ ...prevState, pick: true })) : setFormError(prevState => ({ ...prevState, pick: false }))
+        if (americanOdds > -100 && americanOdds < 100 || decimalOdds < 1) {
+            setFormError(prevState => ({ ...prevState, odds: true }))
+        } else {
+            setFormError(prevState => ({ ...prevState, odds: false }))
+        }
+        formData.betAmount === "" ? setFormError(prevState => ({ ...prevState, betAmount: true })) : setFormError(prevState => ({ ...prevState, betAmount: false }))
+    }
+
     //show confirmation and submit form
     const [showConfirmation, setShowConfirmation] = useState(false)
     function handleSubmit(e) {
         e.preventDefault()
-        setShowConfirmation(true)
+
+        const isError = Object.values(formError).some(value => value)
+        if (isError) {
+            return
+        } else {
+            setShowConfirmation(true)
+        }
+        console.log(formError)
     }
 
     function cancelConfirm() {
         setShowConfirmation(false)
     }
-    console.log(formData)
+
     // console.log(americanOdds, decimalOdds, probability, betAmount, selectedEvent, selectedEventMatchups, pickedFighter)
     return (
         <div className='flex flex-col items-center justify-center text-sm sm:text-base'>
             <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
                 <div ref={eventContainer}>
-                    <p>Event</p>
+                    <div className='flex'>
+                        <p>Event</p>
+                        {formError.event && <span className='ml-auto text-red-400 font-medium'>Required</span>}
+                    </div>
                     <div className='relative'>
-                        <button type='button' className='w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer' aria-label='Select event' onClick={() => toggleDropdown("eventDropdown")}>
+                        <button type='button' className={`w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer ${formError.event ? "border-2 border-red-400" : ""}`} aria-label='Select event' onClick={() => toggleDropdown("eventDropdown")}>
                             <span>{formData.event}</span>
                             <FontAwesomeIcon icon={faChevronDown} />
                         </button>
@@ -232,9 +278,12 @@ const AddPick = () => {
                     </div>
                 </div>
                 <div ref={matchupContainer}>
-                    <p>Matchup</p>
+                    <div className='flex'>
+                        <p>Matchup</p>
+                        {formError.matchup && <span className='ml-auto text-red-400 font-medium'>Required</span>}
+                    </div>
                     <div className='relative'>
-                        <button type='button' className='w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer' aria-label='Select matchup' onClick={() => toggleDropdown("matchupDropdown")}>
+                        <button type='button' className={`w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer ${formError.matchup ? "border-2 border-red-400" : ""}`} aria-label='Select matchup' onClick={() => toggleDropdown("matchupDropdown")}>
                             <span>{formData.matchup}</span>
                             <FontAwesomeIcon icon={faChevronDown} />
                         </button>
@@ -247,8 +296,11 @@ const AddPick = () => {
                     </div>
                 </div>
                 <div ref={pickContainer} className='relative'>
-                    <p>Pick</p>
-                    <button type='button' className='w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer' aria-label='Select matchup' onClick={() => toggleDropdown("pickDropdown")}>
+                    <div className='flex'>
+                        <p>Pick</p>
+                        {formError.pick && <span className='ml-auto text-red-400 font-medium'>Required</span>}
+                    </div>
+                    <button type='button' className={`w-full flex items-center justify-between bg-white px-4 py-2 rounded-lg mt-1 hover:cursor-pointer ${formError.pick ? "border-2 border-red-400" : ""}`} aria-label='Select matchup' onClick={() => toggleDropdown("pickDropdown")}>
                         <span>{formData.pick}</span>
                         <FontAwesomeIcon icon={faChevronDown} />
                     </button>
@@ -259,7 +311,10 @@ const AddPick = () => {
                     </div>}
                 </div>
                 <div>
-                    <p>Odds</p>
+                    <div className='flex'>
+                        <p>Odds</p>
+                        {formError.odds && <span className='ml-auto text-red-400 font-medium'>Invalid Odds</span>}
+                    </div>
                     <div className='w-full grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-10'>
                         <label htmlFor='americanOdds'>
                             American
@@ -268,7 +323,7 @@ const AddPick = () => {
                                 type='number'
                                 value={americanOdds}
                                 onChange={handleAmericanOddsChange}
-                                className='w-full px-4 py-2 rounded-lg'
+                                className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                             />
                         </label>
                         <label htmlFor='decimalnOdds'>
@@ -278,7 +333,7 @@ const AddPick = () => {
                                 type='number'
                                 value={decimalOdds}
                                 onChange={handleDecimalOddsChange}
-                                className='w-full px-4 py-2 rounded-lg'
+                                className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                             />
                         </label>
                         <label htmlFor='probability'>
@@ -289,7 +344,7 @@ const AddPick = () => {
                                     type='number'
                                     value={probability}
                                     onChange={handleProbabilityChange}
-                                    className='w-full px-4 py-2 rounded-lg'
+                                    className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                                 />
                                 <p className='text-xl'>%</p>
                             </div>
@@ -298,13 +353,13 @@ const AddPick = () => {
                 </div>
                 <div className='grid grid-cols-2 gap-12'>
                     <label htmlFor='betAmount'>
-                        <p>Bet [0-10] Units</p>
+                        <p className='flex'>Bet [0-10] Units {formError.betAmount && <span className='ml-auto text-red-400 font-medium'>Required</span>}</p>
                         <input
                             id='betAmount'
                             type='number'
                             value={betAmount}
                             onChange={handleBetAmount}
-                            className='w-full px-4 py-2 rounded-lg mt-1'
+                            className={`w-full px-4 py-2 rounded-lg mt-1 ${formError.betAmount ? "border-2 border-red-400" : ""}`}
                             maxLength={4}
                             min={0}
                             max={10}
@@ -324,7 +379,7 @@ const AddPick = () => {
                         className='w-full h-28 px-4 py-2 rounded-lg mt-1 resize-none'
                     />
                 </label>
-                <button className='w-32 py-2 text-white bg-brightRed rounded-md ml-auto'>Submit</button>
+                <button onClick={checkError} className='w-32 py-2 text-white bg-brightRed rounded-md ml-auto'>Submit</button>
             </form >
             {/* Confirmation dialog and dark overlay */}
             {
