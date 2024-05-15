@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const usersRoutes = require('./routes/usersRoutes')
 const mmaMLRoutes = require('./routes/mmaMLRoutes')
+const eventResultRoutes = require('./routes/eventResultRoutes')
 
 const app = express()
 
@@ -14,8 +15,9 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use('/api/users',usersRoutes)
+app.use('/api/users', usersRoutes)
 app.use('/api/mmamlbets', mmaMLRoutes)
+app.use('/api/eventresults', eventResultRoutes)
 
 //connect to db
 mongoose.connect(process.env.MONGO_URI)

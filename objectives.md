@@ -7,3 +7,8 @@
 7. Event page for upcoming events/matches/games that show which users are picking/betting which side.
 8. Leaderboard for users with highest ROI.
 9. Settings page for users to edit/update their profile. 
+
+
+I currently have a list of Users, MLBets, and Event Results. 
+Each user should have a list of previous event results, and picks for upcoming events.
+Each user should have stats associated with their profile which shows their win loss record, their profit and any additional stats.
