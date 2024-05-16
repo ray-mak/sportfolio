@@ -5,7 +5,7 @@ import Login from "./features/auth/Login"
 import DashLayout from "./components/DashLayout"
 import Welcome from "./features/auth/Welcome"
 import BetsList from "./features/bets/BetsList"
-import UsersList from "./features/users/UsersList"
+import Leaderboard from "./features/users/Leaderboard"
 import AddPick from "./features/bets/AddPick"
 
 
@@ -25,8 +25,8 @@ function App() {
           <Route path="addpick">
             <Route index element={<AddPick />} />
           </Route>
-          <Route path="users">
-            <Route index element={<UsersList />} />
+          <Route path="leaderboard">
+            <Route index element={<Leaderboard />} />
           </Route>
 
         </Route>    {/* End Dash */}
