@@ -1,0 +1,123 @@
+{
+    "eventName": "UFC 300",
+    "eventDate": "4-13-2024",
+    "matchups": [
+        {
+            "matchup": "Alex Pereira vs Jamahal Hill",
+            "matchResults": {
+                "winner": "Alex Pereira",
+                "methodOfVictory": "KO",
+                "timeElapsed": "3:14",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Weili Zhang vs Yan Xioanan",
+            "matchResults": {
+                "winner": "Weili Zhang",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "25:00",
+                "score": "147-135"
+            }
+        },
+        {
+            "matchup": "Justin Gaethje vs Max Holloway",
+            "matchResults": {
+                "winner": "Max Holloway",
+                "methodOfVictory": "KO",
+                "timeElapsed": "24:59",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Charles Oliveira vs Arman Tsarukyan",
+            "matchResults": {
+                "winner": "Arman Tsarukyan",
+                "methodOfVictory": "Split Decision",
+                "timeElapsed": "15:00",
+                "score": "86-85"
+            }
+        },
+        {
+            "matchup": "Bo Nickal vs Cody Brundage",
+            "matchResults": {
+                "winner": "Bo Nickal",
+                "methodOfVictory": "Submission",
+                "timeElapsed": "8:38",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Jiri Prochazka vs Aleksandar Rakic",
+            "matchResults": {
+                "winner": "Jiri Prochazka",
+                "methodOfVictory": "KO",
+                "timeElapsed": "8:17",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Calvin Kattar vs Aljamain Sterling",
+            "matchResults": {
+                "winner": "Aljamain Sterling",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "90-81"
+            }
+        },
+        {
+            "matchup": "Holly Holm vs Kayla Harrison",
+            "matchResults": {
+                "winner": "Kayla Harrison",
+                "methodOfVictory": "Submission",
+                "timeElapsed": "6:47",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Sodiq Yusuff vs Diego Lopes",
+            "matchResults": {
+                "winner": "Diego Lopes",
+                "methodOfVictory": "KO",
+                "timeElapsed": "1:29",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Jalin Turner vs Renato Moicano",
+            "matchResults": {
+                "winner": "Renato Moicano",
+                "methodOfVictory": "KO",
+                "timeElapsed": "9:11",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Jessica Andrade vs Marina Rodriguez",
+            "matchResults": {
+                "winner": "Jessica Andrade",
+                "methodOfVictory": "Split Decision",
+                "timeElapsed": "15:00",
+                "score": "86-85"
+            }
+        },
+        {
+            "matchup": "Bobby Green vs Jim Miller",
+            "matchResults": {
+                "winner": "Bobby Green",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "88-78"
+            }
+        },
+        {
+            "matchup": "Deiveson Figueiredo vs Cody Garbrandt",
+            "matchResults": {
+                "winner": "Deiveson Figueiredo",
+                "methodOfVictory": "Submission",
+                "timeElapsed": "9:02",
+                "score": ""
+            }
+        }
+    ]
+}

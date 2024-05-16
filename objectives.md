@@ -12,3 +12,12 @@
 I currently have a list of Users, MLBets, and Event Results. 
 Each user should have a list of previous event results, and picks for upcoming events.
 Each user should have stats associated with their profile which shows their win loss record, their profit and any additional stats.
+
+I need to create a UserResults page/model to track a users betting stats. In order to do that, I will need to find all the bets/picks uploaded by the user and compare them to the event results. I will need to create a database for for each user, and all of their bets. If the bet has an event name that is also in EventResults, then that means the event has happened. 
+In the UserStats page, I will need to get each User and all Bets with the ID associated with that user.
+{
+    user:
+    mmaMLBets:[...{}] (array of objects(bets))
+}
+Then I will need to get the EventResults.
+For each User, iterate over their bets, and find if mmaMLBets.event === eventResults.event

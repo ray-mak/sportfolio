@@ -1,0 +1,123 @@
+{
+    "eventName": "UFC Fight Night: Nicolau vs Perez",
+    "eventDate": "4-27-2024",
+    "matchups": [
+        {
+            "matchup": "Matheus Nicolau vs Alex Perez",
+            "matchResults": {
+                "winner": "Alex Perex",
+                "methodOfVictory": "KO",
+                "timeElapsed": "7:16",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Ryan Spann vs Bogdan Guskov",
+            "matchResults": {
+                "winner": "Bogdan Guskov",
+                "methodOfVictory": "KO",
+                "timeElapsed": "8:16",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Ariane Lipski vs Karine Silva",
+            "matchResults": {
+                "winner": "Karine Silva",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "88-83"
+            }
+        },
+        {
+            "matchup": "Austen Lane vs Jhonata Diniz",
+            "matchResults": {
+                "winner": "Jhonata Diniz",
+                "methodOfVictory": "KO",
+                "timeElapsed": "7:12",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Jonathan Pearce vs David Onama",
+            "matchResults": {
+                "winner": "David Onama",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "87-84"
+            }
+        },
+        {
+            "matchup": "Tim Means vs Uros Medic",
+            "matchResults": {
+                "winner": "Uros Medic",
+                "methodOfVictory": "KO",
+                "timeElapsed": "2:09",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Rani Yahya vs Victor Henry",
+            "matchResults": {
+                "winner": "Victor Henry",
+                "methodOfVictory": "KO",
+                "timeElapsed": "12:36",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Austin Hubbard vs Michal Figlak",
+            "matchResults": {
+                "winner": "Austin Hubbard",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "87-84"
+            }
+        },
+        {
+            "matchup": "Don'Tale Mayes vs Caio Machado",
+            "matchResults": {
+                "winner": "Don'Tale Mayes",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "87-84"
+            }
+        },
+        {
+            "matchup": "Marnic Mann vs Ketlen Souza",
+            "matchResults": {
+                "winner": "Ketlen Souza",
+                "methodOfVictory": "Decision",
+                "timeElapsed": "15:00",
+                "score": "90-81"
+            }
+        },
+        {
+            "matchup": "James Llontop vs Chris Padilla",
+            "matchResults": {
+                "winner": "Chris Padilla",
+                "methodOfVictory": "Submission",
+                "timeElapsed": "4:33",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Ivana Petrovic vs Liang Na",
+            "matchResults": {
+                "winner": "Ivana Petrovic",
+                "methodOfVictory": "Submission",
+                "timeElapsed": "11:29",
+                "score": ""
+            }
+        },
+        {
+            "matchup": "Gabriel Benitez vs Hayisaer Maheshate",
+            "matchResults": {
+                "winner": "Hayisaer Maheshate",
+                "methodOfVictory": "Split Decision",
+                "timeElapsed": "15:00",
+                "score": "86-85"
+            }
+        }
+    ]
+}

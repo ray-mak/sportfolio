@@ -38,7 +38,7 @@ const eventResultSchema = new mongoose.Schema({
                 required: false,
                 validate: {
                     validator: function (v) {
-                        return /^\d{2,3}-\d{2,3}$/.test(v);
+                        return v === "" || /^\d{2,3}-\d{2,3}$/.test(v);
                     },
                     message: props => `${props.value} is not a valid score format. Please use "##-##".`
                 }

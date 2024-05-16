@@ -41,7 +41,7 @@ const createEventResult = asyncHandler(async (req, res) => {
         if (result.methodOfVictory == "Decision" && !result.score) {
             return res.status(400).json({ message: "Decision victories must have a score" })
         }
-        if (result.score && result.methodOfVictory !== "Decision") {
+        if (result.score && result.methodOfVictory !== "Decision" && result.methodOfVictory !== "Split Decision") {
             return res.status(400).json({ message: "Score not necessary for non-decision victories" })
         }
 
@@ -77,7 +77,7 @@ const updateEventResult = asyncHandler(async (req, res) => {
         if (result.methodOfVictory === "Decision" && !result.score) {
             return res.status(400).json({ message: "Decision victories must have a score" })
         }
-        if (result.score && result.methodOfVictory !== "Decision") {
+        if (result.score && result.methodOfVictory !== "Decision" && result.methodOfVictory !== "Split Decision") {
             return res.status(400).json({ message: "Score not necessary for non-decision victories" })
         }
 
