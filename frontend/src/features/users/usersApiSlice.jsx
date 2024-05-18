@@ -11,7 +11,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     //this is used to specify how to fetch users from the server
     endpoints: builder => ({
         getUsers: builder.query({
-            query: () => '/api/users',
+            query: () => '/api/usermlstats',
             validateStatus: (response, result) => {
                 return response.status === 200 && !result.isError
             },
