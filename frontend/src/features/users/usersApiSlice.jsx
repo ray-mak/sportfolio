@@ -35,12 +35,49 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 } else return [{ type: 'User', id: 'LIST' }]
             }
         }),
+        addNewUser: builder.mutation({  //mutuation since we are changing data
+            query: initialUserData => ({
+                url: '/api/users',
+                method: 'POST',
+                body: {
+                    ...initialUserData
+                }
+            }),
+            invalidatesTags: [  //forces cache to update, user list will be invalidated.
+                { type: 'User', id: "LIST" }
+            ]
+        }),
+        updateUser: builder.mutation({
+            query: initialUserData => ({
+                url: '/api/users',
+                method: "PATCH",
+                body: {
+                    ...initialUserData
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: "User", id: arg.id }
+            ]
+        }),
+        deleteUser: builder.mutation({
+            query: ({ id }) => ({
+                url: "/api/users",
+                method: "DELETE",
+                body: { id }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: "User", id: arg.id }
+            ]
+        })
     }),
 })
 
 export const {
-    useGetUsersQuery,
-} = usersApiSlice   //exported to UsersList
+    useGetUsersQuery,  //used in Leaderboard
+    useAddNewUserMutation,  //used in NewUserForm
+    useUpdateUserMutation,
+    useDeleteUserMutation
+} = usersApiSlice
 
 
 // returns the query result object (allows us to access the result of getUsers)

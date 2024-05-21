@@ -7,6 +7,9 @@ import Welcome from "./features/auth/Welcome"
 import BetsList from "./features/bets/BetsList"
 import Leaderboard from "./features/users/Leaderboard"
 import AddPick from "./features/bets/AddPick"
+import EditUser from "./features/users/EditUser"
+import NewUserForm from "./features/users/NewUserForm"
+import UserProfile from "./features/users/UserProfile"
 
 
 function App() {
@@ -16,6 +19,8 @@ function App() {
       <Route path="/" element={<Layout />}> {/* This is the parent route of everything */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<NewUserForm />} />
+        <Route path=":id" element={<UserProfile />} />
 
         <Route path="dash" element={<DashLayout />}>
 

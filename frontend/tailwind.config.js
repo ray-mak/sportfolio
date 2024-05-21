@@ -17,6 +17,9 @@ export default {
         "brightRed": "#FF5A35",
         "darkGreen": "#279E00"
       },
+      boxShadow: {
+        "xl": "3px 3px 20px #a7a6a6"
+      }
     },
   },
   plugins: [],
