@@ -103,7 +103,7 @@ const NewUserForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        //Check if inputs are valid, set errors accordingly
         isValid.username ? setFormErrors(prevState => ({ ...prevState, username: false })) : setFormErrors(prevState => ({ ...prevState, username: true }))
         isValid.password ? setFormErrors(prevState => ({ ...prevState, password: false })) : setFormErrors(prevState => ({ ...prevState, password: true }))
         isValid.confirmPassword ? setFormErrors(prevState => ({ ...prevState, confirmPassword: false })) : setFormErrors(prevState => ({ ...prevState, confirmPassword: true }))
@@ -115,7 +115,7 @@ const NewUserForm = () => {
         if (canSave) {
             const { confirmPassword, ...newUserData } = formData
             console.log("Success!")
-            // await addNewUser(newUserData)
+            await addNewUser(newUserData)
         } else {
             console.log("Incomplete!")
         }

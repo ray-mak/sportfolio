@@ -15,7 +15,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             validateStatus: (response, result) => {
                 return response.status === 200 && !result.isError
             },
-            keepUnusedDataFor: 5,
             //We transform the data since MongoDB uses _id, then we set all users in the adapter's state
             transformResponse: responseData => {
                 const loadedUsers = responseData.map(user => {
