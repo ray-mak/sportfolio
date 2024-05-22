@@ -23,7 +23,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
                     //console.log(data)
                     dispatch(logOut())
                     //apiSlice is separate from authSlice, so that needs to be cleared as well
-                    dispatch(apiSlice.util.resetApiState())
+                    setTimeout(() => {
+                        dispatch(apiSlice.util.resetApiState())
+                    }, 1000)
                 } catch (err) {
                     console.log(err)
                 }
