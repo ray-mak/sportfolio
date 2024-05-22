@@ -21,6 +21,9 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<NewUserForm />} />
         <Route path=":id" element={<UserProfile />} />
+        <Route path="leaderboard">
+          <Route index element={<Leaderboard />} />
+        </Route>
 
         <Route path="dash" element={<DashLayout />}>
 
@@ -30,9 +33,7 @@ function App() {
           <Route path="addpick">
             <Route index element={<AddPick />} />
           </Route>
-          <Route path="leaderboard">
-            <Route index element={<Leaderboard />} />
-          </Route>
+
 
         </Route>    {/* End Dash */}
 

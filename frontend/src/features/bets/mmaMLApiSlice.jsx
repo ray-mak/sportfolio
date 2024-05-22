@@ -15,7 +15,6 @@ export const mmaMLApiSlice = apiSlice.injectEndpoints({
             validateStatus: (response, result) => {
                 return response.status === 200 && !result.isError
             },
-            keepUnusedDataFor: 5,
             transformResponse: responseData => {
                 const loadedMMAMLBets = responseData.map(bet => {
                     bet.id = bet._id
@@ -32,11 +31,37 @@ export const mmaMLApiSlice = apiSlice.injectEndpoints({
                 } else return [{ type: 'mmaMLBet', id: 'LIST' }]
             }
         }),
+        addNewMMAMLBet: builder.mutation({
+            query: initialData => ({
+                url: "/api/mmamlbets",
+                method: "POST",
+                body: {
+                    ...initialData
+                }
+            }),
+            invalidatesTags: [
+                { type: "mmaMLBet", id: "LIST" }
+            ]
+        }),
+        updateMMAMLBet: builder.mutation({
+            query: initialData => ({
+                url: "/api/mmamlbets",
+                method: "PATCH",
+                body: {
+                    ...initialData
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: "mmaMLBet", id: "LIST" }
+            ]
+        })
     }),
 })
 
 export const {
     useGetMMAMLBetsQuery,
+    useAddNewMMAMLBetMutation,
+    useUpdateMMAMLBetMutation
 } = mmaMLApiSlice
 
 // returns the query result object

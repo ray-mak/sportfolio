@@ -3,8 +3,17 @@ import { useState, useRef } from 'react'
 import upcomingEvents from "../../../public/upcoming_events.json"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
+import { useAddNewMMAMLBetMutation } from './mmaMLApiSlice'
+
 
 const AddPick = () => {
+    const [addNewMMAMLBet, {
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    }] = useAddNewMMAMLBetMutation()
+
     const [formData, setFormData] = useState({
         event: "Select Event",
         matchup: "Select Matchup",
@@ -18,6 +27,14 @@ const AddPick = () => {
         eventDropdown: false,
         matchupDropdown: false,
         pickDropdown: false
+    })
+
+    const [isValid, setIsValid] = useState({
+        event: false,
+        matchup: false,
+        pick: false,
+        odds: false,
+        betAmount: false
     })
 
     const [formError, setFormError] = useState({
@@ -225,31 +242,39 @@ const AddPick = () => {
         }
     }, [betAmount, decimalOdds])
 
-    //check if inputs are valid
-    function checkError() {
-        formData.event === "Select Event" ? setFormError(prevState => ({ ...prevState, event: true })) : setFormError(prevState => ({ ...prevState, event: false }))
-        formData.matchup === "Select Matchup" ? setFormError(prevState => ({ ...prevState, matchup: true })) : setFormError(prevState => ({ ...prevState, matchup: false }))
-        formData.pick === "Pick Fighter" ? setFormError(prevState => ({ ...prevState, pick: true })) : setFormError(prevState => ({ ...prevState, pick: false }))
+    useEffect(() => {
+        formData.event === "Select Event" ? setIsValid(prevState => ({ ...prevState, event: false })) : setIsValid(prevState => ({ ...prevState, event: true }))
+    }, [formData.event])
+    useEffect(() => {
+        formData.matchup === "Select Matchup" ? setIsValid(prevState => ({ ...prevState, matchup: false })) : setIsValid(prevState => ({ ...prevState, matchup: true }))
+    }, [formData.matchup])
+    useEffect(() => {
+        formData.pick === "Pick Fighter" ? setIsValid(prevState => ({ ...prevState, pick: false })) : setIsValid(prevState => ({ ...prevState, pick: true }))
+    }, [formData.pick])
+    useEffect(() => {
+        formData.betAmount === "" ? setIsValid(prevState => ({ ...prevState, betAmount: false })) : setIsValid(prevState => ({ ...prevState, betAmount: true }))
+    }, [formData.betAmount])
+    useEffect(() => {
         if (americanOdds > -100 && americanOdds < 100 || decimalOdds < 1) {
-            setFormError(prevState => ({ ...prevState, odds: true }))
+            setIsValid(prevState => ({ ...prevState, odds: false }))
         } else {
-            setFormError(prevState => ({ ...prevState, odds: false }))
+            setIsValid(prevState => ({ ...prevState, odds: true }))
         }
-        formData.betAmount === "" ? setFormError(prevState => ({ ...prevState, betAmount: true })) : setFormError(prevState => ({ ...prevState, betAmount: false }))
-    }
+    }, [formData.odds])
 
     //show confirmation and submit form
     const [showConfirmation, setShowConfirmation] = useState(false)
     function handleSubmit(e) {
         e.preventDefault()
+        isValid.event ? setFormError(prevState => ({ ...prevState, event: false })) : setFormError(prevState => ({ ...prevState, event: true }))
+        isValid.matchup ? setFormError(prevState => ({ ...prevState, matchup: false })) : setFormError(prevState => ({ ...prevState, matchup: true }))
+        isValid.pick ? setFormError(prevState => ({ ...prevState, pick: false })) : setFormError(prevState => ({ ...prevState, pick: true }))
+        isValid.betAmount ? setFormError(prevState => ({ ...prevState, betAmount: false })) : setFormError(prevState => ({ ...prevState, betAmount: true }))
+        isValid.odds ? setFormError(prevState => ({ ...prevState, odds: false })) : setFormError(prevState => ({ ...prevState, odds: true }))
 
-        const isError = Object.values(formError).some(value => value)
-        if (isError) {
-            return
-        } else {
-            setShowConfirmation(true)
-        }
-        console.log(formError)
+        const canSave = Object.values(isValid).every(Boolean)
+
+        if (canSave) setShowConfirmation(true)
     }
 
     function cancelConfirm() {
@@ -379,7 +404,7 @@ const AddPick = () => {
                         className='w-full h-28 px-4 py-2 rounded-lg mt-1 resize-none'
                     />
                 </label>
-                <button onClick={checkError} className='w-32 py-2 text-white bg-brightRed rounded-md ml-auto'>Submit</button>
+                <button className='w-32 py-2 text-white bg-brightRed rounded-md ml-auto'>Submit</button>
             </form >
             {/* Confirmation dialog and dark overlay */}
             {
