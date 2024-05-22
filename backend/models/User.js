@@ -10,17 +10,17 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     password: {
-        type: String, 
+        type: String,
         required: true
     },
     email: {
         type: String,
         required: true
     },
-    roles: [{
-        type: String, 
+    role: {
+        type: String,
         default: "User"
-    }]
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)

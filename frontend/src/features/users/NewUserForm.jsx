@@ -127,9 +127,7 @@ const NewUserForm = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6 p-8 bg-white rounded-lg shadow-xl text-sm sm:text-base">
                 <h1 className="text-2xl font-semibold sm:text-3xl">Create New Account</h1>
                 <label htmlFor="username" className="flex flex-col gap-1 mb-2">
-                    <p className="w-full flex flex-col sm:flex-row">
-                        Username
-                    </p>
+                    <p>Username</p>
                     <input
                         id="username"
                         name="username"
