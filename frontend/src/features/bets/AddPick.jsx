@@ -14,6 +14,7 @@ const AddPick = () => {
         error
     }] = useAddNewMMAMLBetMutation()
 
+    //variables to store form data, errors, input validation and dropdown status.
     const [formData, setFormData] = useState({
         event: "Select Event",
         matchup: "Select Matchup",

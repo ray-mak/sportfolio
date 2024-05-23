@@ -10,6 +10,7 @@ import AddPick from "./features/bets/AddPick"
 import EditUser from "./features/users/EditUser"
 import NewUserForm from "./features/users/NewUserForm"
 import UserProfile from "./features/users/UserProfile"
+import PersistLogin from "./features/auth/PersistLogin"
 
 
 function App() {
@@ -25,17 +26,18 @@ function App() {
           <Route index element={<Leaderboard />} />
         </Route>
 
-        <Route path="dash" element={<DashLayout />}>
+        <Route element={<PersistLogin />}>
+          <Route path="dash" element={<DashLayout />}>
 
-          <Route index element={<Welcome />} />
+            <Route index element={<Welcome />} />
 
-          {/* This is currently in the protected area, but does not have to be. Just going along with tutorial */}
-          <Route path="addpick">
-            <Route index element={<AddPick />} />
-          </Route>
+            {/* This is currently in the protected area, but does not have to be. Just going along with tutorial */}
+            <Route path="addpick">
+              <Route index element={<AddPick />} />
+            </Route>
 
-
-        </Route>    {/* End Dash */}
+          </Route>    {/* End Dash */}
+        </Route>
 
       </Route>
     </Routes>

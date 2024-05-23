@@ -3,10 +3,12 @@ import { useNavigate, Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { setCredentials } from "./authSlice"
 import { useLoginMutation } from "./authApiSlice"
+import usePersist from "../../hooks/usePersist"
 
 const Login = () => {
     const [formData, setFormData] = useState({ username: "", password: "" })
     const [errMsg, setErrMsg] = useState("")
+    const [persist, setPersist] = usePersist()
 
     const handleChange = (e) => {
         const { name, value } = e.target
