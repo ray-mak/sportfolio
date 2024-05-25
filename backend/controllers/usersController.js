@@ -56,9 +56,9 @@ const createNewUser = asyncHandler(async (req, res) => {
 //@route PATCH /api/users
 //@access Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, displayName, password, email } = req.body
+    const { id, displayName, password, email, role } = req.body
     if (!id || !displayName || !email) {
-        return res.status(400).json({ message: 'All fields except password are required' })
+        return res.status(400).json({ message: 'User ID is required' })
     }
     const user = await User.findById(id).exec()
 
@@ -78,6 +78,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     user.displayName = displayName
     user.email = email
+    user.role = role
 
     if (password) {
         //hash password
