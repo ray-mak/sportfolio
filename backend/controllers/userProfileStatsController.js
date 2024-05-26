@@ -21,8 +21,15 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     //Create an array, upcoming events, for bets that have not been evaluated.
     const upcomingBets = await formatUpcomingBets(userBets, eventResults)
 
+    const allUserBets = {
+        username: user.username,
+        displayName: user.displayName,
+        upcomingBets,
+        betHistory: sortedBets
+    }
 
-    res.json(upcomingBets)
+
+    res.json(allUserBets)
     //don't forget to reactivate auth for users and mmamlbets
 })
 
