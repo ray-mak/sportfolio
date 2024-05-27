@@ -70,3 +70,16 @@ export const {
     useUpdateMMAEventMutation,
     useDeleteMMAEventMutation
 } = mmaEventsApiSlice
+
+export const selectMMAEventsResult = mmaEventsApiSlice.endpoints.getMMAEvents.select()
+
+const selectMMAEventsData = createSelector(
+    selectMMAEventsResult,
+    mmaEventsResult => mmaEventsResult.data
+)
+
+export const {
+    selectAll: selectAllMMAEvents,
+    selectById: selectMMAEventById,
+    selectIds: selectMMAEventIds
+} = mmaEventsAdapter.getSelectors(state => selectMMAEventsData(state) ?? initialState)

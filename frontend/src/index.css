@@ -25,6 +25,10 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.mma-event-table tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;

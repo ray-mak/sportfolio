@@ -7,6 +7,8 @@ import Welcome from "./features/auth/Welcome"
 import BetsList from "./features/bets/BetsList"
 import Leaderboard from "./features/users/Leaderboard"
 import AddPick from "./features/bets/AddPick"
+import MMAEventsList from "./features/events/MMAEventsList"
+import EditMMAEvent from "./features/events/EditMMAEvent"
 import NewMMAEvent from "./features/events/NewMMAEventForm"
 import EditUser from "./features/users/EditUser"
 import NewUserForm from "./features/users/NewUserForm"
@@ -28,7 +30,12 @@ function App() {
         <Route path="leaderboard">
           <Route index element={<Leaderboard />} />
         </Route>
-        <Route path="newmmaevent" element={<NewMMAEvent />} />
+
+        <Route path="editmmaevent">
+          <Route index element={<MMAEventsList />} />
+          <Route path=":id" element={<EditMMAEvent />} />
+          <Route path="newmmaevent" element={<NewMMAEvent />} />
+        </Route>
 
         {/* protected routes */}
         <Route element={<PersistLogin />}>
