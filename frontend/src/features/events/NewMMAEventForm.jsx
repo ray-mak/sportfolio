@@ -26,7 +26,7 @@ const NewMMAEventForm = () => {
         }))
     }
 
-    const [matchups, setMatchups] = useState([{ fighterA: "", fighterB: "" }])
+    const [matchups, setMatchups] = useState([{ fighterA: "", fighterB: "", division: "", weightClass: "" }])
 
     const matchupChange = (index, e) => {
         const { name, value } = e.target
@@ -45,6 +45,10 @@ const NewMMAEventForm = () => {
     }
 
     const deleteMatchup = (index) => {
+        if (matchups.length <= 1) {
+            alert("Must have at least one matchup")
+            return
+        }
         const newMatchups = matchups.filter((_, i) => i !== index)
         setMatchups(newMatchups)
     }
@@ -56,16 +60,22 @@ const NewMMAEventForm = () => {
                 eventDate: "",
                 eventTime: "",
             })
-            navigate("/dash")
+            setMatchups([{ fighterA: "", fighterB: "", division: "", weightClass: "" }])
+            // navigate("/dash")
         }
     }, [isSuccess, navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const matchupsArray = []
-        matchups.forEach(matchup => {
-            const matchupStr = `${matchup.fighterA} vs ${matchup.fighterB}`
-            matchupsArray.push(matchupStr)
+        matchups.forEach(fight => {
+            const matchupStr = `${fight.fighterA} vs ${fight.fighterB}`
+            const matchupData = {
+                matchup: matchupStr,
+                division: fight.division,
+                weightClass: fight.weightClass
+            }
+            matchupsArray.push(matchupData)
         })
         const timeDate = new Date(`${formData.eventDate}T${formData.eventTime}:00`)
 
@@ -86,7 +96,7 @@ const NewMMAEventForm = () => {
     return (
         <div className="flex flex-col items-center">
             <h1 className="text-2xl font-semibold mt-8">Create New MMA Event</h1>
-            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mt-6 p-4 bg-white shadow-xl text-sm md:p-8 md:rounded-lg md:text-base md:w-3/4 xl:w-1/2">
+            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mt-6 p-4 bg-white shadow-xl text-sm md:p-8 md:rounded-lg md:text-md md:w-3/4 xl:w-1/2">
                 <label htmlFor="eventName" className="flex flex-col gap-1 mb-2">
                     <p>Event Name</p>
                     <input
@@ -134,7 +144,7 @@ const NewMMAEventForm = () => {
                                     type="text"
                                     value={matchup.fighterA}
                                     onChange={(e) => matchupChange(index, e)}
-                                    className="w-full py-2 px-4 rounded-lg border-lightGray border-2"
+                                    className="w-full py-1 px-2 rounded-lg border-lightGray border-2"
                                 />
                             </label>
                             <p className="mb-3 text-center">vs</p>
@@ -146,10 +156,33 @@ const NewMMAEventForm = () => {
                                     type="text"
                                     value={matchup.fighterB}
                                     onChange={(e) => matchupChange(index, e)}
-                                    className="w-full py-2 px-4 rounded-lg border-lightGray border-2"
+                                    className="w-full py-1 px-2 rounded-lg border-lightGray border-2"
                                 />
                             </label>
-                            <button type="button" onClick={() => deleteMatchup(index)} className="py-1 px-2 bg-red-500 rounded-lg text-white text-sm mb-2">
+                            <label htmlFor={`division-${index}`}>
+                                <p>Division</p>
+                                <select id={`division-${index}`} value={matchup.division} name="division" onChange={(e) => matchupChange(index, e)} className="py-1 px-2 border-lightGray border-2 rounded-lg">
+                                    <option value=""></option>
+                                    <option value="mens">Mens</option>
+                                    <option value="womens">Womens</option>
+                                </select>
+                            </label>
+                            <label htmlFor={`weightClass-${index}`}>
+                                <p>Weight Class</p>
+                                <select id={`weightClass-${index}`} value={matchup.weightClass} name="weightClass" onChange={(e) => matchupChange(index, e)} className="py-1 px-2 border-lightGray border-2 rounded-lg">
+                                    <option value=""></option>
+                                    <option value="strawweight">Strawweight</option>
+                                    <option value="flyweight">Flyweight</option>
+                                    <option value="bantamweight">Bantamweight</option>
+                                    <option value="featherweight">Featherweight</option>
+                                    <option value="lightweight">Lightweight</option>
+                                    <option value="welterweight">Welterweight</option>
+                                    <option value="middleweight">Middleweight</option>
+                                    <option value="lightHeavyweight">Light heavyweight</option>
+                                    <option value="heavyweight">Heavyweight</option>
+                                </select>
+                            </label>
+                            <button type="button" onClick={() => deleteMatchup(index)} className="py-1 px-2 bg-red-500 rounded-lg text-white text-sm">
                                 X
                             </button>
                         </div>

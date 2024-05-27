@@ -10,8 +10,18 @@ const MMAEventSchema = new mongoose.Schema({
         required: true
     },
     matchups: [{
-        type: String,
-        required: true
+        matchup: {
+            type: String,
+            required: true
+        },
+        division: {
+            type: String,
+            required: true
+        },
+        weightClass: {
+            type: String,
+            required: true
+        }
     }]
 })
 
