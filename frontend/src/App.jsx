@@ -7,6 +7,7 @@ import Welcome from "./features/auth/Welcome"
 import BetsList from "./features/bets/BetsList"
 import Leaderboard from "./features/users/Leaderboard"
 import AddPick from "./features/bets/AddPick"
+import NewMMAEvent from "./features/events/NewMMAEventForm"
 import EditUser from "./features/users/EditUser"
 import NewUserForm from "./features/users/NewUserForm"
 import UserProfile from "./features/users/UserProfile"
@@ -27,6 +28,7 @@ function App() {
         <Route path="leaderboard">
           <Route index element={<Leaderboard />} />
         </Route>
+        <Route path="newmmaevent" element={<NewMMAEvent />} />
 
         {/* protected routes */}
         <Route element={<PersistLogin />}>
