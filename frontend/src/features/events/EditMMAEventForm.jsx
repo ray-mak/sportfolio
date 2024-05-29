@@ -1,32 +1,29 @@
-import { useState, useEffect } from "react"
-import { useAddNewMMAEventMutation } from "./mmaEventsApiSlice"
+import { useUpdateMMAEventMutation } from "./mmaEventsApiSlice"
 import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 
-const NewMMAEventForm = () => {
-    const [addNewMMAEvent, {
+const EditMMAEventForm = ({ event }) => {
+    const navigate = useNavigate()
+
+    const [updateMMAEvent, {
         isLoading,
         isSuccess,
         isError,
         error
-    }] = useAddNewMMAEventMutation()
+    }] = useUpdateMMAEventMutation()
 
-    const navigate = useNavigate()
-
-    const [formData, setFormData] = useState({
-        eventName: "",
-        eventDate: "",
-        eventTime: ""
+    const formattedMatchups = event.matchups.map(item => {
+        const fighterA = item.matchup.split(" vs ")[0]
+        const fighterB = item.matchup.split(" vs ")[1]
+        return { fighterA, fighterB, division: item.division, weightClass: item.weightClass }
     })
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
-
-    const [matchups, setMatchups] = useState([{ fighterA: "", fighterB: "", division: "", weightClass: "" }])
+    const [matchups, setMatchups] = useState(formattedMatchups)
+    const date = new Date(event.eventDate)
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const year = date.getFullYear()
+    const convertedDate = `${month}/${day}/${year}`
 
     const matchupChange = (index, e) => {
         const { name, value } = e.target
@@ -34,6 +31,8 @@ const NewMMAEventForm = () => {
         newMatchups[index][name] = value
         setMatchups(newMatchups)
     }
+
+    const [matchupToDelete, setMatchupToDelete] = useState()
 
     const addMatchup = () => {
         const lastMatchup = matchups[matchups.length - 1]
@@ -49,19 +48,32 @@ const NewMMAEventForm = () => {
             alert("Must have at least one matchup")
             return
         }
+        setMatchupToDelete({ ...matchups[index], index })
+    }
+
+    const confirmDeleteMatchup = (index) => {
         const newMatchups = matchups.filter((_, i) => i !== index)
         setMatchups(newMatchups)
+        setMatchupToDelete()
+    }
+
+    const cancelDeleteMatchup = () => {
+        setMatchupToDelete()
     }
 
     useEffect(() => {
+        if (matchupToDelete) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "unset"
+        }
+
+        return () => { document.body.style.overflow = "unset" }
+    }, [matchupToDelete])
+
+    useEffect(() => {
         if (isSuccess) {
-            setFormData({
-                eventName: "",
-                eventDate: "",
-                eventTime: "",
-            })
-            setMatchups([{ fighterA: "", fighterB: "", division: "", weightClass: "" }])
-            // navigate("/dash")
+            navigate('/editmmaevent')
         }
     }, [isSuccess, navigate])
 
@@ -77,65 +89,28 @@ const NewMMAEventForm = () => {
             }
             matchupsArray.push(matchupData)
         })
-        const timeDate = new Date(`${formData.eventDate}T${formData.eventTime}:00`)
-
         const dataToSubmit = {
-            eventName: formData.eventName,
-            eventDate: timeDate.toUTCString(),
+            eventName: event.eventName,
             matchups: matchupsArray
         }
-        console.log(dataToSubmit)
-
-        const canSubmit = Object.values(formData).every(Boolean)
-
-        if (canSubmit) {
-            await addNewMMAEvent(dataToSubmit)
-        }
+        await updateMMAEvent(dataToSubmit)
     }
 
     return (
         <div className="flex flex-col items-center">
-            <h1 className="text-2xl font-semibold mt-8">Create New MMA Event</h1>
-            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mt-6 p-4 bg-white shadow-xl text-sm md:p-8 md:rounded-lg md:text-md md:w-3/4 xl:w-1/2">
-                <label htmlFor="eventName" className="flex flex-col gap-1 mb-2">
-                    <p>Event Name</p>
-                    <input
-                        id="eventName"
-                        name="eventName"
-                        type="text"
-                        onChange={handleChange}
-                        value={formData.eventName}
-                        className="py-2 px-2 rounded-lg border-lightGray border-2 md:px-4"
-                    />
-                </label>
-                <div className="w-full flex gap-4">
-                    <label htmlFor="eventDate" className="w-1/2 flex flex-col gap-1 mb-2 md:w-2/3">
-                        <p>Event Date</p>
-                        <input
-                            id="eventDate"
-                            name="eventDate"
-                            type="date"
-                            onChange={handleChange}
-                            value={formData.eventDate}
-                            className="py-2 px-2 rounded-lg border-lightGray border-2 md:px-4"
-                        />
-                    </label>
-                    <label htmlFor="eventTime" className="w-1/2 flex flex-col gap-1 mb-2 md:w-1/3">
-                        <p>Event Time</p>
-                        <input
-                            id="eventTime"
-                            name="eventTime"
-                            type="time"
-                            onChange={handleChange}
-                            value={formData.eventTime}
-                            className="py-2 px-2 rounded-lg border-lightGray border-2"
-                        />
-                    </label>
+            {isError && <p className="text-brightRed font-semibold">{error?.data?.message}</p>}
+            <h1 className="text-2xl font-semibold mt-8">Edit MMA Event</h1>
+            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mt-6 p-4 bg-white shadow-xl text-sm md:p-8 md:rounded-lg md:text-base md:w-3/4 xl:w-1/2">
+                <div className="flex justify-between font-medium">
+                    {event.eventName}
+                    <button type="button" onClick={() => navigate('/editmmaevent')} className="bg-slate-400 px-8 py-2 rounded-lg text-white">Back</button>
                 </div>
-                <p>Matchups</p>
+                <p>{convertedDate}</p>
+                <p className="text-center font-semibold">Matchups</p>
                 <div className="p-4 flex flex-col gap-4 border-2 border-slate-500 rounded-lg">
                     {matchups.map((matchup, index) => (
                         <div key={index} className="w-full flex flex-col gap-4 justify-between md:flex-row md:items-end">
+                            <p className="text-sm mb-2 w-3">{index + 1}</p>
                             <label htmlFor={`fighterA-${index}`} className="w-full">
                                 <p>Fighter A</p>
                                 <input
@@ -190,11 +165,21 @@ const NewMMAEventForm = () => {
                     <button type="button" onClick={addMatchup} className="w-full bg-slate-100 border-2 border-lightGray p-3 text-base rounded-lg mt-2">Add Matchup</button>
                 </div>
                 <button type="submit" className="w-full py-3 bg-green-600 text-white rounded-lg">
-                    Add Event
+                    Update Event
                 </button>
             </form>
+            {matchupToDelete && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-25"></div>}
+            {matchupToDelete && <div className="fixed flex justify-center z-10">
+                <div className="w-1/2 p-6 bg-white mt-20 rounded-lg">
+                    <p className="text-black">Are you sure you want to delete <span className="font-semibold">{`"${matchupToDelete.fighterA} vs ${matchupToDelete.fighterB}"`}?</span> This will delete all associated bets with this matchup. Please make sure this matchup is 100% cancelled before confirming.</p>
+                    <div className="flex justify-end gap-4 mt-6">
+                        <button type="button" onClick={cancelDeleteMatchup} className="border-2 px-4 py-1 rounded-lg border-zinc-400">Cancel</button>
+                        <button type="button" onClick={() => confirmDeleteMatchup(matchupToDelete.index)} className="bg-red-500 px-4 py-1 rounded-lg text-white">Delete</button>
+                    </div>
+                </div>
+            </div>}
         </div>
     )
 }
 
-export default NewMMAEventForm
+export default EditMMAEventForm

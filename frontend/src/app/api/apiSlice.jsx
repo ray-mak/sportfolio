@@ -54,6 +54,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 //This is used for making API requests in Redux applications. endpoints is empty because we will provide extended slices that will attach to this
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
-    tagTypes: ["mmaMLBet", "User"],
+    tagTypes: ["mmaMLBet", "User", "MMAEvent"],
     endpoints: builder => ({})
 })
