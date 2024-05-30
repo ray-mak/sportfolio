@@ -4,5 +4,6 @@ const userProfileStatsController = require("../controllers/userProfileStatsContr
 
 router.route('/')
     .get(userProfileStatsController.getUserProfileStats)
+    .post(userProfileStatsController.getUserProfileStats)
 
 module.exports = router

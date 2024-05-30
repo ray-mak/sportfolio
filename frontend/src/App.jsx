@@ -16,6 +16,7 @@ import UserProfile from "./features/users/UserProfile"
 import PersistLogin from "./features/auth/PersistLogin"
 import RequireAuth from "./features/auth/RequireAuth"
 import { ROLES } from "./config/roles"
+import UserMMAEvents from "./features/users/UserMMAEvents"
 
 function App() {
 
@@ -30,6 +31,8 @@ function App() {
         <Route path="leaderboard">
           <Route index element={<Leaderboard />} />
         </Route>
+
+        <Route path="user" element={<UserMMAEvents />} />
 
         <Route path="editmmaevent">
           <Route index element={<MMAEventsList />} />
