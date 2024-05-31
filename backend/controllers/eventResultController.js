@@ -38,10 +38,10 @@ const createEventResult = asyncHandler(async (req, res) => {
         if (!result.winner || !result.methodOfVictory || !result.timeElapsed) {
             return res.status(400).json({ message: "Match results must have a winner, method of victory, and time elapsed" })
         }
-        if (result.methodOfVictory == "Decision" && !result.score) {
+        if (result.methodOfVictory == "decision" && !result.score) {
             return res.status(400).json({ message: "Decision victories must have a score" })
         }
-        if (result.score && result.methodOfVictory !== "Decision" && result.methodOfVictory !== "Split Decision") {
+        if (result.score && result.methodOfVictory !== "decision" && result.methodOfVictory !== "Split Decision") {
             return res.status(400).json({ message: "Score not necessary for non-decision victories" })
         }
 

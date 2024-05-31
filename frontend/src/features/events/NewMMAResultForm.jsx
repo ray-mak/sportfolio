@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react"
 import { useAddNewMMAResultMutation } from "./mmaResultsApiSlice"
 import { useNavigate } from "react-router-dom"
+import ScorecardCalculator from "../../components/ScorecardCalculator"
 
 const NewMMAResultForm = ({ events }) => {
-    const [addNewMMAEvent, {
-        isLoading: addEventIsLoading,
-        isSuccess: addEventIsSuccess,
-        isError: addEventIsError,
-        error: addEventError
+    const [addNewMMAResult, {
+        isLoading,
+        isSuccess,
+        isError,
+        error
     }] = useAddNewMMAResultMutation()
 
     const navigate = useNavigate()
 
     const [eventToLog, setEventToLog] = useState(events[0].eventName)
     const [eventData, setEventData] = useState(events[0])
-    const [matchupResults, setMatchupResults] = useState(eventData.matchups.map(() => ({
-        winner: "",
-        methodOfVictory: "",
-        timeElapsed: "",
-        score: ""
+    const [matchupResults, setMatchupResults] = useState(eventData.matchups.map(object => ({
+        matchup: object.matchup.trim(),
+        matchResults: {
+            winner: "",
+            methodOfVictory: "",
+            timeElapsed: "",
+            score: ""
+        }
     })))
 
     const changeEvent = (e) => {
@@ -34,8 +38,31 @@ const NewMMAResultForm = ({ events }) => {
     const handleChange = (index, e) => {
         const { name, value } = e.target
         const newMatchupResults = [...matchupResults]
-        newMatchupResults[index][name] = value
+        newMatchupResults[index].matchResults[name] = value
         setMatchupResults(newMatchupResults)
+    }
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/login")
+        }
+    }, [isSuccess, navigate])
+
+    useEffect(() => {
+        if (isError) {
+            console.log(error)
+        }
+    }, [isError])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const dataToSubmit = {
+            eventName: eventData.eventName,
+            eventDate: eventData.eventDate,
+            matchups: matchupResults
+        }
+        console.log(dataToSubmit)
+        await addNewMMAResult(dataToSubmit)
     }
 
     const eventOptions = events.map(object => (<option key={object._id} value={object.eventName}>{object.eventName}</option>))
@@ -44,20 +71,20 @@ const NewMMAResultForm = ({ events }) => {
         const fighterA = object.matchup.split(" vs ")[0]
         const fighterB = object.matchup.split(" vs ")[1]
         return (
-            <div key={index}>
-                <p>{object.matchup}</p>
-                <div>
-                    <label htmlFor={`winner-${index}`}>
+            <div key={index} className="border-2 border-slate-400 p-4 rounded-lg mt-4">
+                <p className="font-semibold">{object.matchup}</p>
+                <div className="grid grid-cols-4 gap-4">
+                    <label htmlFor={`winner-${index}`} className="flex flex-col">
                         Winner
-                        <select id={`winner-${index}`} value={matchupResults[index].winner} name="winner" onChange={(e) => handleChange(index, e)}>
+                        <select id={`winner-${index}`} value={matchupResults[index].winner} name="winner" onChange={(e) => handleChange(index, e)} className="p-1 border-2 border-slate-300 rounded-lg">
                             <option value="">Select</option>
                             <option value={fighterA}>{fighterA}</option>
                             <option value={fighterB}>{fighterB}</option>
                         </select>
                     </label>
-                    <label htmlFor={`methodOfVictory-${index}`}>
+                    <label htmlFor={`methodOfVictory-${index}`} className="flex flex-col">
                         Method of Victory
-                        <select id={`methodOfVictory-${index}`} value={matchupResults[index].methodOfVictory} name="methodOfVictory" onChange={(e) => handleChange(index, e)}>
+                        <select id={`methodOfVictory-${index}`} value={matchupResults[index].methodOfVictory} name="methodOfVictory" onChange={(e) => handleChange(index, e)} className="p-1 border-2 border-slate-300 rounded-lg">
                             <option value="">Select</option>
                             <option value="ko">KO</option>
                             <option value="submission">Submission</option>
@@ -66,27 +93,35 @@ const NewMMAResultForm = ({ events }) => {
                             <option value="draw">Draw</option>
                         </select>
                     </label>
-                    <label htmlFor={`timeElapsed-${index}`} value={matchupResults[index].timeElapsed}>
+                    <label htmlFor={`timeElapsed-${index}`} value={matchupResults[index].timeElapsed} className="flex flex-col">
                         Time Elapsed
-                        <input id={`timeElapsed-${index}`} onChange={(e) => handleChange(index, e)} name="timeElapsed" type="text" />
+                        <input id={`timeElapsed-${index}`} onChange={(e) => handleChange(index, e)} name="timeElapsed" type="text" className="p-1 border-2 border-slate-300 rounded-lg" />
                     </label>
-                    <label htmlFor={`score-${index}`} value={matchupResults[index].score}>
+                    <label htmlFor={`score-${index}`} value={matchupResults[index].score} className="flex flex-col">
                         Score
-                        <input id={`score-${index}`} onChange={(e) => handleChange(index, e)} name="score" type="text" />
+                        <input id={`score-${index}`} onChange={(e) => handleChange(index, e)} name="score" type="text" className="p-1 border-2 border-slate-300 rounded-lg" />
                     </label>
                 </div>
             </div>
         )
     })
 
-    console.log(matchupResults)
     return (
-        <div>
-            <label htmlFor="eventSelect">Select an Event</label>
-            <select id="eventSelect" name="eventSelect" value={eventToLog} onChange={changeEvent}>
-                {eventOptions}
-            </select>
-            {resultsInputs}
+        <div className="flex justify-center">
+            <div className="mt-10">
+                <h1 className="text-center text-2xl font-semibold mb-4">Submit MMA Results</h1>
+                <label htmlFor="eventSelect">Select an Event</label>
+                <select id="eventSelect" name="eventSelect" value={eventToLog} onChange={changeEvent} className="p-1 border-2 border-slate-300 rounded-lg ml-6">
+                    {eventOptions}
+                </select>
+                <form onSubmit={handleSubmit}>
+                    {resultsInputs}
+                    <button className="py-2 w-full bg-green-600 text-white rounded-lg my-6">Submit Event</button>
+                </form>
+            </div>
+            {/* <div className="fixed right-20 top-80">
+                <ScorecardCalculator />
+            </div> */}
         </div >
     )
 }

@@ -1,0 +1,278 @@
+[
+    {
+        "_id": "66468087202054d7973535d1",
+        "eventName": "UFC 300",
+        "eventDate": "2024-04-13T07:00:00.000Z",
+        "matchups": [
+            {
+                "matchup": "Alex Pereira vs Jamahal Hill",
+                "matchResults": {
+                    "winner": "Alex Pereira",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "3:14",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535d2"
+            },
+            {
+                "matchup": "Weili Zhang vs Yan Xioanan",
+                "matchResults": {
+                    "winner": "Weili Zhang",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "25:00",
+                    "score": "147-135"
+                },
+                "_id": "66468087202054d7973535d3"
+            },
+            {
+                "matchup": "Justin Gaethje vs Max Holloway",
+                "matchResults": {
+                    "winner": "Max Holloway",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "24:59",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535d4"
+            },
+            {
+                "matchup": "Charles Oliveira vs Arman Tsarukyan",
+                "matchResults": {
+                    "winner": "Arman Tsarukyan",
+                    "methodOfVictory": "Split Decision",
+                    "timeElapsed": "15:00",
+                    "score": "86-85"
+                },
+                "_id": "66468087202054d7973535d5"
+            },
+            {
+                "matchup": "Bo Nickal vs Cody Brundage",
+                "matchResults": {
+                    "winner": "Bo Nickal",
+                    "methodOfVictory": "Submission",
+                    "timeElapsed": "8:38",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535d6"
+            },
+            {
+                "matchup": "Jiri Prochazka vs Aleksandar Rakic",
+                "matchResults": {
+                    "winner": "Jiri Prochazka",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "8:17",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535d7"
+            },
+            {
+                "matchup": "Calvin Kattar vs Aljamain Sterling",
+                "matchResults": {
+                    "winner": "Aljamain Sterling",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "90-81"
+                },
+                "_id": "66468087202054d7973535d8"
+            },
+            {
+                "matchup": "Holly Holm vs Kayla Harrison",
+                "matchResults": {
+                    "winner": "Kayla Harrison",
+                    "methodOfVictory": "Submission",
+                    "timeElapsed": "6:47",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535d9"
+            },
+            {
+                "matchup": "Sodiq Yusuff vs Diego Lopes",
+                "matchResults": {
+                    "winner": "Diego Lopes",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "1:29",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535da"
+            },
+            {
+                "matchup": "Jalin Turner vs Renato Moicano",
+                "matchResults": {
+                    "winner": "Renato Moicano",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "9:11",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535db"
+            },
+            {
+                "matchup": "Jessica Andrade vs Marina Rodriguez",
+                "matchResults": {
+                    "winner": "Jessica Andrade",
+                    "methodOfVictory": "Split Decision",
+                    "timeElapsed": "15:00",
+                    "score": "86-85"
+                },
+                "_id": "66468087202054d7973535dc"
+            },
+            {
+                "matchup": "Bobby Green vs Jim Miller",
+                "matchResults": {
+                    "winner": "Bobby Green",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "88-78"
+                },
+                "_id": "66468087202054d7973535dd"
+            },
+            {
+                "matchup": "Deiveson Figueiredo vs Cody Garbrandt",
+                "matchResults": {
+                    "winner": "Deiveson Figueiredo",
+                    "methodOfVictory": "Submission",
+                    "timeElapsed": "9:02",
+                    "score": ""
+                },
+                "_id": "66468087202054d7973535de"
+            }
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "664685b1202054d7973535e3",
+        "eventName": "UFC Fight Night: Nicolau vs Perez",
+        "eventDate": "2024-04-27T07:00:00.000Z",
+        "matchups": [
+            {
+                "matchup": "Matheus Nicolau vs Alex Perez",
+                "matchResults": {
+                    "winner": "Alex Perex",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "7:16",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535e4"
+            },
+            {
+                "matchup": "Ryan Spann vs Bogdan Guskov",
+                "matchResults": {
+                    "winner": "Bogdan Guskov",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "8:16",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535e5"
+            },
+            {
+                "matchup": "Ariane Lipski vs Karine Silva",
+                "matchResults": {
+                    "winner": "Karine Silva",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "88-83"
+                },
+                "_id": "664685b1202054d7973535e6"
+            },
+            {
+                "matchup": "Austen Lane vs Jhonata Diniz",
+                "matchResults": {
+                    "winner": "Jhonata Diniz",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "7:12",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535e7"
+            },
+            {
+                "matchup": "Jonathan Pearce vs David Onama",
+                "matchResults": {
+                    "winner": "David Onama",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "87-84"
+                },
+                "_id": "664685b1202054d7973535e8"
+            },
+            {
+                "matchup": "Tim Means vs Uros Medic",
+                "matchResults": {
+                    "winner": "Uros Medic",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "2:09",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535e9"
+            },
+            {
+                "matchup": "Rani Yahya vs Victor Henry",
+                "matchResults": {
+                    "winner": "Victor Henry",
+                    "methodOfVictory": "KO",
+                    "timeElapsed": "12:36",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535ea"
+            },
+            {
+                "matchup": "Austin Hubbard vs Michal Figlak",
+                "matchResults": {
+                    "winner": "Austin Hubbard",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "87-84"
+                },
+                "_id": "664685b1202054d7973535eb"
+            },
+            {
+                "matchup": "Don'Tale Mayes vs Caio Machado",
+                "matchResults": {
+                    "winner": "Don'Tale Mayes",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "87-84"
+                },
+                "_id": "664685b1202054d7973535ec"
+            },
+            {
+                "matchup": "Marnic Mann vs Ketlen Souza",
+                "matchResults": {
+                    "winner": "Ketlen Souza",
+                    "methodOfVictory": "Decision",
+                    "timeElapsed": "15:00",
+                    "score": "90-81"
+                },
+                "_id": "664685b1202054d7973535ed"
+            },
+            {
+                "matchup": "James Llontop vs Chris Padilla",
+                "matchResults": {
+                    "winner": "Chris Padilla",
+                    "methodOfVictory": "Submission",
+                    "timeElapsed": "4:33",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535ee"
+            },
+            {
+                "matchup": "Ivana Petrovic vs Liang Na",
+                "matchResults": {
+                    "winner": "Ivana Petrovic",
+                    "methodOfVictory": "Submission",
+                    "timeElapsed": "11:29",
+                    "score": ""
+                },
+                "_id": "664685b1202054d7973535ef"
+            },
+            {
+                "matchup": "Gabriel Benitez vs Hayisaer Maheshate",
+                "matchResults": {
+                    "winner": "Hayisaer Maheshate",
+                    "methodOfVictory": "Split Decision",
+                    "timeElapsed": "15:00",
+                    "score": "86-85"
+                },
+                "_id": "664685b1202054d7973535f0"
+            }
+        ],
+        "__v": 0
+    }
+]
