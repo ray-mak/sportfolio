@@ -1,7 +1,7 @@
-import useEventsWithNoResults from "./useEventsWithNoResults"
-import NewMMAResultForm from "./NewMMAResultForm"
+import useEventsWithNoResults from "../events/useEventsWithNoResults"
+import AddMMAPickForm from "./AddMMAPickForm"
 
-const NewMMAResult = () => {
+const AddMMAPick = () => {
     const { eventsWithNoResults, isLoading, isError, errorMessage } = useEventsWithNoResults()
 
     let content
@@ -11,14 +11,11 @@ const NewMMAResult = () => {
     if (eventsWithNoResults) {
         content = (
             <div>
-                <NewMMAResultForm events={eventsWithNoResults} />
+                <AddMMAPickForm events={eventsWithNoResults} />
             </div>
         )
-    } else {
-        content = <p>All events have been logged</p>
     }
-
     return content
 }
 
-export default NewMMAResult
+export default AddMMAPick

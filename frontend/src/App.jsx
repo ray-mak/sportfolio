@@ -6,7 +6,7 @@ import DashLayout from "./components/DashLayout"
 import Welcome from "./features/auth/Welcome"
 import BetsList from "./features/bets/BetsList"
 import Leaderboard from "./features/users/Leaderboard"
-import AddPick from "./features/bets/AddPick"
+import AddMMAPick from "./features/bets/AddMMAPick"
 import MMAEventsList from "./features/events/MMAEventsList"
 import EditMMAEvent from "./features/events/EditMMAEvent"
 import NewMMAEvent from "./features/events/NewMMAEventForm"
@@ -51,7 +51,7 @@ function App() {
               <Route index element={<Welcome />} />
 
               <Route path="addpick">
-                <Route index element={<AddPick />} />
+                <Route index element={<AddMMAPick />} />
               </Route>
 
             </Route>    {/* End Dash */}

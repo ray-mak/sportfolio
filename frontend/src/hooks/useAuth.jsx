@@ -15,7 +15,7 @@ const useAuth = () => {
         isAdmin = role.includes("Admin")
         if (isAdmin) status = "Admin"
 
-        return { username, role, status, isAdmin }
+        return { username, role, status, isAdmin, id }
     }
 
     return { username: "", role: "", isAdmin, status }

@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
-import upcomingEvents from "../../../public/upcoming_events.json"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { useAddNewMMAMLBetMutation } from './mmaMLApiSlice'
+import useAuth from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 
-const AddPick = () => {
+const AddMMAPickForm = ({ events }) => {
     const [addNewMMAMLBet, {
         isLoading,
         isSuccess,
         isError,
         error
     }] = useAddNewMMAMLBetMutation()
+
+    const { id } = useAuth()
+    const navigate = useNavigate()
 
     //variables to store form data, errors, input validation and dropdown status.
     const [formData, setFormData] = useState({
@@ -63,21 +67,21 @@ const AddPick = () => {
             pickDropdown: false
         }))
     }
-
+    console.log(events)
     //generate event names from JSON
-    const eventNames = upcomingEvents.map(item => {
+    const eventNames = events.map(item => {
         return (
-            <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer' onClick={(e) => handleChange(e, "event")} key={item.event}>{item.event}</li>
+            <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer' onClick={(e) => handleChange(e, "event")} key={item.eventName}>{item.eventName}</li>
         )
     })
 
     //Generate matchups based on which event is selected, by matching the name of the event selected in the form with same event name in the JSON.
-    const selectedEventMatchups = upcomingEvents.find(item => item.event === formData.event)
+    const selectedEventMatchups = events.find(item => item.eventName === formData.event)
     let matchupsList
     if (selectedEventMatchups) {
-        matchupsList = selectedEventMatchups.matchups.map(matchup => {
+        matchupsList = selectedEventMatchups.matchups.map(item => {
             return (
-                <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer' onClick={(e) => handleChange(e, "matchup")} key={matchup}>{matchup}</li>
+                <li className='flex items-center p-2 rounded-md hover:bg-blue-400 hover:text-white hover:cursor-pointer' onClick={(e) => handleChange(e, "matchup")} key={item.matchup}>{item.matchup}</li>
             )
         })
     } else {
@@ -282,7 +286,26 @@ const AddPick = () => {
         setShowConfirmation(false)
     }
 
-    // console.log(americanOdds, decimalOdds, probability, betAmount, selectedEvent, selectedEventMatchups, pickedFighter)
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/dash")
+        }
+    }, [isSuccess, navigate])
+
+    const submitData = async (e) => {
+        e.preventDefault()
+        await addNewMMAMLBet({
+            user: id,
+            betType: "moneyline",
+            event: formData.event,
+            matchup: formData.matchup,
+            pick: formData.pick,
+            odds: formData.odds,
+            betAmount: formData.betAmount,
+            notes: formData.notes
+        })
+    }
+
     return (
         <div className='flex flex-col items-center justify-center text-sm mt-20 sm:text-base'>
             <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
@@ -424,7 +447,7 @@ const AddPick = () => {
                     </div>
                     <div className='flex gap-4 mt-4 ml-auto'>
                         <button onClick={cancelConfirm} className='py-2 px-4 text-brightRed font-semibold hover:opacity-70'>Cancel</button>
-                        <button className='py-2 px-4 bg-brightRed text-white rounded-lg font-medium hover:opacity-70'>Confirm</button>
+                        <button className='py-2 px-4 bg-brightRed text-white rounded-lg font-medium hover:opacity-70' onClick={submitData}>Confirm</button>
                     </div>
                 </div>
             }
@@ -433,4 +456,4 @@ const AddPick = () => {
     )
 }
 
-export default AddPick
+export default AddMMAPickForm
