@@ -46,7 +46,7 @@ const Login = () => {
         }
     }
 
-    console.log(formData)
+    const handleToggle = () => setPersist(prev => !prev)
     return (
         <div className="flex justify-center">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-8 mt-8 bg-white rounded-lg shadow-xl">
@@ -78,6 +78,10 @@ const Login = () => {
                         required
                     />
                 </label>
+                {/* <label htmlFor="persist">
+                    <input type="checkbox" id="persist" onChange={handleToggle} checked={persist} />
+                    Trust this device
+                </label> */}
                 <p>Don't have an account? <span className="underline">Sign up here</span></p>
                 <button className="w-full bg-brightRed text-white p-3 text-base rounded-lg mt-2">Log In</button>
             </form>

@@ -81,7 +81,7 @@ const EditMMAEventForm = ({ event }) => {
         e.preventDefault()
         const matchupsArray = []
         matchups.forEach(fight => {
-            const matchupStr = `${fight.fighterA} vs ${fight.fighterB}`
+            const matchupStr = `${fight.fighterA.trim()} vs ${fight.fighterB.trim()}`
             const matchupData = {
                 matchup: matchupStr,
                 division: fight.division,

@@ -35,6 +35,18 @@ const NewMMAResultForm = ({ events }) => {
         setEventData(event)
     }, [eventToLog])
 
+    useEffect(() => {
+        setMatchupResults(eventData.matchups.map(object => ({
+            matchup: object.matchup.trim(),
+            matchResults: {
+                winner: "",
+                methodOfVictory: "",
+                timeElapsed: "",
+                score: ""
+            }
+        })))
+    }, [eventData])
+
     const handleChange = (index, e) => {
         const { name, value } = e.target
         const newMatchupResults = [...matchupResults]
@@ -44,7 +56,7 @@ const NewMMAResultForm = ({ events }) => {
 
     useEffect(() => {
         if (isSuccess) {
-            navigate("/login")
+            navigate("/editmmaevent")
         }
     }, [isSuccess, navigate])
 
@@ -61,9 +73,11 @@ const NewMMAResultForm = ({ events }) => {
             eventDate: eventData.eventDate,
             matchups: matchupResults
         }
-        console.log(dataToSubmit)
-        await addNewMMAResult(dataToSubmit)
+        // console.log(dataToSubmit)
+        // await addNewMMAResult(dataToSubmit)
     }
+
+    console.log(eventToLog, eventData, matchupResults)
 
     const eventOptions = events.map(object => (<option key={object._id} value={object.eventName}>{object.eventName}</option>))
 

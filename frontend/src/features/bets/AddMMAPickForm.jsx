@@ -412,6 +412,7 @@ const AddMMAPickForm = ({ events }) => {
                             maxLength={4}
                             min={0}
                             max={10}
+                            step={0.01}
                         />
                     </label>
                     <div className='flex flex-col'>

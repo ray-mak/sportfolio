@@ -274,5 +274,177 @@
             }
         ],
         "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "665b94ecc342dbfe543c83e1"
+        },
+        "eventName": "UFC 300",
+        "eventDate": {
+            "$date": {
+                "$numberLong": "1713045600000"
+            }
+        },
+        "matchups": [
+            {
+                "matchup": "Alex Pereira vs Jamahal Hill",
+                "matchResults": {
+                    "winner": "Alex Pereira",
+                    "methodOfVictory": "ko",
+                    "timeElapsed": "3:14",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e2"
+                }
+            },
+            {
+                "matchup": "Weili Zhang vs Xiaonan Yan",
+                "matchResults": {
+                    "winner": "Weili Zhang",
+                    "methodOfVictory": "decision",
+                    "timeElapsed": "25:00",
+                    "score": "147-135"
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e3"
+                }
+            },
+            {
+                "matchup": "Justin Gaethje vs Max Holloway",
+                "matchResults": {
+                    "winner": "Max Holloway",
+                    "methodOfVictory": "ko",
+                    "timeElapsed": "24:59",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e4"
+                }
+            },
+            {
+                "matchup": "Charles Oliveira vs Arman Tsarukyan",
+                "matchResults": {
+                    "winner": "Arman Tsarukyan",
+                    "methodOfVictory": "split decision",
+                    "timeElapsed": "15:00",
+                    "score": "86-85"
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e5"
+                }
+            },
+            {
+                "matchup": "Bo Nickal vs  Cody Brundage",
+                "matchResults": {
+                    "winner": "Bo Nickal",
+                    "methodOfVictory": "submission",
+                    "timeElapsed": "8:38",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e6"
+                }
+            },
+            {
+                "matchup": "Aleksandar Rakić vs Jiří Procházka",
+                "matchResults": {
+                    "winner": "Aleksandar Rakić",
+                    "methodOfVictory": "ko",
+                    "timeElapsed": "8:17",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e7"
+                }
+            },
+            {
+                "matchup": "Aljamain Sterling vs Calvin Kattar",
+                "matchResults": {
+                    "winner": "Aljamain Sterling",
+                    "methodOfVictory": "decision",
+                    "timeElapsed": "15:00",
+                    "score": "90-81"
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e8"
+                }
+            },
+            {
+                "matchup": "Kayla Harrison vs  Holly Holm",
+                "matchResults": {
+                    "winner": "Kayla Harrison",
+                    "methodOfVictory": "submission",
+                    "timeElapsed": "6:47",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83e9"
+                }
+            },
+            {
+                "matchup": "Sodiq Yusuff vs Diego Lopes",
+                "matchResults": {
+                    "winner": "Diego Lopes",
+                    "methodOfVictory": "ko",
+                    "timeElapsed": "1:29",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83ea"
+                }
+            },
+            {
+                "matchup": "Renato Moicano vs  Jalin Turner",
+                "matchResults": {
+                    "winner": "Renato Moicano",
+                    "methodOfVictory": "ko",
+                    "timeElapsed": "9:11",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83eb"
+                }
+            },
+            {
+                "matchup": "Jéssica Andrade vs Marina Rodriguez",
+                "matchResults": {
+                    "winner": "Marina Rodriguez",
+                    "methodOfVictory": "decision",
+                    "timeElapsed": "15:00",
+                    "score": "86-85"
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83ec"
+                }
+            },
+            {
+                "matchup": "Bobby Green vs  Jim Miller",
+                "matchResults": {
+                    "winner": "Bobby Green",
+                    "methodOfVictory": "decision",
+                    "timeElapsed": "15:00",
+                    "score": "88-78"
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83ed"
+                }
+            },
+            {
+                "matchup": "Deiveson Figueiredo vs Cody Garbrandt",
+                "matchResults": {
+                    "winner": "Deiveson Figueiredo",
+                    "methodOfVictory": "submission",
+                    "timeElapsed": "9:02",
+                    "score": ""
+                },
+                "_id": {
+                    "$oid": "665b94ecc342dbfe543c83ee"
+                }
+            }
+        ],
+        "__v": {
+            "$numberInt": "0"
+        }
     }
 ]
