@@ -71,3 +71,16 @@ export const {
     useDeleteMMAResultMutation
 } = mmaResultsApiSlice
 
+export const selectMMAResultsResult = mmaResultsApiSlice.endpoints.getMMAResults.select()
+
+const selectMMAResultsData = createSelector(
+    selectMMAResultsResult,
+    mmaResults => mmaResults.data
+)
+
+export const {
+    selectAll: selectAllMMAResults,
+    selectById: selectMMAResultById,
+    selectIds: selectMMAResultIds
+} = mmaResultsAdapter.getSelectors(state => selectMMAResultsData(state) ?? initialState)
+

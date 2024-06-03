@@ -18,6 +18,8 @@ import RequireAuth from "./features/auth/RequireAuth"
 import { ROLES } from "./config/roles"
 import UserMMAEvents from "./features/users/UserMMAEvents"
 import NewMMAResult from "./features/events/NewMMAResult"
+import MMAResultsList from "./features/events/MMAResultsList"
+import EditMMAResult from "./features/events/EditMMAResult"
 
 function App() {
 
@@ -41,7 +43,11 @@ function App() {
           <Route path="newmmaevent" element={<NewMMAEvent />} />
         </Route>
 
-        <Route path="newmmaresult" element={<NewMMAResult />} />
+        <Route path="mmaresults">
+          <Route index element={<MMAResultsList />} />
+          <Route path=":id" element={<EditMMAResult />} />
+          <Route path="newmmaresult" element={<NewMMAResult />} />
+        </Route>
 
         {/* protected routes */}
         <Route element={<PersistLogin />}>
