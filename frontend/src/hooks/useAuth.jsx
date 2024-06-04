@@ -10,12 +10,12 @@ const useAuth = () => {
 
     if (token) {
         const decoded = jwtDecode(token)
-        const { username, role, id } = decoded.UserInfo //UserInfo is defined in authController
+        const { username, role, id, displayName, email } = decoded.UserInfo //UserInfo is defined in authController
 
         isAdmin = role.includes("Admin")
         if (isAdmin) status = "Admin"
 
-        return { username, role, status, isAdmin, id }
+        return { username, role, status, isAdmin, id, displayName, email }
     }
 
     return { username: "", role: "", isAdmin, status }

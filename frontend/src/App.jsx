@@ -10,7 +10,7 @@ import AddMMAPick from "./features/bets/AddMMAPick"
 import MMAEventsList from "./features/events/MMAEventsList"
 import EditMMAEvent from "./features/events/EditMMAEvent"
 import NewMMAEvent from "./features/events/NewMMAEventForm"
-import EditUser from "./features/users/EditUser"
+import EditUser from "./features/users/EditProfile"
 import NewUserForm from "./features/users/NewUserForm"
 import UserProfile from "./features/users/UserProfile"
 import PersistLogin from "./features/auth/PersistLogin"
@@ -20,6 +20,7 @@ import UserMMAEvents from "./features/users/UserMMAEvents"
 import NewMMAResult from "./features/events/NewMMAResult"
 import MMAResultsList from "./features/events/MMAResultsList"
 import EditMMAResult from "./features/events/EditMMAResult"
+import EditProfile from "./features/users/EditProfile"
 
 function App() {
 
@@ -59,6 +60,8 @@ function App() {
               <Route path="addpick">
                 <Route index element={<AddMMAPick />} />
               </Route>
+
+              <Route path="editprofile" element={<EditProfile />} />
 
             </Route>    {/* End Dash */}
           </Route>
