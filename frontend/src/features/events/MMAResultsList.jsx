@@ -50,7 +50,7 @@ const MMAResultsList = () => {
         content = (
             <div className="flex justify-center">
                 <div className="flex flex-col gap-6 border-2 mt-16">
-                    <button onClick={() => navigate("/editmmaevent/newmmaevent")} type="button" className="px-4 py-2 bg-slate-300 border-2 border-lightGray rounded-lg justify-self-center">Add New Event</button>
+                    <button onClick={() => navigate("/mmaresults/newmmaresult")} type="button" className="px-4 py-2 bg-slate-300 border-2 border-lightGray rounded-lg justify-self-center">Add New Result</button>
                     <h1 className="font-semibold text-xl text-center">MMA Events List</h1>
                     <table>
                         <thead>

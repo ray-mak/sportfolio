@@ -29,7 +29,7 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     }
 
 
-    res.json(evaluatedBets)
+    res.json(allUserBets)
     //don't forget to reactivate auth for users and mmamlbets
 })
 

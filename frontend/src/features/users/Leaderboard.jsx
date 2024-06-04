@@ -43,16 +43,19 @@ const Leaderboard = () => {
         //userStats will be an array of objects that contains the users name and betting stats.
         const userStats = []
         entities.forEach(object => {
-            const results = object.bets
+            const betHistory = object.betHistory
             let picks = 0
             let profit = 0
             let unitsBet = 0
             let roi
 
-            for (const result of results) {
-                picks++
-                profit = profit += Number(result.profit)
-                unitsBet = unitsBet += result.betAmount
+            for (const event of betHistory) {
+                const eventResults = event.eventResults
+                for (const matchup of eventResults) {
+                    picks++
+                    profit = profit += Number(matchup.profit)
+                    unitsBet = unitsBet += matchup.betAmount
+                }
             }
 
             roi = ((profit / unitsBet) * 100)

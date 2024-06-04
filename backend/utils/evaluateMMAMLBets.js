@@ -7,14 +7,13 @@ async function evaluateMMAMLBets(bets, eventResults) {
             const event = eventResults.find(object => object.eventName === bet.event)
             //check to see if event exists. Will not exist if event has not happened (or not logged yet)
             if (!event) {
-                evaluatedBets.push({ ...bet })
                 continue
             }
             //find the corresponding matchup in event for the bet
             const matchup = event.matchups.find(object => object.matchup === bet.matchup)
             //set the result of each bet
             let betResult
-            if (matchup.matchResults.winner === "Draw") {
+            if (matchup.matchResults.methodOfVictory === "Draw") {
                 betResult = "Draw"
             } else if (matchup.matchResults.winner === bet.pick) {
                 betResult = "Win"
