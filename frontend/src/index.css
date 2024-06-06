@@ -29,6 +29,24 @@ input::-webkit-inner-spin-button {
     background-color: #dddddd;
 }
 
+.notes-tr {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .3s;
+
+}
+
+.notes-tr>div {
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto
+}
+
+.notes-tr.expanded {
+    grid-template-rows: 1fr;
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;

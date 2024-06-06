@@ -72,7 +72,7 @@ const UserMMAEvents = () => {
                             <th></th>
                             <th></th>
                             <th className="text-left">{totalBetAmount}</th>
-                            <th className={`text-left ${textColor}`}>{totalProfit}</th>
+                            <th className={`text-left ${textColor}`}>{totalProfit.toFixed(2)}</th>
                             <th className={`text-left ${textColor}`}>{totalROI.toFixed(0)}%</th>
                         </tr>
                     </tbody>

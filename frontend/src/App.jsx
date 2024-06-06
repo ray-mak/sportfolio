@@ -21,6 +21,7 @@ import NewMMAResult from "./features/events/NewMMAResult"
 import MMAResultsList from "./features/events/MMAResultsList"
 import EditMMAResult from "./features/events/EditMMAResult"
 import EditProfile from "./features/users/EditProfile"
+import UserUpcomingEvents from "./features/users/UserUpcomingEvents"
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         </Route>
 
         <Route path="user" element={<UserMMAEvents />} />
+        <Route path="userupcoming" element={<UserUpcomingEvents />} />
 
         <Route path="editmmaevent">
           <Route index element={<MMAEventsList />} />
