@@ -40,12 +40,13 @@ input::-webkit-inner-spin-button {
 .notes-tr>div {
     overflow: hidden;
     width: 80%;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .notes-tr.expanded {
     grid-template-rows: 1fr;
 }
+
 
 @media (max-width: 768px) {
     .nav-menu {

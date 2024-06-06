@@ -33,7 +33,7 @@ const UserMMAEvents = () => {
                 }
                 return (
                     <tr key={bet._id}>
-                        <td className="px-4 py-1">{bet.matchup}</td>
+                        <td className="px-4">{bet.matchup}</td>
                         <td>{bet.pick}</td>
                         <td className={textColor}>{bet.result}</td>
                         <td>{bet.betAmount.toFixed(2)}</td>
@@ -53,11 +53,11 @@ const UserMMAEvents = () => {
             totalProfit >= 0 ? textColor = "text-green-700" : textColor = "text-red-600"
 
             return (
-                <table key={object.event} className="w-full mt-6">
+                <table key={object.event} className="w-full mt-6 border-2 border-zinc-400">
                     <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                     <thead>
                         <tr className="bg-slate-200">
-                            <th scope="col" className="text-left py-1 px-4">Matchup</th>
+                            <th scope="col" className="text-left px-4">Matchup</th>
                             <th scope="col" className="text-left">Pick</th>
                             <th scope="col" className="text-left">Result</th>
                             <th scope="col" className="text-left">Units Bet</th>

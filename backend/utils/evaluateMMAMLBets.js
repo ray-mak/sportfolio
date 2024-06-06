@@ -13,20 +13,20 @@ async function evaluateMMAMLBets(bets, eventResults) {
             const matchup = event.matchups.find(object => object.matchup === bet.matchup)
             //set the result of each bet
             let betResult
-            if (matchup.matchResults.methodOfVictory === "Draw") {
-                betResult = "Draw"
+            if (matchup.matchResults.methodOfVictory === "draw") {
+                betResult = "draw"
             } else if (matchup.matchResults.winner === bet.pick) {
-                betResult = "Win"
+                betResult = "win"
             } else {
-                betResult = "Loss"
+                betResult = "loss"
             }
             //set the profit and roi of each bet
             let profit
             let roi
-            if (betResult === "Draw") {
+            if (betResult === "draw") {
                 profit = 0
                 roi = 0
-            } else if (betResult === "Win") {
+            } else if (betResult === "win") {
                 profit = bet.odds * bet.betAmount - bet.betAmount
                 roi = (profit / bet.betAmount) * 100
             } else {

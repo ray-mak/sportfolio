@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler')
 const { evaluateMMAMLBets } = require('../utils/evaluateMMAMLBets')
 const { sortEvaluatedBets } = require('../utils/sortEvaluatedBets')
 const { formatUpcomingBets } = require('../utils/formatUpcomingBets')
+const { calculateMLStats } = require('../utils/calculateMLStats')
 
 const getUserProfileStats = asyncHandler(async (req, res) => {
     const { id } = req.body
@@ -20,10 +21,12 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     const sortedBets = await sortEvaluatedBets(evaluatedBets)
     //Create an array, upcoming events, for bets that have not been evaluated.
     const upcomingBets = await formatUpcomingBets(userBets, eventResults)
+    const mlStats = await calculateMLStats(sortedBets)
 
     const allUserBets = {
         username: user.username,
         displayName: user.displayName,
+        mlStats,
         upcomingBets,
         betHistory: sortedBets
     }

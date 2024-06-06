@@ -36,13 +36,15 @@ const UserUpcomingEvents = () => {
                             <td>{item.pick}</td>
                             <td>{item.odds}</td>
                             <td>{item.betAmount}</td>
-                            <td onClick={() => toggleNote(item._id)} className="cursor-pointer">{item.notes ? "Notes" : ""}</td>
+                            {item.notes ? <td onClick={() => toggleNote(item._id)} className="cursor-pointer">{item.notes ? "View" : ""}</td> : <td></td>}
                         </tr>
                         <tr>
                             <td colSpan="5" className="w-full">
-                                <div className={`notes-tr ${isExpanded ? "expanded" : ""}`}>
+                                <div className={`notes-tr ${isExpanded ? "expanded" : ""} bg-zinc-200`}>
                                     <div>
-                                        {item.notes}
+                                        <div className="p-4">
+                                            {item.notes}
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -52,10 +54,10 @@ const UserUpcomingEvents = () => {
             })
 
             return (
-                <table key={object.event} className="w-full mt-8">
+                <table key={object.event} className="w-full mt-8 border-2 border-zinc-400">
                     <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                     <thead>
-                        <tr>
+                        <tr className="bg-slate-200">
                             <th scope="col" className="text-left px-4">Matchup</th>
                             <th scope="col" className="text-left">Pick</th>
                             <th scope="col" className="text-left">Odds</th>
@@ -69,7 +71,7 @@ const UserUpcomingEvents = () => {
         })
 
         content = (
-            <div>
+            <div className="w-full p-6">
                 <h3 className="bg-slate-600 text-white p-2 text-lg font-medium tracking-wide">{data.displayName}'s Upcoming MMA Bets</h3>
                 {upcomingBets}
             </div>
