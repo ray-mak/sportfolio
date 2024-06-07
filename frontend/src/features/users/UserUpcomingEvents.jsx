@@ -1,4 +1,3 @@
-import { useGetUserResultsQuery } from "./userMMAEventsApiSlice"
 import { useState } from "react"
 import React from "react"
 
@@ -39,7 +38,7 @@ const UserUpcomingEvents = ({ data }) => {
         })
 
         return (
-            <table key={object.event} className="w-full mt-8 border-2 border-zinc-400">
+            <table key={object.event} className="w-full mt-8 border-2 border-zinc-400 text-sm">
                 <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                 <thead>
                     <tr className="bg-slate-200">

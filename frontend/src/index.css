@@ -121,7 +121,7 @@ input::-webkit-inner-spin-button {
 
     td {
         display: grid;
-        grid-template-columns: 15ch auto;
+        grid-template-columns: 18ch auto;
         padding: 0 1rem;
 
     }
@@ -147,5 +147,23 @@ input::-webkit-inner-spin-button {
 
     .events-tr>td {
         grid-template-columns: 1fr;
+    }
+
+    .result-tr>td:nth-child(1),
+    .result-tr>td:nth-child(2),
+    .result-tr>td:nth-child(3) {
+        display: none
+    }
+
+    .result-tr>td:nth-child(4) {
+        padding-top: .5rem;
+    }
+
+    .result-tr>td:nth-child(6) {
+        padding-bottom: .5rem;
+    }
+
+    .result-tr {
+        margin-top: 1rem;
     }
 }

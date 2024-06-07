@@ -15,7 +15,7 @@ const UserMMAEvents = ({ data }) => {
                 textColor = "text-gray-500"
             }
             return (
-                <tr key={bet._id}>
+                <tr key={bet._id} className="text-sm">
                     <td data-cell="matchup" className="md:px-4">{bet.matchup}</td>
                     <td data-cell="pick">{bet.pick}</td>
                     <td data-cell="result" className={`capitalize ${textColor}`}>{bet.result}</td>
@@ -39,7 +39,7 @@ const UserMMAEvents = ({ data }) => {
             <table key={object.event} className="w-full mt-6 border-2 border-zinc-400">
                 <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                 <thead>
-                    <tr className="bg-slate-200">
+                    <tr className="bg-slate-200 text-sm">
                         <th scope="col" className="text-left px-4">Matchup</th>
                         <th scope="col" className="text-left">Pick</th>
                         <th scope="col" className="text-left">Result</th>
@@ -50,13 +50,13 @@ const UserMMAEvents = ({ data }) => {
                 </thead>
                 <tbody>
                     {betResults}
-                    <tr className={trBg}>
-                        <th className="text-left py-1 px-4">Total</th>
-                        <th></th>
-                        <th></th>
-                        <th className="text-left">{totalBetAmount}</th>
-                        <th className={`text-left ${textColor}`}>{totalProfit.toFixed(2)}</th>
-                        <th className={`text-left ${textColor}`}>{totalROI.toFixed(0)}%</th>
+                    <tr className={`${trBg} text-sm result-tr`}>
+                        <td data-cell="event total" className="text-left py-1 px-4">Total</td>
+                        <td></td>
+                        <td></td>
+                        <td data-cell="total units bet" className="text-left">{totalBetAmount}</td>
+                        <td data-cell="total units profit" className={`text-left ${textColor}`}>{totalProfit.toFixed(2)}</td>
+                        <td data-cell="total ROI" className={`text-left ${textColor}`}>{totalROI.toFixed(0)}%</td>
                     </tr>
                 </tbody>
             </table>
