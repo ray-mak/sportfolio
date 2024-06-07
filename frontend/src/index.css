@@ -114,4 +114,38 @@ input::-webkit-inner-spin-button {
     .dimmer.opened {
         opacity: .5;
     }
+
+    th {
+        display: none
+    }
+
+    td {
+        display: grid;
+        grid-template-columns: 15ch auto;
+        padding: 0 1rem;
+
+    }
+
+    td:first-child {
+        padding-top: 1rem
+    }
+
+    /* td:last-child {
+        padding-bottom: .5rem;
+    } */
+
+    td::before {
+        content: attr(data-cell) ": ";
+        color: black;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    .events-tr>td:last-child::before {
+        content: none
+    }
+
+    .events-tr>td {
+        grid-template-columns: 1fr;
+    }
 }

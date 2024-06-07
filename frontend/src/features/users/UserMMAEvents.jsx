@@ -7,21 +7,21 @@ const UserMMAEvents = ({ data }) => {
     const betHistory = data.betHistory.map(object => {
         const betResults = object.eventResults.map(bet => {
             let textColor
-            if (bet.result === "Win") {
+            if (bet.result === "win") {
                 textColor = "text-green-700"
-            } else if (bet.result === "Loss") {
+            } else if (bet.result === "loss") {
                 textColor = "text-red-600"
             } else {
                 textColor = "text-gray-500"
             }
             return (
                 <tr key={bet._id}>
-                    <td className="px-4">{bet.matchup}</td>
-                    <td>{bet.pick}</td>
-                    <td className={textColor}>{bet.result}</td>
-                    <td>{bet.betAmount.toFixed(2)}</td>
-                    <td>{bet.profit}</td>
-                    <td>{bet.roi}%</td>
+                    <td data-cell="matchup" className="md:px-4">{bet.matchup}</td>
+                    <td data-cell="pick">{bet.pick}</td>
+                    <td data-cell="result" className={`capitalize ${textColor}`}>{bet.result}</td>
+                    <td data-cell="units bet">{bet.betAmount.toFixed(2)}</td>
+                    <td data-cell="units profit">{bet.profit}</td>
+                    <td data-cell="ROI">{bet.roi}%</td>
                 </tr>
             )
         })

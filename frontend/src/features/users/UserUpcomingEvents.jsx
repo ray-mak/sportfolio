@@ -17,13 +17,13 @@ const UserUpcomingEvents = ({ data }) => {
             return (
                 <tbody key={item._id} className="w-full">
                     <tr>
-                        <td className="px-4">{item.matchup}</td>
-                        <td>{item.pick}</td>
-                        <td>{item.odds}</td>
-                        <td>{item.betAmount}</td>
-                        {item.notes ? <td onClick={() => toggleNote(item._id)} className="cursor-pointer">{item.notes ? "View" : ""}</td> : <td></td>}
+                        <td data-cell="matchup" className="px-4">{item.matchup}</td>
+                        <td data-cell="pick">{item.pick}</td>
+                        <td data-cell="odds">{item.odds}</td>
+                        <td data-cell="units bet">{item.betAmount}</td>
+                        {item.notes ? <td onClick={() => toggleNote(item._id)} data-cell="notes" className="cursor-pointer">{item.notes ? "View" : ""}</td> : <td data-cell="notes"></td>}
                     </tr>
-                    <tr>
+                    <tr className="events-tr">
                         <td colSpan="5" className="w-full">
                             <div className={`notes-tr ${isExpanded ? "expanded" : ""} bg-zinc-200`}>
                                 <div>
