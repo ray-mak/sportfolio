@@ -67,7 +67,7 @@ const AddMMAPickForm = ({ events }) => {
             pickDropdown: false
         }))
     }
-    console.log(events)
+
     //generate event names from JSON
     const eventNames = events.map(item => {
         return (
