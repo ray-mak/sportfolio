@@ -5,6 +5,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { useAddNewMMAMLBetMutation } from './mmaMLApiSlice'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import { convertAmericanOdds, convertDecimalOdds, convertProbability } from '../../hooks/oddsConverter'
 
 
 const AddMMAPickForm = ({ events }) => {
@@ -149,76 +150,48 @@ const AddMMAPickForm = ({ events }) => {
     }, [])
 
     //set odds input and automatically update decimal/american/probability when one input changes
-    const [americanOdds, setAmericanOdds] = useState("")
-    const [decimalOdds, setDecimalOdds] = useState("")
-    const [probability, setProbability] = useState("")
+    const [oddsData, setOddsData] = useState({
+        americanOdds: "",
+        decimalOdds: "",
+        probability: ""
+    })
 
-    function handleAmericanOddsChange(e) {
-        let newAmericanOdds = e.target.value
-        setAmericanOdds(newAmericanOdds)
-
-        //convert American odds to decimal odds.
-        if (newAmericanOdds.startsWith("-")) {
-            //remove the "-"
-            const number = parseFloat(newAmericanOdds.replace(/[^\d.]/g, ''))
-            const newDecimalOdds = (100 / number) + 1
-            const newProbability = 100 / (100 / number + 1)
-            setDecimalOdds(newDecimalOdds.toFixed(2))
-            setProbability(newProbability.toFixed(2))
-            setFormData(prevState => ({ ...prevState, odds: newDecimalOdds.toFixed(2) }))
-        } else {
-            const number = parseFloat(newAmericanOdds.replace(/[^\d.]/g, ''))
-            const newDecimalOdds = (number / 100) + 1
-            const newProbability = 100 / (number / 100 + 1)
-            setDecimalOdds(newDecimalOdds.toFixed(2))
-            setProbability(newProbability.toFixed(2))
-            setFormData(prevState => ({ ...prevState, odds: newDecimalOdds.toFixed(2) }))
-        }
-
+    const handleAmericanOddsChange = (e) => {
+        const newAmericanOdds = e.target.value
+        setOddsData(prevData => ({
+            ...prevData,
+            americanOdds: newAmericanOdds,
+            ...convertAmericanOdds(newAmericanOdds)
+        }))
     }
 
-    function handleDecimalOddsChange(e) {
+    const handleDecimalOddsChange = (e) => {
         let newDecimalOdds = e.target.value
         if (newDecimalOdds.length > 4) {
             newDecimalOdds = newDecimalOdds.slice(0, 4)
         }
-        setDecimalOdds(newDecimalOdds)
-        setFormData(prevState => ({ ...prevState, odds: newDecimalOdds }))
-        if (newDecimalOdds >= 2) {
-            const newAmericanOdds = (newDecimalOdds - 1) * 100
-            const newProbability = (1 - (1 / newDecimalOdds)) * 100
-            setAmericanOdds(newAmericanOdds.toFixed(0))
-            setProbability(newProbability.toFixed(2))
-        } else {
-            const newAmericanOdds = -100 / (newDecimalOdds - 1)
-            const newProbability = (1 / newDecimalOdds) * 100
-            setAmericanOdds(newAmericanOdds.toFixed(0))
-            setProbability(newProbability.toFixed(2))
-            console.log(newAmericanOdds)
-        }
-        if (newDecimalOdds == "") {
-            setAmericanOdds("")
-        }
+        setOddsData(prevData => ({
+            ...prevData,
+            decimalOdds: newDecimalOdds,
+            ...convertDecimalOdds(newDecimalOdds)
+        }))
     }
 
-    function handleProbabilityChange(e) {
+    const handleProbabilityChange = (e) => {
         const newProbability = e.target.value
-        setProbability(newProbability)
-
-        if (newProbability >= 50) {
-            const newAmericanOdds = -(newProbability / (100 - newProbability)) * 100
-            const newDecimalOdds = 100 / newProbability
-            setAmericanOdds(newAmericanOdds.toFixed(0))
-            setDecimalOdds(newDecimalOdds.toFixed(2))
-            setFormData(prevState => ({ ...prevState, odds: newDecimalOdds.toFixed(2) }))
-        } else {
-            const newAmericanOdds = ((100 - newProbability) / newProbability) * 100
-            const newDecimalOdds = (100 - newProbability) / newProbability + 1
-            setAmericanOdds(newAmericanOdds.toFixed(0))
-            setDecimalOdds(newDecimalOdds.toFixed(2))
-            setFormData(prevState => ({ ...prevState, odds: newDecimalOdds.toFixed(2) }))
-        }
+        setOddsData(prevData => ({
+            ...prevData,
+            probability: newProbability,
+            ...convertProbability(newProbability)
+        }))
     }
+
+    useEffect(() => {
+        setFormData(prevData => ({
+            ...prevData,
+            odds: Number(oddsData.decimalOdds).toFixed(2)
+        }))
+    }, [oddsData])
 
     //handle and store bet amount, users are only allowed to bet between 0-10 units
     const [betAmount, setBetAmount] = useState("")
@@ -239,13 +212,13 @@ const AddMMAPickForm = ({ events }) => {
     //calculate profit amount
     const [profitAmount, setProfitAmount] = useState(0)
     useEffect(() => {
-        if (betAmount && decimalOdds) {
-            const profit = betAmount * decimalOdds - betAmount
+        if (betAmount && oddsData.decimalOdds) {
+            const profit = betAmount * oddsData.decimalOdds - betAmount
             setProfitAmount(profit.toFixed(2))
         } else {
             setProfitAmount(0)
         }
-    }, [betAmount, decimalOdds])
+    }, [betAmount, oddsData.decimalOdds])
 
     useEffect(() => {
         formData.event === "Select Event" ? setIsValid(prevState => ({ ...prevState, event: false })) : setIsValid(prevState => ({ ...prevState, event: true }))
@@ -260,7 +233,7 @@ const AddMMAPickForm = ({ events }) => {
         formData.betAmount === "" ? setIsValid(prevState => ({ ...prevState, betAmount: false })) : setIsValid(prevState => ({ ...prevState, betAmount: true }))
     }, [formData.betAmount])
     useEffect(() => {
-        if (americanOdds > -100 && americanOdds < 100 || decimalOdds < 1) {
+        if (oddsData.americanOdds > -100 && oddsData.americanOdds < 100 || oddsData.decimalOdds < 1) {
             setIsValid(prevState => ({ ...prevState, odds: false }))
         } else {
             setIsValid(prevState => ({ ...prevState, odds: true }))
@@ -278,6 +251,7 @@ const AddMMAPickForm = ({ events }) => {
         isValid.odds ? setFormError(prevState => ({ ...prevState, odds: false })) : setFormError(prevState => ({ ...prevState, odds: true }))
 
         const canSave = Object.values(isValid).every(Boolean)
+        console.log(formData)
 
         if (canSave) setShowConfirmation(true)
     }
@@ -370,7 +344,7 @@ const AddMMAPickForm = ({ events }) => {
                             <input
                                 id='americanOdds'
                                 type='number'
-                                value={americanOdds}
+                                value={oddsData.americanOdds}
                                 onChange={handleAmericanOddsChange}
                                 className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                             />
@@ -380,7 +354,7 @@ const AddMMAPickForm = ({ events }) => {
                             <input
                                 id='decimalOdds'
                                 type='number'
-                                value={decimalOdds}
+                                value={oddsData.decimalOdds}
                                 onChange={handleDecimalOddsChange}
                                 className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                             />
@@ -391,7 +365,7 @@ const AddMMAPickForm = ({ events }) => {
                                 <input
                                     id='probability'
                                     type='number'
-                                    value={probability}
+                                    value={oddsData.probability}
                                     onChange={handleProbabilityChange}
                                     className={`w-full px-4 py-2 rounded-lg ${formError.odds ? "border-2 border-red-400" : ""}`}
                                 />
