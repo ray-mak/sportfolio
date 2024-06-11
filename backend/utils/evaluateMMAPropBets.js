@@ -321,7 +321,30 @@ async function evaluateMMAPropBets(propBets, eventResults) {
                         break
                 }
             }
+
+            let profit, roi
+            if (betResult === "push") {
+                profit = 0
+                roi = 0
+            } else if (betResult === "win") {
+                profit = bet.odds * bet.betAmount - bet.betAmount
+                roi = (profit / bet.betAmount) * 100
+            } else {
+                profit = -bet.betAmount
+                roi = -100
+            }
+
+            const { _id, betType, __v, ...betData } = bet
+            evaluatedPropBets.push({
+                ...betData,
+                result: betResult,
+                profit: profit.toFixed(2),
+                roi: roi.toFixed(0),
+                date: event.eventDate
+            })
         }
+
+        return evaluatedPropBets
     } catch (error) {
         console.error("Error evaluating prop bets: ", error)
         throw error

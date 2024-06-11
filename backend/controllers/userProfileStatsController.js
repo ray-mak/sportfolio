@@ -1,6 +1,6 @@
 const mmaMLBet = require("../models/MMAMLBet")
 const User = require("../models/User")
-const mmaPropBet = require("../models/MMAMLBetResult")
+const mmaPropBet = require("../models/MMAPropBet")
 const EventResult = require('../models/EventResult')
 const asyncHandler = require('express-async-handler')
 const { evaluateMMAMLBets } = require('../utils/evaluateMMAMLBets')
@@ -19,9 +19,10 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     //Get event results. Create an object for each events result for each user, push to past events array
     const eventResults = await EventResult.find().lean()
     const evaluatedBets = await evaluateMMAMLBets(userBets, eventResults)
+    const evaluatedPropBets = await evaluateMMAPropBets(userPropBets, eventResults)
 
     //Format and sort the evaluated bets
-    const sortedBets = await sortEvaluatedBets(evaluatedBets)
+    const sortedBets = await sortEvaluatedBets(evaluatedBets, evaluatedPropBets)
     //Create an array, upcoming events, for bets that have not been evaluated.
     const upcomingBets = await formatUpcomingBets(userBets, eventResults)
     const mlStats = await calculateMLStats(sortedBets)
@@ -31,7 +32,7 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
         displayName: user.displayName,
         mlStats,
         upcomingBets,
-        betHistory: sortedBets
+        betHistory: sortedBets,
     }
 
 
