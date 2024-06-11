@@ -2,6 +2,9 @@ const mmaPropBet = require("../models/MMAPropBet")
 const User = require("../models/User")
 const asyncHandler = require('express-async-handler')
 
+//@desc Get all MMA Prop Bets with user
+//@route GET /api/mmapropbets
+//@access Private
 const getMMAPropBets = asyncHandler(async (req, res) => {
     const propBets = await mmaPropBet.find().lean()
     if (!propBets?.length) {
@@ -15,6 +18,9 @@ const getMMAPropBets = asyncHandler(async (req, res) => {
     res.json(propsWithUser)
 })
 
+//@desc Create new MMA prop bet
+//@route POST /api/mmapropbets
+//@access Private
 const createMMAPropBet = asyncHandler(async (req, res) => {
     const { user, betType, event, matchup, propType, timeProp, pickFighter, fighterProp, odds, betAmount, notes } = req.body
 
@@ -34,6 +40,9 @@ const createMMAPropBet = asyncHandler(async (req, res) => {
     }
 })
 
+//@desc Update a prop bet
+//@route PATCH /api/mmapropbets
+//@access Private
 const updateMMAPropBet = asyncHandler(async (req, res) => {
     const { id, notes } = req.body
 
@@ -52,6 +61,9 @@ const updateMMAPropBet = asyncHandler(async (req, res) => {
     res.json({ message: `Notes for betID ${updatedBet._id} updated` })
 })
 
+//@desc Delete a prop bet
+//@route DELETE /api/mmapropbets
+//@access Private
 const deleteMMAPropBet = asyncHandler(async (req, res) => {
     const { id } = req.body
     if (!id) {

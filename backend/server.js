@@ -14,6 +14,7 @@ const authRoutes = require('./routes/authRoutes')
 const userProfileStatsRoutes = require('./routes/userProfileStatsRoutes')
 const mmaEventRoutes = require('./routes/mmaEventRoutes')
 const mmaPropRoutes = require('./routes/mmaPropRoutes')
+const mmaParlayRoutes = require('./routes/mmaParlayRoutes')
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use('/api/usermlstats', userMLStatsRoutes)
 app.use('/api/userprofilestats', userProfileStatsRoutes)
 app.use('/api/mmaevents', mmaEventRoutes)
 app.use('/api/mmapropbets', mmaPropRoutes)
+app.use('/api/mmaparlays', mmaParlayRoutes)
 
 app.use(errorHandler)
 
