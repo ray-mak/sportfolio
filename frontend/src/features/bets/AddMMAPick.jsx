@@ -3,6 +3,7 @@ import AddMMAPickForm from "./AddMMAPickForm"
 import { useGetMMAEventsQuery } from "../events/mmaEventsApiSlice"
 import AddPropForm from "./AddPropForm"
 import AddMMAParlayForm from "./AddMMAParlayForm"
+import Example from "./Example"
 
 const AddMMAPick = () => {
     // const { eventsWithNoResults, isLoading, isError, errorMessage } = useEventsWithNoResults()
@@ -26,7 +27,8 @@ const AddMMAPick = () => {
             <div>
                 <AddMMAPickForm events={entities} />
                 {/* <AddPropForm events={entities} /> */}
-                <AddMMAParlayForm events={entities} />
+                {/* <AddMMAParlayForm events={entities} /> */}
+                <Example events={entities} />
             </div>
         )
     }
