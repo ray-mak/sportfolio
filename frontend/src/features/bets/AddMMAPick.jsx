@@ -2,6 +2,7 @@ import useEventsWithNoResults from "../events/useEventsWithNoResults"
 import AddMMAPickForm from "./AddMMAPickForm"
 import { useGetMMAEventsQuery } from "../events/mmaEventsApiSlice"
 import AddPropForm from "./AddPropForm"
+import AddMMAParlayForm from "./AddMMAParlayForm"
 
 const AddMMAPick = () => {
     // const { eventsWithNoResults, isLoading, isError, errorMessage } = useEventsWithNoResults()
@@ -24,7 +25,8 @@ const AddMMAPick = () => {
         content = (
             <div>
                 <AddMMAPickForm events={entities} />
-                <AddPropForm events={entities} />
+                {/* <AddPropForm events={entities} /> */}
+                <AddMMAParlayForm events={entities} />
             </div>
         )
     }
