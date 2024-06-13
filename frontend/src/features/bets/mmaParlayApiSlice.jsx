@@ -4,7 +4,7 @@ import { apiSlice } from "../../app/api/apiSlice"
 const mmaParlayAdapter = createEntityAdapter({})
 const initialState = mmaParlayAdapter.getInitialState()
 
-const mmaParlayApiSlice = apiSlice.injectEndpoints({
+export const mmaParlayApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getMMAParlays: builder.query({
             query: () => '/api/mmaparlays',

@@ -156,6 +156,25 @@ const AddMMAParlayForm = ({ events }) => {
         setParlayData(prevData => prevData.filter((_, index) => index !== indexToDelete))
     }
 
+    const parlayConfirmation = parlayData.map((object, index) => {
+        let pick
+        if (object.parlayBetType === "moneyline") {
+            pick = `${object.pick} to win`
+        } else if (object.parlayBetType === "prop" && object.propType === "timeProp") {
+            pick = object.timeProp
+        } else if (object.parlayBetType === "prop" && object.propType === "fighterProp") {
+            pick = `${object.pickFighter} ${object.fighterProp}`
+        }
+
+        return (
+            <tr key={index}>
+                <td data-cell="matchup" className="text-left">{object.matchup}</td>
+                <td data-cell="pick" className="md:pl-6 text-left">{pick}</td>
+                <td data-cell="odds" className="md:pl-6 text-left">{object.odds}</td>
+            </tr>
+        )
+    })
+
     const totalOdds = parlayData.length ? parlayData.reduce((accumulator, parlayLeg) => accumulator * parlayLeg.odds, 1) : 0
 
 
@@ -249,7 +268,15 @@ const AddMMAParlayForm = ({ events }) => {
         setFormData(prevState => ({ ...prevState, betAmount: betInput }))
     }
 
-    const profitAmount = (totalOdds * betAmount - betAmount).toFixed(2)
+    const [profitAmount, setProfitAmount] = useState(0)
+    useEffect(() => {
+        if (betAmount && totalOdds != 0) {
+            const profit = betAmount * totalOdds - betAmount
+            setProfitAmount(profit.toFixed(2))
+        } else {
+            setProfitAmount(0)
+        }
+    }, [betAmount, totalOdds])
 
     //logic for checking if inputs are valid
     useEffect(() => {
@@ -292,7 +319,7 @@ const AddMMAParlayForm = ({ events }) => {
         isValid.odds ? setFormError(prevState => ({ ...prevState, odds: false })) : setFormError(prevState => ({ ...prevState, odds: true }))
 
         const { betAmount, ...isValidData } = isValid
-        const canAdd = Object.values(isValidData).every(Boolean)
+        const canAdd = Object.values(isValidData).every(Boolean) && !isLoading
         if (canAdd) {
             const parlayLeg = {
                 event: formData.event,
@@ -332,14 +359,35 @@ const AddMMAParlayForm = ({ events }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (parlayData?.length) {
-
-        } else {
+        isValid.betAmount ? setFormError(prevState => ({ ...prevState, betAmount: false })) : setFormError(prevState => ({ ...prevState, betAmount: true }))
+        if (!parlayData?.length) {
             alert("Parlay must have at least 1 leg")
+        } else {
+            if (isValid.betAmount) setShowConfirmation(true)
         }
     }
 
-    //update parlay controller, 
+    const cancelConfirm = (e) => {
+        setShowConfirmation(false)
+    }
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/dash")
+        }
+    }, [isSuccess, navigate])
+
+    const submitData = async (e) => {
+        e.preventDefault()
+        const dataToSubmit = {
+            user: id,
+            betType: "parlay",
+            betAmount: formData.betAmount,
+            parlayInfo: parlayData
+        }
+        console.log(dataToSubmit)
+        await addNewMMAParlay(dataToSubmit)
+    }
 
     //logic for toggling dropdowns
     const eventContainer = useRef(null)
@@ -385,7 +433,7 @@ const AddMMAParlayForm = ({ events }) => {
     }, [])
     return (
         <div className='mb-20 flex flex-col items-center justify-center text-sm mt-20 sm:text-base'>
-            <form className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
+            <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
                 <div ref={eventContainer}>
                     <div className="flex">
                         <p>Event</p>
@@ -597,9 +645,9 @@ const AddMMAParlayForm = ({ events }) => {
                     </thead>
                     <tbody>
                         {parlaySummary}
-                        <tr className="border-t">
+                        <tr className="border-t parlay-total">
                             <td colSpan="2" className="font-medium">Total Odds</td>
-                            <td className="font-medium">{totalOdds.toFixed(2)}</td>
+                            <td className="font-medium" data-cell="total odds">{totalOdds.toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -625,6 +673,39 @@ const AddMMAParlayForm = ({ events }) => {
                 </div>
                 <button className='px-6 py-2 text-white bg-brightRed rounded-md ml-auto'>Submit Parlay</button>
             </form>
+            {
+                showConfirmation && <div className='absolute flex flex-col gap-4 p-6 border-2 z-20 bg-white -mt-16'>
+                    <p className='text-2xl font-semibold'>Confirm your parlay</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="text-left">Matchup</th>
+                                <th className="text-left md:pl-6">Pick</th>
+                                <th className="text-left md:pl-6">Odds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {parlayConfirmation}
+                            <tr className="border-t parlay-total">
+                                <td colSpan="2" className="font-medium">Total Odds</td>
+                                <td className="font-medium md:pl-6" data-cell="total odds">{totalOdds.toFixed(2)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div className='flex'>
+                        <p>Bet</p>
+                        <p className='ml-auto font-semibold'>{betAmount}</p>
+                    </div><div className='flex'>
+                        <p>To Profit</p>
+                        <p className='ml-auto font-semibold'>{profitAmount}</p>
+                    </div>
+                    <div className='flex gap-4 mt-4 ml-auto'>
+                        <button onClick={cancelConfirm} className='py-2 px-4 text-brightRed font-semibold hover:opacity-70'>Cancel</button>
+                        <button className='py-2 px-4 bg-brightRed text-white rounded-lg font-medium hover:opacity-70' onClick={submitData}>Confirm</button>
+                    </div>
+                </div>
+            }
+            {showConfirmation && <div className='fixed w-full h-full bg-black/50 top-0 z-10'></div>}
         </div>
     )
 }

@@ -141,6 +141,10 @@ input::-webkit-inner-spin-button {
         text-transform: capitalize;
     }
 
+    .parlay-total>td:first-child {
+        display: none;
+    }
+
     .events-tr>td:last-child::before {
         content: none
     }

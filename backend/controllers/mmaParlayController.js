@@ -11,7 +11,7 @@ const getMMAParlays = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'No parlays found' })
     }
 
-    const parlaysWithUser = Promise.all(parlays.map(async (bet) => {
+    const parlaysWithUser = await Promise.all(parlays.map(async (bet) => {
         const user = User.findById(bet.user).lean().exec()
         return { ...bet, username: user.username }
     }))
@@ -22,15 +22,15 @@ const getMMAParlays = asyncHandler(async (req, res) => {
 //@route POST /api/mmaparlays
 //@access Private
 const createMMAParlay = asyncHandler(async (req, res) => {
-    const { user, betType, event, matchup, parlayInfo } = req.body
+    const { user, betType, betAmount, parlayInfo } = req.body
 
-    if (!user || !betType || !event || !matchup || !parlayInfo?.length) {
+    if (!user || !betType || !betAmount || !parlayInfo?.length) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    const parlay = await mmaParlay.create({ user, betType, event, matchup, parlayInfo })
+    const parlay = await mmaParlay.create({ user, betType, betAmount, parlayInfo })
 
-    if (result) {
+    if (parlay) {
         return res.status(201).json({ message: 'Parlay created' })
     } else {
         return res.status(400).json({ message: 'Invalid parlay data received' })

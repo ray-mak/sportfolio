@@ -4,6 +4,7 @@ import { useGetMMAEventsQuery } from "../events/mmaEventsApiSlice"
 import AddPropForm from "./AddPropForm"
 import AddMMAParlayForm from "./AddMMAParlayForm"
 import Example from "./Example"
+import { useGetMMAParlaysQuery } from "./mmaParlayApiSlice"
 
 const AddMMAPick = () => {
     // const { eventsWithNoResults, isLoading, isError, errorMessage } = useEventsWithNoResults()
@@ -16,6 +17,9 @@ const AddMMAPick = () => {
         error
     } = useGetMMAEventsQuery()
 
+    const { data: parlayData } = useGetMMAParlaysQuery()
+    console.log(parlayData)
+
     let content
     if (isLoading) content = <p>Loading...</p>
     if (isError) content = <p>{errorMessage}</p>
@@ -25,7 +29,7 @@ const AddMMAPick = () => {
         const entities = Object.values(data.entities)
         content = (
             <div>
-                <AddMMAPickForm events={entities} />
+                {/* <AddMMAPickForm events={entities} /> */}
                 {/* <AddPropForm events={entities} /> */}
                 <AddMMAParlayForm events={entities} />
                 {/* <Example events={entities} /> */}

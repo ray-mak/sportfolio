@@ -28,7 +28,7 @@ const createMMAPropBet = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    if (!timeProp && !fightProp) {
+    if (!timeProp && !fighterProp) {
         return res.status(400).json({ message: 'Must have time prop or fighter prop' })
     }
 

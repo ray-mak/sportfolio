@@ -10,6 +10,10 @@ const mmaParlaySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    betAmount: {
+        type: Number,
+        required: true
+    },
     parlayInfo: [{
         event: {
             type: String,
@@ -44,10 +48,6 @@ const mmaParlaySchema = new mongoose.Schema({
             required: false
         },
         odds: {
-            type: Number,
-            required: true
-        },
-        betAmount: {
             type: Number,
             required: true
         },
