@@ -27,8 +27,8 @@ const AddMMAPick = () => {
             <div>
                 <AddMMAPickForm events={entities} />
                 {/* <AddPropForm events={entities} /> */}
-                {/* <AddMMAParlayForm events={entities} /> */}
-                <Example events={entities} />
+                <AddMMAParlayForm events={entities} />
+                {/* <Example events={entities} /> */}
             </div>
         )
     }

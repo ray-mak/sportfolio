@@ -10,15 +10,15 @@ const mmaParlaySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    event: {
-        type: String,
-        required: true
-    },
-    matchup: {
-        type: String,
-        required: true
-    },
     parlayInfo: [{
+        event: {
+            type: String,
+            required: true
+        },
+        matchup: {
+            type: String,
+            required: true
+        },
         parlayBetType: {
             type: String,
             required: true,
