@@ -14,6 +14,7 @@ async function evaluateMMAParlays(parlayBets, eventResults) {
                 if (!event) {
                     updatedLeg.result = "noResult"
                     evaluatedParlayLeg.push(updatedLeg)
+                    continue
                 }
 
                 const matchup = event.matchups.find(object => object.matchup === leg.matchup)
@@ -36,8 +37,23 @@ async function evaluateMMAParlays(parlayBets, eventResults) {
                 }
 
             }
+            let totalOdds = 1
+            for (leg of evaluatedParlayLeg) {
+                if (leg.result === "loss") {
+                    totalOdds = 0
+                    break
+                } else if (leg.result === "win") {
+                    totalOdds = totalOdds * leg.odds
+                }
+            }
+
+            const profit = bet.betAmount * totalOdds - bet.betAmount
+            const roi = profit / bet.betAmount * 100
+
             const evaluatedParlay = {
                 ...bet,
+                profit: profit.toFixed(2),
+                roi: roi.toFixed(0),
                 parlayInfo: evaluatedParlayLeg
             }
             const hasNoResult = evaluatedParlayLeg.some(leg => leg.result === "noResult")

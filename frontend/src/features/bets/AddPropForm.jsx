@@ -314,8 +314,8 @@ const AddPropForm = ({ events }) => {
 
 
     return (
-        <div className='mb-20 flex flex-col items-center justify-center text-sm mt-20 sm:text-base'>
-            <form className='flex flex-col w-full gap-6 border-2 p-4 sm:w-5/6 lg:w-3/5 2xl:w-1/2' onSubmit={handleSubmit}>
+        <div className='mb-20 flex flex-col items-center justify-center text-sm sm:text-base'>
+            <form className='flex flex-col w-full gap-6 border-2 p-4 bg-zinc-100 sm:w-5/6 lg:w-3/5 2xl:w-1/2' onSubmit={handleSubmit}>
                 <div ref={eventContainer}>
                     <div className="flex">
                         <p>Event</p>

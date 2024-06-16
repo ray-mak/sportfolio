@@ -28,7 +28,7 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     //Format and sort the evaluated bets
     const sortedBets = await sortEvaluatedBets(evaluatedBets, evaluatedPropBets, evaluatedParlays)
     //Create an array, upcoming events, for bets that have not been evaluated.
-    const upcomingBets = await formatUpcomingBets(userBets, eventResults)
+    const upcomingBets = await formatUpcomingBets(userBets, userPropBets, upcomingParlays, eventResults)
     const mlStats = await calculateMLStats(sortedBets)
 
     const allUserBets = {
