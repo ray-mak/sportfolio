@@ -10,6 +10,7 @@ const { formatUpcomingBets } = require('../utils/formatUpcomingBets')
 const { calculateMLStats } = require('../utils/calculateMLStats')
 const { evaluateMMAPropBets } = require("../utils/evaluateMMAPropBets")
 const { evaluateMMAParlays } = require("../utils/evaluateMMAParlays")
+const { calcPropParlayStats } = require("../utils/calcPropParlayStats")
 
 const getUserProfileStats = asyncHandler(async (req, res) => {
     const { id } = req.body
@@ -30,11 +31,14 @@ const getUserProfileStats = asyncHandler(async (req, res) => {
     //Create an array, upcoming events, for bets that have not been evaluated.
     const upcomingBets = await formatUpcomingBets(userBets, userPropBets, upcomingParlays, eventResults)
     const mlStats = await calculateMLStats(sortedBets)
+    const { propStats, parlayStats } = await calcPropParlayStats(evaluatedPropBets, evaluatedParlays)
 
     const allUserBets = {
         username: user.username,
         displayName: user.displayName,
         mlStats,
+        propStats,
+        parlayStats,
         upcomingBets,
         betHistory: sortedBets,
     }

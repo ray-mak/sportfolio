@@ -74,6 +74,7 @@ async function calculateMLStats(evaluatedBets) {
             totalPicks,
             totalCorrect,
             percentCorrect,
+            totalProfit,
             totalROI,
             bigFavPick,
             bigFavROI,
