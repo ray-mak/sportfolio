@@ -20,7 +20,7 @@ const UserUpcomingEvents = ({ data }) => {
                         <td data-cell="pick">{item.pick}</td>
                         <td data-cell="odds">{item.odds}</td>
                         <td data-cell="units bet">{item.betAmount}</td>
-                        {item.notes ? <td onClick={() => toggleNote(item._id)} data-cell="notes" className="cursor-pointer">{item.notes ? "View" : ""}</td> : <td data-cell="notes"></td>}
+                        {item.notes ? <td onClick={() => toggleNote(item._id)} data-cell="notes" className="cursor-pointer text-blue-700 underline">{item.notes ? "View" : ""}</td> : <td data-cell="notes"></td>}
                     </tr>
                     <tr className="events-tr">
                         <td colSpan="5" className="w-full">
@@ -32,6 +32,83 @@ const UserUpcomingEvents = ({ data }) => {
                                 </div>
                             </div>
                         </td>
+                    </tr>
+                </tbody>
+            )
+        })
+
+        const propBet = object.props.map(item => {
+            const isExpanded = expandedNote === item._id
+            const isFighterProp = item.propType === "fighterProp" ? true : false
+            return (
+                <tbody key={item._id} className="w-full">
+                    <tr>
+                        <td data-cell="matchup" className="px-4">{item.matchup}</td>
+                        <td data-cell="pick">{isFighterProp ? `${item.pickFighter} ${item.fighterProp}` : item.timeProp}</td>
+                        <td data-cell="odds">{item.odds}</td>
+                        <td data-cell="units bet">{item.betAmount}</td>
+                        {item.notes ? <td onClick={() => toggleNote(item._id)} data-cell="notes" className="cursor-pointer text-blue-700 underline">{item.notes ? "View" : ""}</td> : <td data-cell="notes"></td>}
+                    </tr>
+                    <tr className="events-tr">
+                        <td colSpan="5" className="w-full">
+                            <div className={`notes-tr ${isExpanded ? "expanded" : ""} bg-zinc-200`}>
+                                <div>
+                                    <div className="p-4">
+                                        {item.notes}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            )
+        })
+
+        const parlays = object.parlays.map(item => {
+            const totalOdds = item.parlayInfo.reduce((accumulator, parlayLeg) => accumulator * parlayLeg.odds, 1)
+            const parlayLeg = item.parlayInfo.map(leg => {
+                const isExpanded = expandedNote === leg._id
+                let pick
+                if (leg.parlayBetType === "moneyline") {
+                    pick = `${leg.pick} to win`
+                } else if (leg.parlayBetType === "prop" && leg.propType === "timeProp") {
+                    pick = leg.timeProp
+                } else if (leg.parlayBetType === "prop" && leg.propType === "fighterProp") {
+                    pick = `${leg.pickFighter} ${leg.fighterProp}`
+                }
+
+                return (
+                    <React.Fragment key={leg._id}>
+                        <tr>
+                            <td data-cell="matchup" className="md:px-4">{leg.matchup}</td>
+                            <td data-cell="pick">{pick}</td>
+                            <td data-cell="odds">{leg.odds.toFixed(2)}</td>
+                            <td className="hidden-td"></td>
+                            {item.notes ? <td onClick={() => toggleNote(item._id)} data-cell="notes" className="cursor-pointer text-blue-700 underline">{item.notes ? "View" : ""}</td> : <td data-cell="notes"></td>}
+                        </tr>
+                        <tr className="events-tr">
+                            <td colSpan="5" className="w-full">
+                                <div className={`notes-tr ${isExpanded ? "expanded" : ""} bg-zinc-200`}>
+                                    <div>
+                                        <div className="p-4">
+                                            {item.notes}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </React.Fragment>
+                )
+            })
+
+            return (
+                <tbody key={item._id} className="parlay-upcoming-tr">
+                    {parlayLeg}
+                    <tr>
+                        <td colSpan="2" className="hidden-td"></td>
+                        <td data-cell="parlay odds">{totalOdds.toFixed(2)}</td>
+                        <td data-cell="Units Bet">{item.betAmount.toFixed(2)}</td>
+                        <td className="hidden-td"></td>
                     </tr>
                 </tbody>
             )
@@ -49,7 +126,30 @@ const UserUpcomingEvents = ({ data }) => {
                         <th scope="col" className="text-left">Notes</th>
                     </tr>
                 </thead>
-                {bet}
+                {bet?.length > 0 && <>
+                    <tbody>
+                        <tr>
+                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Moneyline Picks</td>
+                        </tr>
+                    </tbody>
+                    {bet}
+                </>}
+                {propBet?.length > 0 && <>
+                    <tbody>
+                        <tr>
+                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Prop Picks</td>
+                        </tr>
+                    </tbody>
+                    {propBet}
+                </>}
+                {parlays?.length > 0 && <>
+                    <tbody>
+                        <tr>
+                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Parlays</td>
+                        </tr>
+                    </tbody>
+                    {parlays}
+                </>}
             </table>
         )
     })
