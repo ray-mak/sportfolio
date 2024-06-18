@@ -30,7 +30,7 @@ const Welcome = () => {
     if (isSuccess) {
         content = (
             <div className="w-full flex flex-col items-center">
-                <div className="w-full flex flex-col gap-6 justify-center md:p-8 border-2 border-gray rounded-lg lg:w-5/6 2xl:w-1/2">
+                <div className="w-full flex flex-col gap-6 justify-center md:p-8 border-2 border-gray rounded-lg lg:w-5/6 2xl:w-3/5">
                     <UserStatsSummary data={data} />
                     <div>
                         <p className="text-xl text-center">You do not have any upcoming picks</p>

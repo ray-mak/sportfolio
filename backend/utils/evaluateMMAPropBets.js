@@ -334,7 +334,7 @@ async function evaluateMMAPropBets(propBets, eventResults) {
                 roi = -100
             }
 
-            const { _id, betType, __v, ...betData } = bet
+            const { betType, __v, ...betData } = bet
             evaluatedPropBets.push({
                 ...betData,
                 result: betResult,
