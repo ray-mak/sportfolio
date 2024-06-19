@@ -31,7 +31,53 @@ const getSingleEvent = asyncHandler(async (req, res) => {
     const eventResult = await EventResult.find({ eventName }).lean()
     const eventData = eventResult.length > 0 ? eventResult : await MMAEvent.find({ eventName }).lean()
 
-    res.json(eventData)
+    let eventWithBets = eventData[0]
+
+    for (const matchup of eventWithBets.matchups) {
+        matchup.mlBets = []
+        matchup.propBets = []
+        matchup.parlays = []
+    }
+
+    const eventMLBets = await MMAMLBet.find({ event: eventName }).lean()
+    const eventPropBets = await mmaPropBet.find({ event: eventName }).lean()
+    const eventParlays = await mmaParlay.find({ parlayInfo: { $elemMatch: { event: eventName } } }).lean()
+
+    const mlBetsWithUser = await Promise.all(eventMLBets.map(async (bet) => {
+        const user = await User.findById(bet.user).lean().exec()
+        return { ...bet, displayName: user.displayName }
+    }))
+
+    const propsWithUser = await Promise.all(eventPropBets.map(async (bet) => {
+        const user = await User.findById(bet.user).lean().exec()
+        return { ...bet, displayName: user.displayName }
+    }))
+
+    const parlaysWithUser = await Promise.all(eventParlays.map(async (bet) => {
+        const user = await User.findById(bet.user).lean().exec()
+        return { ...bet, displayName: user.displayName }
+    }))
+
+    for (const mlBet of mlBetsWithUser) {
+        const matchup = eventWithBets.matchups.find(item => item.matchup === mlBet.matchup)
+        matchup.mlBets.push(mlBet)
+    }
+
+    for (const propBet of propsWithUser) {
+        const matchup = eventWithBets.matchups.find(item => item.matchup === propBet.matchup)
+        matchup.propBets.push(propBet)
+    }
+
+    for (const parlay of parlaysWithUser) {
+        for (const parlayLeg of parlay.parlayInfo) {
+            const matchups = eventWithBets.matchups.filter(item => item.matchup === parlayLeg.matchup)
+            for (const matchup of matchups) {
+                matchup.parlays.push(parlay)
+            }
+        }
+    }
+
+    res.json(eventWithBets)
 })
 
 
