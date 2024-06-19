@@ -128,24 +128,24 @@ const UserUpcomingEvents = ({ data }) => {
                 </thead>
                 {bet?.length > 0 && <>
                     <tbody>
-                        <tr>
-                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Moneyline Picks</td>
+                        <tr className="bg-teal-700 text-white">
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Moneyline Picks</td>
                         </tr>
                     </tbody>
                     {bet}
                 </>}
                 {propBet?.length > 0 && <>
                     <tbody>
-                        <tr>
-                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Prop Picks</td>
+                        <tr className="bg-teal-700 text-white">
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Prop Picks</td>
                         </tr>
                     </tbody>
                     {propBet}
                 </>}
                 {parlays?.length > 0 && <>
-                    <tbody>
+                    <tbody className="bg-teal-700 text-white">
                         <tr>
-                            <td colSpan="5" className="font-medium text-base pt-2 hide-attr">Parlays</td>
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Parlays</td>
                         </tr>
                     </tbody>
                     {parlays}

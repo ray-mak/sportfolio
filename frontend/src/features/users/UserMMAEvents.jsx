@@ -131,8 +131,8 @@ const UserMMAEvents = ({ data }) => {
                     </tr>
                 </thead>
                 {betResults?.length > 0 && <tbody>
-                    <tr>
-                        <td colSpan="7" className="font-medium pt-2 hide-attr">Moneyline Results</td>
+                    <tr className="bg-teal-700 text-white">
+                        <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Moneyline Results</td>
                     </tr>
                     {betResults}
                     <tr className={` bg-indigo-200 text-sm result-tr`}>
@@ -143,8 +143,8 @@ const UserMMAEvents = ({ data }) => {
                     </tr>
                 </tbody>}
                 {propResults?.length > 0 && <tbody>
-                    <tr>
-                        <td colSpan="7" className="font-medium pt-2 hide-attr">Prop Results</td>
+                    <tr className="bg-teal-700 text-white">
+                        <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Prop Results</td>
                     </tr>
                     {propResults}
                     <tr className={`text-sm result-tr bg-indigo-200`}>
@@ -156,8 +156,8 @@ const UserMMAEvents = ({ data }) => {
                 </tbody>}
                 {parlayResults?.length > 0 && <>
                     <tbody>
-                        <tr>
-                            <td colSpan="7" className="font-medium pt-2 hide-attr">Parlay Results</td>
+                        <tr className="bg-teal-700 text-white">
+                            <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Parlay Results</td>
                         </tr>
                     </tbody>
                     {parlayResults}
