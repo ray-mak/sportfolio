@@ -26,7 +26,7 @@ const UserStatsSummary = ({ data }) => {
                     </div>
                 </div>
                 <div className="w-full">
-                    <div className="flex border-2 border-slate-200 items-center px-2 py-1 mt-6 text-lg text-left font-medium text-white bg-green-700 md:bg-inherit md:text-inherit">
+                    <div className="flex border-2 border-slate-200 items-center px-2 py-1 mt-6 text-lg text-left font-medium text-white bg-green-700 md:bg-inherit md:text-inherit md:border-0 md:ml-8">
                         <p>MMA Betting Stats Summary</p>
                         <button onClick={toggleSummary} aria-label="toggle summary stats" className="ml-auto text-sm font-normal cursor-pointer underline toggle-button">{showSummary ? "hide" : "show"}</button>
                     </div>
