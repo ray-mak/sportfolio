@@ -18,16 +18,20 @@ const getAllEvents = asyncHandler(async (req, res) => {
 
     const upcomingEvents = mmaEvents.filter(event => !eventResultNames.includes(event.eventName))
     const pastEvents = mmaEvents.filter(event => eventResultNames.includes(event.eventName))
+    const sortedUpcomgingEvents = upcomingEvents.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
+    const sortedPastEvents = pastEvents.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate))
 
-    res.json({ upcomingEvents, pastEvents })
+    res.json({ upcomingEvents: sortedUpcomgingEvents, pastEvents: sortedPastEvents })
 })
 
 //@desc Get individual MMA Events summary
 //@route POST /api/eventsummary
 //@access Private
 const getSingleEvent = asyncHandler(async (req, res) => {
-    const { eventName } = req.body
+    const { id } = req.body
 
+    const foundEvent = await MMAEvent.findById(id).lean().exec()
+    const eventName = foundEvent.eventName
     const eventResult = await EventResult.find({ eventName }).lean()
     const eventData = eventResult.length > 0 ? eventResult : await MMAEvent.find({ eventName }).lean()
 
