@@ -13,7 +13,7 @@ export default {
         "darkGray": "#2B2B2B",
         "gray": "#5D5D5D",
         "lightGray": "#E7E4E4",
-        "almostWhite": "#F7F7F7",
+        "almostWhite": "#FBFBFB",
         "brightRed": "#FF5A35",
         "darkGreen": "#279E00"
       },

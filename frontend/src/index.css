@@ -250,4 +250,8 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
         height: 0;
         overflow: hidden;
     }
+
+    .events-table>tbody>tr>td {
+        grid-template-columns: minmax(25ch, 40ch) auto;
+    }
 }
