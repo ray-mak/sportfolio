@@ -5,6 +5,8 @@ import useAuth from "../../hooks/useAuth"
 import UserMMAEvents from "../users/UserMMAEvents"
 import UserUpcomingEvents from "../users/UserUpcomingEvents"
 import UserStatsSummary from "../users/UserStatsSummary"
+import LineChartMMA from "../../components/LineChartMMA"
+import { Line } from "react-chartjs-2"
 
 const Welcome = () => {
     const { id } = useAuth()
@@ -32,6 +34,7 @@ const Welcome = () => {
             <div className="w-full flex flex-col items-center">
                 <div className="w-full flex flex-col gap-6 justify-center md:p-8 border-2 border-gray rounded-lg lg:w-5/6 2xl:w-3/5">
                     <UserStatsSummary data={data} />
+                    <LineChartMMA data={data} />
                     <div>
                         <p className="text-xl text-center">You do not have any upcoming picks</p>
                         <button onClick={() => navigate("/dash/addpick")} type="button" className="w-full bg-brightRed text-white h-10 font-medium rounded-md">Add pick</button>
