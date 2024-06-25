@@ -106,7 +106,8 @@ const LineChartMMA = ({ data }) => {
             {
                 label: "Moneyline Bets",
                 data: mlData,
-                borderColor: "#2991FF"
+                borderColor: "#2991FF",
+                backgroundColor: "#2991FF"
             },
             {
                 label: "Prop Bets",
