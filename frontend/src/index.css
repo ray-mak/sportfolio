@@ -184,7 +184,7 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
     }
 
     .stats-summary>tbody>tr>td,
-    .ml-stats-table>tbody>tr>td {
+    .ml-stats-table>table>tbody>tr>td {
         grid-template-columns: minmax(25ch, 40ch) auto;
     }
 
@@ -230,7 +230,7 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
     }
 
     .summary-table {
-        height: 580px;
+        height: 624px;
         transition: .5s ease-in-out;
         overflow: hidden;
     }
@@ -241,7 +241,7 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
     }
 
     .ml-stats-table {
-        height: 800px;
+        height: 520px;
         transition: .5s ease-in-out;
         overflow: hidden;
     }

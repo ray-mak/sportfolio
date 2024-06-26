@@ -32,11 +32,10 @@ const Welcome = () => {
     if (isSuccess) {
         content = (
             <div className="w-full flex flex-col items-center">
-                <div className="w-full flex flex-col gap-6 justify-center md:p-8 border-2 border-gray rounded-lg lg:w-5/6 2xl:w-3/5">
+                <div className="w-full flex flex-col gap-6 justify-center md:p-8 border-2 border-slate-500 bg-slate-100 lg:w-5/6 2xl:w-3/5">
                     <UserStatsSummary data={data} />
-                    <div className="w-full flex">
+                    <div className="w-full flex border-2 border-slate-300 bg-white" style={{ height: '360px' }}>
                         <LineChartMMA data={data} />
-                        <PieChartMMA data={data} />
                     </div>
                     <div>
                         <p className="text-xl text-center">You do not have any upcoming picks</p>

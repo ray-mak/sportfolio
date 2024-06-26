@@ -115,7 +115,7 @@ const UserUpcomingEvents = ({ data }) => {
         })
 
         return (
-            <table key={object.event} className="w-full mt-8 border-2 border-zinc-400 text-sm">
+            <table key={object.event} className="w-full border-2 border-zinc-400 text-sm">
                 <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                 <thead>
                     <tr className="bg-slate-200">
@@ -128,24 +128,24 @@ const UserUpcomingEvents = ({ data }) => {
                 </thead>
                 {bet?.length > 0 && <>
                     <tbody>
-                        <tr className="bg-teal-700 text-white">
-                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Moneyline Picks</td>
+                        <tr>
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 underline hide-attr">Moneyline Picks</td>
                         </tr>
                     </tbody>
                     {bet}
                 </>}
                 {propBet?.length > 0 && <>
                     <tbody>
-                        <tr className="bg-teal-700 text-white">
-                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Prop Picks</td>
+                        <tr>
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 underline hide-attr">Prop Picks</td>
                         </tr>
                     </tbody>
                     {propBet}
                 </>}
                 {parlays?.length > 0 && <>
-                    <tbody className="bg-teal-700 text-white">
+                    <tbody>
                         <tr>
-                            <td colSpan="5" className="font-medium text-base py-1 px-2 hide-attr">Parlays</td>
+                            <td colSpan="5" className="font-medium text-base py-1 px-2 underline hide-attr">Parlays</td>
                         </tr>
                     </tbody>
                     {parlays}
@@ -155,9 +155,11 @@ const UserUpcomingEvents = ({ data }) => {
     })
 
     const content = (
-        <div className="w-full p-6">
+        <div className="w-full bg-white">
             <h3 className="bg-slate-600 text-white p-2 text-lg font-medium tracking-wide">{data.displayName}'s Upcoming MMA Bets</h3>
-            {upcomingBets}
+            <div className="p-6 flex flex-col gap-6">
+                {upcomingBets}
+            </div>
         </div>
     )
 

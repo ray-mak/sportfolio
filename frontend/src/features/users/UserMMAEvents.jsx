@@ -117,7 +117,7 @@ const UserMMAEvents = ({ data }) => {
         const eventROI = eventProfit / eventBetAmount * 100
 
         return (
-            <table key={object.event} className="w-full mt-6 border-2 border-zinc-400">
+            <table key={object.event} className="w-full mb-6 border-2 border-zinc-400">
                 <caption className="text-left text-xl font-medium px-4 py-2">{object.event}</caption>
                 <thead>
                     <tr className="bg-slate-200 text-sm">
@@ -131,8 +131,8 @@ const UserMMAEvents = ({ data }) => {
                     </tr>
                 </thead>
                 {betResults?.length > 0 && <tbody>
-                    <tr className="bg-teal-700 text-white">
-                        <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Moneyline Results</td>
+                    <tr>
+                        <td colSpan="7" className="font-medium py-1 px-2 underline hide-attr">Moneyline Results</td>
                     </tr>
                     {betResults}
                     <tr className={` bg-indigo-200 text-sm result-tr`}>
@@ -143,8 +143,8 @@ const UserMMAEvents = ({ data }) => {
                     </tr>
                 </tbody>}
                 {propResults?.length > 0 && <tbody>
-                    <tr className="bg-teal-700 text-white">
-                        <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Prop Results</td>
+                    <tr>
+                        <td colSpan="7" className="font-medium py-1 px-2 underline hide-attr">Prop Results</td>
                     </tr>
                     {propResults}
                     <tr className={`text-sm result-tr bg-indigo-200`}>
@@ -156,8 +156,8 @@ const UserMMAEvents = ({ data }) => {
                 </tbody>}
                 {parlayResults?.length > 0 && <>
                     <tbody>
-                        <tr className="bg-teal-700 text-white">
-                            <td colSpan="7" className="font-medium py-1 px-2 hide-attr">Parlay Results</td>
+                        <tr>
+                            <td colSpan="7" className="font-medium py-1 px-2 underline hide-attr">Parlay Results</td>
                         </tr>
                     </tbody>
                     {parlayResults}
@@ -182,9 +182,11 @@ const UserMMAEvents = ({ data }) => {
         )
     })
     const content = (
-        <div className="w-full p-6 ">
+        <div className="w-full bg-white">
             <h3 className="bg-slate-600 text-white p-2 text-lg font-medium tracking-wide">{data.displayName}'s MMA Bet History</h3>
-            {betHistory}
+            <div className="p-4">
+                {betHistory}
+            </div>
         </div>
     )
 

@@ -63,6 +63,7 @@ const LineChartMMA = ({ data }) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "bottom",
@@ -106,30 +107,33 @@ const LineChartMMA = ({ data }) => {
             {
                 label: "Moneyline Bets",
                 data: mlData,
-                borderColor: "#2991FF",
-                backgroundColor: "#2991FF"
+                borderColor: "#227EB6",
+                backgroundColor: "#227EB6"
             },
             {
                 label: "Prop Bets",
                 data: propData,
-                borderColor: "#DF29FF"
+                borderColor: "#C437E0",
+                backgroundColor: "#C437E0"
             },
             {
                 label: "Parlays",
                 data: parlayData,
-                borderColor: "#F3DF36"
+                borderColor: "#F3DF36",
+                backgroundColor: "#F3DF36"
             },
             {
                 label: "Total Profit",
                 data: totalData,
-                borderColor: "#189C00"
+                borderColor: "#189C00",
+                backgroundColor: "#189C00"
             }
         ]
     }
 
     console.log(totalData)
     return (
-        <Line options={options} data={chartData} height={100} />
+        <Line options={options} data={chartData} height={200} />
     )
 }
 

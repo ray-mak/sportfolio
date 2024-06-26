@@ -20,7 +20,7 @@ const PieChartMMA = ({ data }) => {
             {
                 label: "Bets By Type",
                 data: [moneyline, props, parlays],
-                backgroundColor: ["#2991FF", "#DF29FF", "#F3DF36"]
+                backgroundColor: ["#227EB6", "#C437E0", "#F3DF36"]
             }
         ]
     }
@@ -30,9 +30,7 @@ const PieChartMMA = ({ data }) => {
     }
 
     return (
-        <div style={{ height: '200px' }}>
-            <Pie options={options} data={pieData} height={100} />
-        </div>
+        <Pie options={options} data={pieData} height={100} />
     )
 }
 
