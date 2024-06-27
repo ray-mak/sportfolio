@@ -16,12 +16,10 @@ import UserProfile from "./features/users/UserProfile"
 import PersistLogin from "./features/auth/PersistLogin"
 import RequireAuth from "./features/auth/RequireAuth"
 import { ROLES } from "./config/roles"
-import UserMMAEvents from "./features/users/UserMMAEvents"
 import NewMMAResult from "./features/events/NewMMAResult"
 import MMAResultsList from "./features/events/MMAResultsList"
 import EditMMAResult from "./features/events/EditMMAResult"
 import EditProfile from "./features/users/EditProfile"
-import UserUpcomingEvents from "./features/users/UserUpcomingEvents"
 import ViewMMAEvents from "./features/events/ViewMMAEvents"
 import EventSummary from "./features/events/EventSummary"
 
@@ -35,17 +33,13 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<NewUserForm />} />
         <Route path=":id" element={<UserProfile />} />
-        <Route path="leaderboard">
-          <Route index element={<Leaderboard />} />
-        </Route>
+
+        <Route path="leaderboard" element={<Leaderboard />} />
 
         <Route path="mmaevents" >
           <Route index element={<ViewMMAEvents />} />
           <Route path=":id" element={<EventSummary />} />
         </Route>
-
-        <Route path="user" element={<UserMMAEvents />} />
-        <Route path="userupcoming" element={<UserUpcomingEvents />} />
 
         <Route path="editmmaevent">
           <Route index element={<MMAEventsList />} />

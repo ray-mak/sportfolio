@@ -282,7 +282,7 @@ const AddMMAPickForm = ({ events }) => {
 
     return (
         <div className='flex flex-col items-center justify-center text-sm sm:text-base'>
-            <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 p-4 bg-zinc-100 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
+            <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6 border-2 border-slate-600 p-4 bg-slate-100 mb-8 sm:w-5/6 lg:w-3/5 2xl:w-1/2'>
                 <div ref={eventContainer}>
                     <div className='flex'>
                         <p>Event</p>

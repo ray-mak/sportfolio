@@ -43,9 +43,9 @@ const DashHeader = () => {
                 {/* Navigation links container */}
                 <div className={`nav-menu flex items-center ml-auto gap-4 font-semibold md:font-normal lg:gap-6 lg:text-base ${hamburgerMenu ? "opened" : ""}`}>
                     <Link to="/dash">Home</Link>
-                    <a>Free Tips</a>
-                    <a>Leaderboard</a>
-                    <a>Add Picks</a>
+                    <Link to="/mmaevents">Free Tips</Link>
+                    <Link to="/leaderboard">Leaderboard</Link>
+                    <Link to="/dash/addpick">Add Picks</Link>
                     <a>Settings</a>
                     <button onClick={sendLogout} className="border-2 px-4 py-2 rounded-lg self-center">Logout</button>
                 </div>

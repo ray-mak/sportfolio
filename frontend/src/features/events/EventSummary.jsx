@@ -1,7 +1,7 @@
 import { useGetSingleEventMutation } from "./eventSummaryApiSlice"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 const EventSummary = () => {
     const { id } = useParams()
@@ -34,28 +34,48 @@ const EventSummary = () => {
             const fighterAMLBets = object.mlBets.map(bet => {
                 if (bet.pick === fighterA) {
                     return (
-                        <p key={bet._id}><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {bet.betAmount}u @ {bet.odds.toFixed(2)}</p>
+                        <p key={bet._id}>
+                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                {bet.displayName}
+                            </Link>
+                            {bet.betAmount}u @ {bet.odds.toFixed(2)}
+                        </p>
                     )
                 }
             })
             const fighterBMLBets = object.mlBets.map(bet => {
                 if (bet.pick !== fighterA) {
                     return (
-                        <p key={bet._id} className="text-right"><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {bet.betAmount}u @ {bet.odds.toFixed(2)}</p>
+                        <p key={bet._id} className="text-right">
+                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                {bet.displayName}
+                            </Link>
+                            {bet.betAmount}u @ {bet.odds.toFixed(2)}
+                        </p>
                     )
                 }
             })
             const fighterAProps = object.propBets.map(bet => {
                 if (bet.propType === "fighterProp" && bet.pickFighter === fighterA) {
                     return (
-                        <p key={bet._id}><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}</p>
+                        <p key={bet._id}>
+                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                {bet.displayName}
+                            </Link>
+                            {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}
+                        </p>
                     )
                 }
             })
             const fighterBProps = object.propBets.map(bet => {
                 if (bet.propType === "fighterProp" && bet.pickFighter === fighterB) {
                     return (
-                        <p key={bet._id} className="text-right"><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}</p>
+                        <p key={bet._id} className="text-right">
+                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                {bet.displayName}
+                            </Link>
+                            {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}
+                        </p>
                     )
                 }
             })
@@ -69,7 +89,12 @@ const EventSummary = () => {
                     }
                     if ((leg.parlayBetType === "moneyline" || leg.propType === "fighterProp") && (leg.pick === fighterA || leg.pickFighter === fighterA)) {
                         return (
-                            <p key={leg._id}><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {pick} @ {leg.odds.toFixed(2)}</p>
+                            <p key={leg._id}>
+                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                    {bet.displayName}
+                                </Link>
+                                {pick} @ {leg.odds.toFixed(2)}
+                            </p>
                         )
                     }
                 })
@@ -84,7 +109,12 @@ const EventSummary = () => {
                     }
                     if ((leg.parlayBetType === "moneyline" || leg.propType === "fighterProp") && (leg.pick === fighterB || leg.pickFighter === fighterB)) {
                         return (
-                            <p key={leg._id} className="text-right"><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {pick} @ {leg.odds.toFixed(2)}</p>
+                            <p key={leg._id} className="text-right">
+                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                    {bet.displayName}
+                                </Link>
+                                {pick} @ {leg.odds.toFixed(2)}
+                            </p>
                         )
                     }
                 })
@@ -93,7 +123,12 @@ const EventSummary = () => {
             const timePropsSingles = object.propBets.map(bet => {
                 if (bet.parlayBetType === "prop" && bet.propType === "timeProp") {
                     return (
-                        <p key={bet._id} className="text-center"><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {bet.timeProp} @ {bet.odds}</p>
+                        <p key={bet._id} className="text-center">
+                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                {bet.displayName}
+                            </Link>
+                            {bet.timeProp} @ {bet.odds}
+                        </p>
                     )
                 }
             })
@@ -101,16 +136,21 @@ const EventSummary = () => {
                 return bet.parlayInfo.map(leg => {
                     if (leg.parlayBetType === "prop" && leg.propType === "timeProp") {
                         return (
-                            <p key={bet._id} className="text-center"><span onClick={() => navigate(`/${bet.user}`)} className="font-medium cursor-pointer text-blue-800 hover:text-blue-500">{bet.displayName}</span> {leg.timeProp} @ {leg.odds}</p>
+                            <p key={bet._id} className="text-center">
+                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                    {bet.displayName}
+                                </Link>
+                                {leg.timeProp} @ {leg.odds}
+                            </p>
                         )
                     }
                 })
             })
 
             return (
-                <div key={object._id} className="bg-neutral-100 p-2 mb-4">
+                <div key={object._id} className="border-2 border-slate-300 bg-white p-4">
                     <h2 className="text-center font-medium text-base my-2">{object.matchup}</h2>
-                    {(fighterAMLBets?.length > 0 || fighterBMLBets?.length > 0) && <div className="mb-4">
+                    {(fighterAMLBets?.length > 0 || fighterBMLBets?.length > 0) && <div>
                         <p className="text-center font-medium">Moneyline Bets</p>
                         <div className="flex justify-between gap-2">
                             <div className="">
@@ -159,9 +199,11 @@ const EventSummary = () => {
         })
         content = (
             <div className="flex justify-center text-sm">
-                <div className="w-full p-4 bg-neutral-200 mt-4 sm:w-5/6 lg:w-3/4 xl:w-3/5 2xl:w-2/5">
-                    <h1 className="text-xl font-semibold mb-4">{data.eventName} Betting Tips</h1>
-                    {matchupContainer}
+                <div className="w-full bg-slate-100 mt-4 sm:w-5/6 lg:w-3/4 xl:w-3/5 2xl:w-2/5">
+                    <h1 className="p-2 text-xl font-semibold text-white bg-cyan-700">{data.eventName} Betting Tips</h1>
+                    <div className="p-2 flex flex-col gap-4 md:p-6">
+                        {matchupContainer}
+                    </div>
                 </div>
             </div>
         )

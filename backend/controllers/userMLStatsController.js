@@ -17,8 +17,8 @@ const getUserMLStats = asyncHandler(async (req, res) => {
     for (const user of users) {
         const userBets = mmaBets.filter(bet => bet.user.toString() === user._id.toString())
         const evaluatedBets = await evaluateMMAMLBets(userBets, eventResults)
-        const sortedBets = await sortEvaluatedBets(evaluatedBets)
-        const upcomingBets = await formatUpcomingBets(userBets, eventResults)
+        const sortedBets = await sortEvaluatedBets(evaluatedBets, [], [])
+        const upcomingBets = await formatUpcomingBets(userBets, [], [], eventResults)
 
         usersWithResults.push({
             ...user,

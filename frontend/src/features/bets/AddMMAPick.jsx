@@ -56,9 +56,9 @@ const AddMMAPick = () => {
             <div>
                 <div className="flex justify-center">
                     <div className="w-full flex justify-center rounded-lg my-10 sm:w-5/6 lg:w-3/5 2xl:w-1/2">
-                        <button type="button" className={`w-32 px-4 py-2 rounded-l-lg border-2 border-blue-500 ${selectedForm.moneylineForm ? "bg-blue-500 text-white" : "bg-white"}`} onClick={selectMoneyline}>Moneyline</button>
-                        <button type="button" className={`w-32 px-4 py-2 border-y-2 border-blue-500 ${selectedForm.propForm ? "bg-blue-500 text-white" : "bg-white"}`} onClick={selectProp}>Prop</button>
-                        <button type="button" className={`w-32 px-4 py-2 rounded-r-lg border-2 border-blue-500 ${selectedForm.parlayForm ? "bg-blue-500 text-white" : "bg-white"}`} onClick={selectParlay}>Parlay</button>
+                        <button type="button" className={`w-32 px-4 py-2 rounded-l-lg border-2 border-slate-500 ${selectedForm.moneylineForm ? "bg-slate-500 text-white" : "bg-white"}`} onClick={selectMoneyline}>Moneyline</button>
+                        <button type="button" className={`w-32 px-4 py-2 border-y-2 border-slate-500 ${selectedForm.propForm ? "bg-slate-500 text-white" : "bg-white"}`} onClick={selectProp}>Prop</button>
+                        <button type="button" className={`w-32 px-4 py-2 rounded-r-lg border-2 border-slate-500 ${selectedForm.parlayForm ? "bg-slate-500 text-white" : "bg-white"}`} onClick={selectParlay}>Parlay</button>
                     </div>
                 </div>
                 {selectedForm.moneylineForm && <AddMMAPickForm events={entities} />}
