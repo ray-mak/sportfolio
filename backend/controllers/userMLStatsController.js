@@ -1,4 +1,6 @@
 const mmaMLBet = require("../models/MMAMLBet")
+const mmaPropBet = require("../models/MMAPropBet")
+const mmaParlay = require("../models/MMAParlay")
 const User = require("../models/User")
 const EventResult = require('../models/EventResult')
 const asyncHandler = require('express-async-handler')
@@ -16,6 +18,8 @@ const getUserMLStats = asyncHandler(async (req, res) => {
 
     for (const user of users) {
         const userBets = mmaBets.filter(bet => bet.user.toString() === user._id.toString())
+        const userProps = mmaPropBet.filter(bet => bet.user.toString() === user._id.toString())
+        const userParlays = mmaParlay.filter(bet => bet.user.toString() === user._id.toString())
         const evaluatedBets = await evaluateMMAMLBets(userBets, eventResults)
         const sortedBets = await sortEvaluatedBets(evaluatedBets, [], [])
         const upcomingBets = await formatUpcomingBets(userBets, [], [], eventResults)
