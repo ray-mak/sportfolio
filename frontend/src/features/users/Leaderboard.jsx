@@ -42,27 +42,9 @@ const Leaderboard = () => {
 
         //userStats will be an array of objects that contains the users name and betting stats.
         const userStats = []
-        entities.forEach(object => {
-            const betHistory = object.betHistory
-            let picks = 0
-            let profit = 0
-            let unitsBet = 0
-            let roi
 
-            for (const event of betHistory) {
-                const eventResults = event.eventResults
-                for (const matchup of eventResults) {
-                    picks++
-                    profit = profit += Number(matchup.profit)
-                    unitsBet = unitsBet += matchup.betAmount
-                }
-            }
+        console.log(entities)
 
-            roi = ((profit / unitsBet) * 100)
-            if (!isNaN(roi)) {
-                userStats.push({ "displayName": object.displayName, "roi": roi.toFixed(0), "totalProfit": profit.toFixed(2), "unitsBet": unitsBet, "totalPicks": picks })
-            }
-        })
 
         function sortUsers(array) {
             if (sort.direction === "asc") {
@@ -72,7 +54,7 @@ const Leaderboard = () => {
             }
         }
 
-        const tableContent = sortUsers(userStats).map((user, index) => (
+        const tableContent = sortUsers(entities).map((user, index) => (
             <tr className="bg-lightGray" key={index}>
                 <td data-rank className="px-4 py-2">{index + 1}</td>
                 <td data-username className="px-4 py-2">{user.displayName}</td>
@@ -93,7 +75,7 @@ const Leaderboard = () => {
                                 <th scope="col" className="px-4 py-2 text-left text-white">Rank</th>
                                 <th scope="col" className="px-4 py-2 text-left text-white">User</th>
                                 <th scope="col" className="px-4 py-2 text-left text-white cursor-pointer" onClick={() => handleSort("roi")}>ROI</th>
-                                <th scope="col" className="px-4 py-2 text-left text-white cursor-pointer" onClick={() => handleSort("unitsProfit")}>Units Profit</th>
+                                <th scope="col" className="px-4 py-2 text-left text-white cursor-pointer" onClick={() => handleSort("totalProfit")}>Units Profit</th>
                                 <th scope="col" className="px-4 py-2 text-left text-white cursor-pointer" onClick={() => handleSort("unitsBet")}>Units Bet</th>
                                 <th scope="col" className="px-4 py-2 text-left text-white cursor-pointer" onClick={() => handleSort("totalPicks")}>Total Picks</th>
                             </tr>
