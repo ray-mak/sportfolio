@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { selectUserById, useGetUsersQuery } from "./usersApiSlice"
-import MMALeaderboardUser from "./MMALeaderboardUser"
+
 
 //this is a users list, but this will be used for the leaderboard, which will have the users username and profits and additional stats
 const Leaderboard = () => {
@@ -41,10 +41,6 @@ const Leaderboard = () => {
         const entities = Object.values(data.entities)
 
         //userStats will be an array of objects that contains the users name and betting stats.
-        const userStats = []
-
-        console.log(entities)
-
 
         function sortUsers(array) {
             if (sort.direction === "asc") {
@@ -55,21 +51,25 @@ const Leaderboard = () => {
         }
 
         const tableContent = sortUsers(entities).map((user, index) => (
-            <tr className="bg-lightGray" key={index}>
-                <td data-rank className="px-4 py-2">{index + 1}</td>
-                <td data-username className="px-4 py-2">{user.displayName}</td>
-                <td data-roi className="px-4 py-2">{user.roi}%</td>
-                <td data-units-profit className="px-4 py-2">{user.totalProfit}</td>
-                <td data-units-bet className="px-4 py-2">{user.unitsBet}</td>
-                <td data-picks className="px-4 py-2">{user.totalPicks}</td>
+            <tr className={index % 2 === 0 ? "bg-white" : "bg-neutral-200"} key={index}>
+                <td data-cell="rank" className="md:px-4 md:py-2">{index + 1}</td>
+                <td data-cell="username" className="md:px-4 md:py-2 font-medium text-blue-800">
+                    <Link to={`/${user._id}`} className="hover:text-blue-500">
+                        {user.displayName}
+                    </Link>
+                </td>
+                <td data-cell="ROI" className="md:px-4 md:py-2">{user.roi}%</td>
+                <td data-cell="units profit" className="md:px-4 md:py-2">{user.totalProfit}</td>
+                <td data-cell="units bet" className="md:px-4 md:py-2">{user.unitsBet}</td>
+                <td data-cell="total picks" className="md:px-4 md:py-2">{user.totalPicks}</td>
             </tr>
         ))
 
         content = (
             <div className="flex justify-center">
-                <div className="border-2 w-full max-w-7xl bg-white overflow-x-auto m:p-4 sm:w-4/5 xl:w-3/5 2xl:w-1/2">
-                    <h1 className="text-center text-2xl font-semibold p-2">MMA Handicappers Leaderboard</h1>
-                    <table className="w-full mt-4">
+                <div className="border-2 border-slate-600 w-full max-w-7xl bg-slate-100 overflow-x-auto m:p-4 sm:w-4/5 xl:w-3/5 2xl:w-1/2">
+                    <h1 className="text-center text-2xl font-semibold p-4">MMA Handicappers Leaderboard</h1>
+                    <table className="w-full text-sm md:text-base">
                         <thead className="sticky">
                             <tr className="bg-slate-700">
                                 <th scope="col" className="px-4 py-2 text-left text-white">Rank</th>

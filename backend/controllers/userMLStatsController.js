@@ -27,8 +27,6 @@ const getUserMLStats = asyncHandler(async (req, res) => {
         const evaluatedBets = await evaluateMMAMLBets(userBets, eventResults)
         const evaluatedPropBets = await evaluateMMAPropBets(userProps, eventResults)
         const { evaluatedParlays } = await evaluateMMAParlays(userParlays, eventResults)
-        const sortedBets = await sortEvaluatedBets(evaluatedBets, [], [])
-        const upcomingBets = await formatUpcomingBets(userBets, [], [], eventResults)
 
         let totalPicks = 0
         let totalProfit = 0
@@ -46,7 +44,7 @@ const getUserMLStats = asyncHandler(async (req, res) => {
             unitsBet += bet.betAmount
         }
 
-        for (const bet of evaluatedPropBets) {
+        for (const bet of evaluatedParlays) {
             totalPicks++
             totalProfit += Number(bet.profit)
             unitsBet += bet.betAmount

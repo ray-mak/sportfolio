@@ -157,9 +157,14 @@ const UserUpcomingEvents = ({ data }) => {
     const content = (
         <div className="w-full bg-white">
             <h3 className="bg-slate-600 text-white p-2 text-lg font-medium tracking-wide">{data.displayName}'s Upcoming MMA Bets</h3>
-            <div className="p-6 flex flex-col gap-6">
-                {upcomingBets}
-            </div>
+            {upcomingBets.length > 0
+                ? <div className="p-6 flex flex-col gap-6">
+                    {upcomingBets}
+                </div>
+                : <div className="flex justify-center p-6">
+                    <p><span className="font-medium">{data.displayName}</span> has no upcoming bets</p>
+                </div>
+            }
         </div>
     )
 

@@ -2,8 +2,6 @@
 import { useGetUserResultsQuery } from "./userMMAEventsApiSlice"
 
 const UserMMAEvents = ({ data }) => {
-    console.log(data)
-
     const betHistory = data.betHistory.map(object => {
         const betResults = object.eventResults.map(bet => {
             let textColor
@@ -184,9 +182,15 @@ const UserMMAEvents = ({ data }) => {
     const content = (
         <div className="w-full bg-white">
             <h3 className="bg-slate-600 text-white p-2 text-lg font-medium tracking-wide">{data.displayName}'s MMA Bet History</h3>
-            <div className="p-4">
-                {betHistory}
-            </div>
+            {
+                betHistory.length > 0
+                    ? <div className="p-4">
+                        {betHistory}
+                    </div>
+                    : <div className="flex justify-center p-6">
+                        <p><span className="font-medium">{data.displayName}</span> has no bet history</p>
+                    </div>
+            }
         </div>
     )
 
