@@ -53,10 +53,23 @@ const PersistLogin = () => {
     } else if (isError) { //persist: yes, token: no
         console.log('error')
         content = (
-            <p className='errmsg'>
-                {error.data?.message}
-                <Link to="/login">Please login again</Link>.
-            </p>
+            <div className="flex justify-center mt-12">
+                <div className="flex flex-col gap-4 p-8 rounded-lg shadow-xl">
+                    <p className="text-center text-xl font-semibold">
+                        {error.data?.message}
+                    </p>
+                    <p>You must be logged in to view this page</p>
+                    <div className="flex flex-col">
+                        <Link to="/login" className="w-full text-white rounded-lg bg-brightRed p-2 text-center">
+                            Login
+                        </Link>
+                        <p className="text-sm mt-1 text-center">
+                            Don't have an account?
+                            <Link to="/register" className="underline text-blue-600 ml-1">Sign Up</Link>
+                        </p>
+                    </div>
+                </div>
+            </div>
         )
     } else if (isSuccess && trueSuccess) { //persist: yes, token: yes
         console.log('success')

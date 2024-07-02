@@ -21,9 +21,13 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [login, { isLoading }] = useLoginMutation()
+    const [login, { isLoading, isError, error }] = useLoginMutation()
 
     if (isLoading) return <p>Loading...</p>
+
+    if (isError) return (
+        <p>{error?.data?.message}</p>
+    )
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -82,8 +86,15 @@ const Login = () => {
                     <input type="checkbox" id="persist" onChange={handleToggle} checked={persist} />
                     Trust this device
                 </label> */}
-                <p>Don't have an account? <span className="underline">Sign up here</span></p>
-                <button className="w-full bg-brightRed text-white p-3 text-base rounded-lg mt-2">Log In</button>
+
+                <div className="text-sm text-center">
+                    <button className="w-full bg-brightRed text-white p-3 text-base rounded-lg mt-2">Log In</button>
+                    <p className="mt-2">Don't have an account?
+                        <Link to="/register" className="underline text-blue-600 ml-1">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
             </form>
         </div>
     )
