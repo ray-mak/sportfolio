@@ -6,7 +6,6 @@ const DashLayout = () => {
     return (
         <>
             {/* Dash Header will be above every protected part of our site */}
-            <DashHeader />
             <div>
                 {/* Wrap outlet in div to provide different styles to our protected area */}
                 <Outlet />

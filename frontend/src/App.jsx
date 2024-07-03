@@ -27,7 +27,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}> {/* This is the parent route of everything */}
+      <Route path="/" element={<Layout roles={[...Object.values(ROLES)]} />} > {/* This is the parent route of everything */}
         {/* public routes */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />

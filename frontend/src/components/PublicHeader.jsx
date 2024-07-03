@@ -1,27 +1,7 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { useSendLogoutMutation } from "../features/auth/authApiSlice"
 
-
-const DashHeader = () => {
-    //navigation/logout logic
-    const navigate = useNavigate()
-
-    const [sendLogout, {
-        isLoading,
-        isSuccess,
-        isError,
-        error
-    }] = useSendLogoutMutation()
-
-    useEffect(() => {
-        if (isSuccess) navigate('/')
-    }, [isSuccess, navigate])
-
-    // if (isLoading) return <p>Logging out...</p>
-    // if (isError) return <p>Error {error.data?.message}</p>
-
-    //hamburger menu logic
+const PublicHeader = () => {
     const [hamburgerMenu, setHamburgerMenu] = useState(false)
 
     function toggleHamburger() {
@@ -29,9 +9,9 @@ const DashHeader = () => {
     }
 
     return (
-        <div className="w-full bg-white flex justify-center navbar">
+        <div className="w-full bg-white flex justify-center border-b-2 border-b-neutral-100 navbar">
             <div className="w-full flex p-4 xl:w-4/5">
-                <Link to="/dash">
+                <Link to="/">
                     <img className="w-60 lg:w-80" src="/logo.png" alt="logo" />
                 </Link>
                 <div onClick={toggleHamburger} className={`hamburger ${hamburgerMenu ? "opened" : ""}`}>
@@ -40,19 +20,16 @@ const DashHeader = () => {
                     <span className="bar bg-darkGray"></span>
                 </div>
                 <div className={`dimmer ${hamburgerMenu ? "opened" : ""}`}></div>
-                {/* Navigation links container */}
                 <div className={`nav-menu flex items-center ml-auto gap-4 font-semibold md:font-normal lg:gap-6 lg:text-base ${hamburgerMenu ? "opened" : ""}`}>
-                    <Link to="/dash">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/mmaevents">Free Tips</Link>
                     <Link to="/leaderboard">Leaderboard</Link>
-                    <Link to="/dash/addpick">Add Picks</Link>
-                    <Link to="/dash/editprofile">Settings</Link>
-                    <button onClick={sendLogout} className="border-2 px-4 py-2 rounded-lg self-center">Logout</button>
+                    <Link to="/login" className="border-2 px-4 py-2 rounded-lg self-center">Login</Link>
+                    <Link to="/register" className="border-2 border-slate-500 bg-slate-500 text-white px-4 py-2 rounded-lg self-center">Sign Up</Link>
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default DashHeader
+export default PublicHeader

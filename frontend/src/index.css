@@ -58,6 +58,11 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
 
 
 @media (max-width: 768px) {
+    .navbar {
+        position: fixed;
+        margin-bottom: 50px;
+    }
+
     .nav-menu {
         position: fixed;
         flex-direction: column;
