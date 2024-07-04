@@ -47,7 +47,7 @@ const EventSummary = () => {
                 if (bet.pick === fighterA) {
                     return (
                         <p key={bet._id}>
-                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                            <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                 {bet.displayName}
                             </Link>
                             {bet.betAmount}u @ {bet.odds.toFixed(2)}
@@ -59,7 +59,7 @@ const EventSummary = () => {
                 if (bet.pick !== fighterA) {
                     return (
                         <p key={bet._id} className="text-right">
-                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                            <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                 {bet.displayName}
                             </Link>
                             {bet.betAmount}u @ {bet.odds.toFixed(2)}
@@ -71,7 +71,7 @@ const EventSummary = () => {
                 if (bet.propType === "fighterProp" && bet.pickFighter === fighterA) {
                     return (
                         <p key={bet._id}>
-                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                            <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                 {bet.displayName}
                             </Link>
                             {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}
@@ -83,7 +83,7 @@ const EventSummary = () => {
                 if (bet.propType === "fighterProp" && bet.pickFighter === fighterB) {
                     return (
                         <p key={bet._id} className="text-right">
-                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                            <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                 {bet.displayName}
                             </Link>
                             {bet.fighterProp} {bet.betAmount}u @ {bet.odds.toFixed(2)}
@@ -102,7 +102,7 @@ const EventSummary = () => {
                     if ((leg.parlayBetType === "moneyline" || leg.propType === "fighterProp") && (leg.pick === fighterA || leg.pickFighter === fighterA)) {
                         return (
                             <p key={leg._id}>
-                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                     {bet.displayName}
                                 </Link>
                                 {pick} @ {leg.odds.toFixed(2)}
@@ -122,7 +122,7 @@ const EventSummary = () => {
                     if ((leg.parlayBetType === "moneyline" || leg.propType === "fighterProp") && (leg.pick === fighterB || leg.pickFighter === fighterB)) {
                         return (
                             <p key={leg._id} className="text-right">
-                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                     {bet.displayName}
                                 </Link>
                                 {pick} @ {leg.odds.toFixed(2)}
@@ -136,7 +136,7 @@ const EventSummary = () => {
                 if (bet.parlayBetType === "prop" && bet.propType === "timeProp") {
                     return (
                         <p key={bet._id} className="text-center">
-                            <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                            <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                 {bet.displayName}
                             </Link>
                             {bet.timeProp} @ {bet.odds}
@@ -149,7 +149,7 @@ const EventSummary = () => {
                     if (leg.parlayBetType === "prop" && leg.propType === "timeProp") {
                         return (
                             <p key={bet._id} className="text-center">
-                                <Link to={`/${bet.user}`} className="font-medium text-blue-800 hover:text-blue-500">
+                                <Link to={`/${bet.user}`} className="mr-1 font-medium text-blue-800 hover:text-blue-500">
                                     {bet.displayName}
                                 </Link>
                                 {leg.timeProp} @ {leg.odds}

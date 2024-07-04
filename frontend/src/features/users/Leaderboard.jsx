@@ -60,7 +60,7 @@ const Leaderboard = () => {
                 </td>
                 <td data-cell="ROI" className="md:px-4 md:py-2">{user.roi}%</td>
                 <td data-cell="units profit" className="md:px-4 md:py-2">{user.totalProfit}</td>
-                <td data-cell="units bet" className="md:px-4 md:py-2">{user.unitsBet}</td>
+                <td data-cell="units bet" className="md:px-4 md:py-2">{user.unitsBet.toFixed(2)}</td>
                 <td data-cell="total picks" className="md:px-4 md:py-2">{user.totalPicks}</td>
             </tr>
         ))

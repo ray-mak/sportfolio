@@ -62,15 +62,15 @@ const UserStatsSummary = ({ data }) => {
                                 </tr>
                                 <tr className="bg-neutral-200">
                                     <td>Total Bet Amount</td>
-                                    <td data-cell="total units bet">{betAmount}</td>
-                                    <td data-cell="moneyline units bet">{data.mlStats.totalBetAmount}</td>
-                                    <td data-cell="props units bet">{data.propStats.totalPropBetAmount}</td>
-                                    <td data-cell="parlays units bet" className="pb-2 md:pb-0">{data.parlayStats.totalParlayBetAmount}</td>
+                                    <td data-cell="total units bet">{betAmount.toFixed(2)}</td>
+                                    <td data-cell="moneyline units bet">{data.mlStats.totalBetAmount.toFixed(2)}</td>
+                                    <td data-cell="props units bet">{data.propStats.totalPropBetAmount.toFixed(2)}</td>
+                                    <td data-cell="parlays units bet" className="pb-2 md:pb-0">{data.parlayStats.totalParlayBetAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <td>Total Profit Amount</td>
-                                    <td data-cell="total profit">{profitAmount}</td>
-                                    <td data-cell="moneyline profit">{data.mlStats.totalProfit}</td>
+                                    <td data-cell="total profit">{profitAmount.toFixed(2)}</td>
+                                    <td data-cell="moneyline profit">{data.mlStats.totalProfit.toFixed(2)}</td>
                                     <td data-cell="props profit">{data.propStats.totalPropProfit.toFixed(2)}</td>
                                     <td data-cell="parlays profit" className="pb-2 md:pb-0">{data.parlayStats.totalParlayProfit}</td>
                                 </tr>
@@ -117,7 +117,7 @@ const UserStatsSummary = ({ data }) => {
                                 <td data-cell="big favorite correct">{data.mlStats.bigFavWin}</td>
                                 <td data-cell="big favorite percent correct">{data.mlStats.bigFavWinPercent}%</td>
                                 <td data-cell="big favorite units bet">{data.mlStats.bigFavBetAmount}</td>
-                                <td data-cell="big favorite units profit">{data.mlStats.bigFavProfit}</td>
+                                <td data-cell="big favorite units profit">{data.mlStats.bigFavProfit.toFixed(2)}</td>
                                 <td data-cell="big favorite ROI">{data.mlStats.bigFavROI}%</td>
                             </tr>
                             <tr className="bg-neutral-200">
@@ -126,7 +126,7 @@ const UserStatsSummary = ({ data }) => {
                                 <td data-cell="slight favorite correct">{data.mlStats.slightFavWin}</td>
                                 <td data-cell="slight favorite percent correct">{data.mlStats.slightFavWinPercent}%</td>
                                 <td data-cell="slight favorite units bet">{data.mlStats.slightFavBetAmount}</td>
-                                <td data-cell="slight favorite units profit">{data.mlStats.slightFavProfit}</td>
+                                <td data-cell="slight favorite units profit">{data.mlStats.slightFavProfit.toFixed(2)}</td>
                                 <td data-cell="slight favorite ROI">{data.mlStats.slightFavROI}%</td>
                             </tr>
                             <tr>
@@ -135,7 +135,7 @@ const UserStatsSummary = ({ data }) => {
                                 <td data-cell="slight underdog correct">{data.mlStats.slightDogWin}</td>
                                 <td data-cell="slight underdog percent correct">{data.mlStats.slightDogWinPercent}%</td>
                                 <td data-cell="slight underdog units bet">{data.mlStats.slightDogBetAmount}</td>
-                                <td data-cell="slight underdog units profit">{data.mlStats.slightDogProfit}</td>
+                                <td data-cell="slight underdog units profit">{data.mlStats.slightDogProfit.toFixed(2)}</td>
                                 <td data-cell="slight underdog ROI">{data.mlStats.slightDogROI}%</td>
                             </tr>
                             <tr className="bg-neutral-200">
@@ -144,7 +144,7 @@ const UserStatsSummary = ({ data }) => {
                                 <td data-cell="big underdog correct">{data.mlStats.bigDogWin}</td>
                                 <td data-cell="big underdog percent correct">{data.mlStats.bigDogWinPercent}%</td>
                                 <td data-cell="big underdog units bet">{data.mlStats.bigDogBetAmount}</td>
-                                <td data-cell="big underdog units profit">{data.mlStats.bigDogProfit}</td>
+                                <td data-cell="big underdog units profit">{data.mlStats.bigDogProfit.toFixed(2)}</td>
                                 <td data-cell="big underdog ROI" className="mb-2">{data.mlStats.bigDogROI}%</td>
                             </tr>
                         </tbody>

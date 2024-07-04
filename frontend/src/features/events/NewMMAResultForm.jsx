@@ -56,7 +56,7 @@ const NewMMAResultForm = ({ events }) => {
 
     useEffect(() => {
         if (isSuccess) {
-            navigate("/editmmaevent")
+            navigate("/mmaresults")
         }
     }, [isSuccess, navigate])
 
@@ -73,8 +73,8 @@ const NewMMAResultForm = ({ events }) => {
             eventDate: eventData.eventDate,
             matchups: matchupResults
         }
-        // console.log(dataToSubmit)
-        // await addNewMMAResult(dataToSubmit)
+        console.log(dataToSubmit)
+        await addNewMMAResult(dataToSubmit)
     }
 
     console.log(eventToLog, eventData, matchupResults)
