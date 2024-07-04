@@ -8,6 +8,10 @@ const PublicHeader = () => {
         setHamburgerMenu(prevState => !prevState)
     }
 
+    function closeHamburgerMenu() {
+        setHamburgerMenu(false)
+    }
+
     return (
         <div className="w-full bg-white flex justify-center border-b-2 border-b-neutral-100 navbar">
             <div className="w-full flex p-4 xl:w-4/5">
@@ -21,11 +25,11 @@ const PublicHeader = () => {
                 </div>
                 <div className={`dimmer ${hamburgerMenu ? "opened" : ""}`}></div>
                 <div className={`nav-menu flex items-center ml-auto gap-4 font-semibold md:font-normal lg:gap-6 lg:text-base ${hamburgerMenu ? "opened" : ""}`}>
-                    <Link to="/">Home</Link>
-                    <Link to="/mmaevents">Free Tips</Link>
-                    <Link to="/leaderboard">Leaderboard</Link>
-                    <Link to="/login" className="border-2 px-4 py-2 rounded-lg self-center">Login</Link>
-                    <Link to="/register" className="border-2 border-slate-500 bg-slate-500 text-white px-4 py-2 rounded-lg self-center">Sign Up</Link>
+                    <Link to="/" onClick={closeHamburgerMenu}>Home</Link>
+                    <Link to="/mmaevents" onClick={closeHamburgerMenu}>Free Tips</Link>
+                    <Link to="/leaderboard" onClick={closeHamburgerMenu}>Leaderboard</Link>
+                    <Link to="/login" onClick={closeHamburgerMenu} className="border-2 px-4 py-2 rounded-lg self-center">Login</Link>
+                    <Link to="/register" onClick={closeHamburgerMenu} className="border-2 border-slate-500 bg-slate-500 text-white px-4 py-2 rounded-lg self-center">Sign Up</Link>
                 </div>
             </div>
         </div>

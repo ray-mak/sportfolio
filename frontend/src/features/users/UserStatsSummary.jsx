@@ -71,7 +71,7 @@ const UserStatsSummary = ({ data }) => {
                                     <td>Total Profit Amount</td>
                                     <td data-cell="total profit">{profitAmount}</td>
                                     <td data-cell="moneyline profit">{data.mlStats.totalProfit}</td>
-                                    <td data-cell="props profit">{data.propStats.totalPropProfit}</td>
+                                    <td data-cell="props profit">{data.propStats.totalPropProfit.toFixed(2)}</td>
                                     <td data-cell="parlays profit" className="pb-2 md:pb-0">{data.parlayStats.totalParlayProfit}</td>
                                 </tr>
                                 <tr className="bg-neutral-200">
