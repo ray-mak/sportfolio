@@ -43,6 +43,18 @@ const EventSummary = () => {
         const matchupContainer = data.matchups.map(object => {
             const fighterA = object.matchup.split(" vs ")[0]
             const fighterB = object.matchup.split(" vs ")[1]
+            let fighterAImg, fighterBImg
+            if (object.fighterAImg === "") {
+                fighterAImg = "https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp"
+            } else {
+                fighterAImg = object.fighterAImg
+            }
+
+            if (object.fighterBImg === "") {
+                fighterBImg = "https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp"
+            } else {
+                fighterBImg = object.fighterBImg
+            }
             const fighterAMLBets = object.mlBets.map(bet => {
                 if (bet.pick === fighterA) {
                     return (
@@ -162,12 +174,12 @@ const EventSummary = () => {
             return (
                 <div key={object._id} className="border-2 border-slate-300 bg-white p-4">
                     <div className="flex justify-between gap-2">
-                        <div className="w-20 h-20 border-2 overflow-hidden md:w-28 md:h-28">
-                            <img className="w-full object-fill" src="https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp" />
+                        <div className="w-20 h-20 overflow-hidden rounded md:w-28 md:h-28">
+                            <img className="w-full object-fill" src={fighterAImg} />
                         </div>
                         <h2 className="text-center font-medium text-sm my-2 md:text-base">{object.matchup}</h2>
-                        <div className="w-20 h-20 border-2 overflow-hidden md:w-28 md:h-28">
-                            <img className="w-full object-fill" src="https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp" />
+                        <div className="w-20 h-20 overflow-hidden rounded md:w-28 md:h-28">
+                            <img className="w-full object-fill" src={fighterBImg} />
                         </div>
                     </div>
                     {(fighterAMLBets?.length > 0 || fighterBMLBets?.length > 0) && <div>

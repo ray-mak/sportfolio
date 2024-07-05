@@ -4,6 +4,7 @@ const User = require('../models/User')
 const MMAMLBet = require('../models/MMAMLBet')
 const mmaPropBet = require("../models/MMAPropBet")
 const mmaParlay = require("../models/MMAParlay")
+const Fighter = require("../models/Fighter")
 const asyncHandler = require('express-async-handler')
 
 //@desc Get all MMA Events and Results
@@ -41,6 +42,24 @@ const getSingleEvent = asyncHandler(async (req, res) => {
         matchup.mlBets = []
         matchup.propBets = []
         matchup.parlays = []
+
+        const fighterA = matchup.matchup.split(" vs ")[0]
+        const fighterB = matchup.matchup.split(" vs ")[1]
+        const foundFighterA = await Fighter.find({ name: fighterA }).lean()
+        const foundFighterB = await Fighter.find({ name: fighterB }).lean()
+        if (foundFighterA?.length > 0) {
+            const fighterAImg = foundFighterA[0].image
+            matchup.fighterAImg = fighterAImg
+        } else {
+            matchup.fighterAImg = ""
+        }
+
+        if (foundFighterB?.length > 0) {
+            const fighterBImg = foundFighterB[0].image
+            matchup.fighterBImg = fighterBImg
+        } else {
+            matchup.fighterBImg = ""
+        }
     }
 
     const eventMLBets = await MMAMLBet.find({ event: eventName }).lean()
