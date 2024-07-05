@@ -161,9 +161,17 @@ const EventSummary = () => {
 
             return (
                 <div key={object._id} className="border-2 border-slate-300 bg-white p-4">
-                    <h2 className="text-center font-medium text-base my-2">{object.matchup}</h2>
+                    <div className="flex justify-between gap-2">
+                        <div className="w-20 h-20 border-2 overflow-hidden md:w-28 md:h-28">
+                            <img className="w-full object-fill" src="https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp" />
+                        </div>
+                        <h2 className="text-center font-medium text-sm my-2 md:text-base">{object.matchup}</h2>
+                        <div className="w-20 h-20 border-2 overflow-hidden md:w-28 md:h-28">
+                            <img className="w-full object-fill" src="https://banner2.cleanpng.com/lnd/20240425/ijw/aax06tbvd.webp" />
+                        </div>
+                    </div>
                     {(fighterAMLBets?.length > 0 || fighterBMLBets?.length > 0) && <div>
-                        <p className="text-center font-medium">Moneyline Bets</p>
+                        <p className="text-center font-medium text-sm">Moneyline Bets</p>
                         <div className="flex justify-between gap-2">
                             <div className="">
                                 <p className="text-sm font-medium italic">{fighterA} moneyline bets</p>

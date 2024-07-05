@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useSendLogoutMutation } from "../features/auth/authApiSlice"
 import useAuth from "../hooks/useAuth"
-import { logOut } from "../features/auth/authSlice"
 
 
 const DashHeader = () => {
