@@ -48,10 +48,7 @@ const Welcome = () => {
                     <div className="w-full flex border-2 border-slate-300 bg-white" style={{ height: '360px' }}>
                         <LineChartMMA data={data} />
                     </div>
-                    <div>
-                        <p className="text-xl text-center">You do not have any upcoming picks</p>
-                        <button onClick={() => navigate("/dash/addpick")} type="button" className="w-full bg-brightRed text-white h-10 font-medium rounded-md">Add pick</button>
-                    </div>
+                    <button onClick={() => navigate("/dash/addpick")} type="button" className="w-full bg-brightRed text-white h-10 font-medium rounded-md">Add pick</button>
                     <UserUpcomingEvents data={data} />
                     <UserMMAEvents data={data} />
                 </div>

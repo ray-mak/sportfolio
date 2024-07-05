@@ -4,7 +4,7 @@ const mmaPropController = require("../controllers/mmaPropController")
 const verifyJWT = require('../middleware/verifyJWT')
 
 //apply verifyJWT middleware to all of the routes in this file
-// router.use(verifyJWT)
+router.use(verifyJWT)
 
 router.route("/")
     .get(mmaPropController.getMMAPropBets)

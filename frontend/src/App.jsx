@@ -41,18 +41,6 @@ function App() {
           <Route path=":id" element={<EventSummary />} />
         </Route>
 
-        <Route path="editmmaevent">
-          <Route index element={<MMAEventsList />} />
-          <Route path=":id" element={<EditMMAEvent />} />
-          <Route path="newmmaevent" element={<NewMMAEvent />} />
-        </Route>
-
-        <Route path="mmaresults">
-          <Route index element={<MMAResultsList />} />
-          <Route path=":id" element={<EditMMAResult />} />
-          <Route path="newmmaresult" element={<NewMMAResult />} />
-        </Route>
-
         {/* protected routes */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
@@ -67,6 +55,20 @@ function App() {
               <Route path="editprofile" element={<EditProfile />} />
 
             </Route>    {/* End Dash */}
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route path="editmmaevent">
+              <Route index element={<MMAEventsList />} />
+              <Route path=":id" element={<EditMMAEvent />} />
+              <Route path="newmmaevent" element={<NewMMAEvent />} />
+            </Route>
+
+            <Route path="mmaresults">
+              <Route index element={<MMAResultsList />} />
+              <Route path=":id" element={<EditMMAResult />} />
+              <Route path="newmmaresult" element={<NewMMAResult />} />
+            </Route>
           </Route>
         </Route>
         {/* end protected routes */}

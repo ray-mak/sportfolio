@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useSendLogoutMutation } from "../features/auth/authApiSlice"
+import useAuth from "../hooks/useAuth"
+import { logOut } from "../features/auth/authSlice"
 
 
 const DashHeader = () => {
-    //navigation/logout logic
     const navigate = useNavigate()
+    const { role } = useAuth()
 
     const [sendLogout, {
         isLoading,
@@ -15,13 +17,20 @@ const DashHeader = () => {
     }] = useSendLogoutMutation()
 
     useEffect(() => {
-        if (isSuccess) navigate('/')
+        console.log("isSuccess changed")
+        if (isSuccess) {
+            navigate('/login')
+        }
     }, [isSuccess, navigate])
 
     // if (isLoading) return <p>Logging out...</p>
     // if (isError) return <p>Error {error.data?.message}</p>
 
-    //hamburger menu logic
+    const logout = () => {
+        sendLogout()
+        navigate('/login')
+    }
+
     const [hamburgerMenu, setHamburgerMenu] = useState(false)
 
     function toggleHamburger() {
@@ -47,15 +56,17 @@ const DashHeader = () => {
                 {/* Navigation links container */}
                 <div className={`nav-menu flex items-center ml-auto gap-4 font-semibold md:font-normal lg:gap-6 lg:text-base ${hamburgerMenu ? "opened" : ""}`}>
                     <Link to="/dash" onClick={closeHamburgerMenu}>Home</Link>
+                    {role === "Admin" && <Link to="/editmmaevent" onClick={closeHamburgerMenu}>Add Event</Link>}
+                    {role === "Admin" && < Link to="/mmaresults" onAbort={closeHamburgerMenu}>Event Results</Link>}
                     <Link to="/mmaevents" onClick={closeHamburgerMenu}>Free Tips</Link>
                     <Link to="/leaderboard" onClick={closeHamburgerMenu}>Leaderboard</Link>
                     <Link to="/dash/addpick" onClick={closeHamburgerMenu}>Add Picks</Link>
                     <Link to="/dash/editprofile" onClick={closeHamburgerMenu}>Settings</Link>
-                    <button onClick={sendLogout} className="border-2 px-4 py-2 rounded-lg self-center">Logout</button>
+                    <button onClick={logout} className="border-2 px-4 py-2 rounded-lg self-center">Logout</button>
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 

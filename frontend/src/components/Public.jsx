@@ -13,8 +13,8 @@ const Public = () => {
                     <h1 className="text-3xl xl:text-4xl 2xl:text-5xl font-bold">The Ultimate Sports Betting Tracking App</h1>
                     <p className="text-lg xl:text-xl font-medium">Track your betting history, analyze your performance, and refine your strategy. Tail winning bettors with third party verified picks!</p>
                     <div className="flex flex-row gap-8 justify-center md:justify-start">
-                        <Link className="flex px-4 py-2 items-center border-2 rounded-lg">Free Picks</Link>
-                        <Link to="/dash/addpick" className="flex px-4 py-2 items-center bg-brightRed text-white rounded-lg">Start Tracking</Link>
+                        <Link to="/mmaevents" className="flex px-4 py-2 items-center border-2 rounded-lg">Free Picks</Link>
+                        <Link to="/login" className="flex px-4 py-2 items-center bg-brightRed text-white rounded-lg">Start Tracking</Link>
                     </div>
                 </div>
                 <div className="w-full 2xl:w-1/2 p-8 m-auto">
