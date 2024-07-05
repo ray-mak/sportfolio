@@ -22,6 +22,7 @@ import EditMMAResult from "./features/events/EditMMAResult"
 import EditProfile from "./features/users/EditProfile"
 import ViewMMAEvents from "./features/events/ViewMMAEvents"
 import EventSummary from "./features/events/EventSummary"
+import NewFighterForm from "./features/fighters/NewFighterForm"
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
           <Route index element={<ViewMMAEvents />} />
           <Route path=":id" element={<EventSummary />} />
         </Route>
+
+        <Route path="addfighter" element={<NewFighterForm />} />
 
         {/* protected routes */}
         <Route element={<PersistLogin />}>
