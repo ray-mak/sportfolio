@@ -30,10 +30,12 @@ const useEventsWithNoResults = () => {
     }, [resultsData, eventsData, resultsIsSuccess, eventsIsSuccess])
 
     const isLoading = resultsIsLoading || eventsIsLoading
+    const isSuccess = resultsIsSuccess && eventsIsSuccess
     const isError = resultsIsError || eventsIsError
     const errorMessage = (eventsError?.data?.message || '') + (resultsError?.data?.message || '')
     return {
         eventsWithNoResults,
+        isSuccess,
         isLoading,
         isError,
         errorMessage

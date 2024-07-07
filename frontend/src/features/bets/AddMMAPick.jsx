@@ -6,15 +6,15 @@ import AddMMAParlayForm from "./AddMMAParlayForm"
 import { useState } from "react"
 
 const AddMMAPick = () => {
-    // const { eventsWithNoResults, isLoading, isError, errorMessage } = useEventsWithNoResults()
+    const { eventsWithNoResults, isLoading, isSuccess, isError, errorMessage } = useEventsWithNoResults()
 
-    const {
-        data,
-        isLoading,
-        isSuccess,
-        isError,
-        error
-    } = useGetMMAEventsQuery()
+    // const {
+    //     data,
+    //     isLoading,
+    //     isSuccess,
+    //     isError,
+    //     error
+    // } = useGetMMAEventsQuery()
 
     const [selectedForm, setSelectedForm] = useState({
         moneylineForm: true,
@@ -51,7 +51,7 @@ const AddMMAPick = () => {
 
     // if (!isLoading && !isError)
     if (isSuccess) {
-        const entities = Object.values(data.entities)
+        // const entities = Object.values(data.entities)
         content = (
             <div>
                 <div className="flex justify-center">
@@ -61,9 +61,9 @@ const AddMMAPick = () => {
                         <button type="button" className={`w-32 px-4 py-2 rounded-r-lg border-2 border-slate-500 ${selectedForm.parlayForm ? "bg-slate-500 text-white" : "bg-white"}`} onClick={selectParlay}>Parlay</button>
                     </div>
                 </div>
-                {selectedForm.moneylineForm && <AddMMAPickForm events={entities} />}
-                {selectedForm.propForm && <AddPropForm events={entities} />}
-                {selectedForm.parlayForm && <AddMMAParlayForm events={entities} />}
+                {selectedForm.moneylineForm && <AddMMAPickForm events={eventsWithNoResults} />}
+                {selectedForm.propForm && <AddPropForm events={eventsWithNoResults} />}
+                {selectedForm.parlayForm && <AddMMAParlayForm events={eventsWithNoResults} />}
 
             </div>
         )

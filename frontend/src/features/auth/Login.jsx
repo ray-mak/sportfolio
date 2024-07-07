@@ -23,11 +23,6 @@ const Login = () => {
 
     const [login, { isLoading, isError, error }] = useLoginMutation()
 
-    if (isLoading) return <p>Loading...</p>
-
-    if (isError) return (
-        <p>{error?.data?.message}</p>
-    )
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -51,12 +46,62 @@ const Login = () => {
     }
 
     const handleToggle = () => setPersist(prev => !prev)
+
+    if (isLoading) return <p>Loading...</p>
+
+    // if (isError) return (
+    //     <p>{error?.data?.message}</p>
+    // )
+
+    if (isError) {
+        <div className="flex justify-center">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-8 mt-8 bg-white rounded-lg shadow-xl">
+                <h1 className="text-2xl font-semibold text-center">Log in</h1>
+                <div className="w-full flex justify-center mb-2">
+                    <p className="absolute text-brightRed">{error?.data?.message}</p>
+                </div>
+                <label htmlFor="username" className="flex flex-col gap-1 mb-2">
+                    <p>Username</p>
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        value={formData.username}
+                        onChange={handleChange}
+                        className="py-2 px-4 rounded-lg border-lightGray border-2"
+                        required
+                    />
+                </label>
+                <label htmlFor="username" className="flex flex-col gap-1 mb-2">
+                    <p>Password</p>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        className="py-2 px-4 rounded-lg border-lightGray border-2"
+                        required
+                    />
+                </label>
+                <div className="text-sm text-center">
+                    <button className="w-full bg-brightRed text-white p-3 text-base rounded-lg mt-2">Log In</button>
+                    <p className="mt-2">Don't have an account?
+                        <Link to="/register" className="underline text-blue-600 ml-1">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
+            </form>
+        </div>
+    }
+
     return (
         <div className="flex justify-center">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-8 mt-8 bg-white rounded-lg shadow-xl">
                 <h1 className="text-2xl font-semibold text-center">Log in</h1>
                 <div className="w-full flex justify-center mb-2">
-                    <p className="absolute text-brightRed">{errMsg}</p>
+                    <p className="absolute text-brightRed">{error?.data?.message}</p>
                 </div>
                 <label htmlFor="username" className="flex flex-col gap-1 mb-2">
                     <p>Username</p>
