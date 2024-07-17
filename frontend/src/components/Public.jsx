@@ -1,6 +1,5 @@
 //This is the public facing page (landing page)
 import { Link } from "react-router-dom"
-import graph from "/public/graph.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
@@ -18,10 +17,10 @@ const Public = () => {
                     </div>
                 </div>
                 <div className="w-full 2xl:w-1/2 p-8 m-auto">
-                    <img className="w-full rounded-xl object-cover" src="../../public/graph2.jpg" />
+                    <img className="w-full rounded-xl object-cover" src="/hero_img.png" />
                 </div>
             </section>
-            <section className="w-full flex flex-col justify-center items-center gap-2 p-4 bg-slate-600 text-white md:flex-row md:gap-10">
+            <section className="w-full flex flex-col justify-center items-center gap-2 p-4 bg-slate-500 text-white md:flex-row md:gap-10">
                 <div className="flex gap-1 items-center">
                     <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#FFD43B", }} />
                     <p>Track moneyline picks, props, and parlays</p>
@@ -35,24 +34,31 @@ const Public = () => {
                     <p>Follow other users and tail their bets</p>
                 </div>
             </section>
-            <section className="flex flex-col justify-center items-center w-full bg-lightGray mt-8 p-10 gap-8">
+            {/* <section className="flex flex-col justify-center items-center w-full bg-lightGray p-10 gap-8">
                 <h2 className="text-3xl font-semibold">Features Heading</h2>
                 <div className="flex flex-col gap-8 md:flex-row md:gap-12 xl:w-4/5 2xl:w-2/3">
-                    <div className="flex flex-col justify-center items-center gap-6 bg-white p-8 rounded-lg">
-                        <img className="w-3/5" src="../../public/icon.jpg" />
-                        <h3 className="text-darkGray text-2xl font-semibold">Feature 1</h3>
-                        <p className="font-medium text-center text-lg md:text-base">Track moneyline picks, props, and parlays</p>
+                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
+                        <img src="/public/icon1.png" />
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-6 bg-white p-8 rounded-lg">
-                        <img className="w-3/5" src="../../public/icon.jpg" />
-                        <h3 className="text-darkGray text-2xl font-semibold">Feature 1</h3>
-                        <p className="font-medium text-center text-lg md:text-base">View detailed stats on bet types</p>
+                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
+                        <img src="/public/icon3.png" />
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-6 bg-white p-8 rounded-lg">
-                        <img className="w-3/5" src="../../public/icon.jpg" />
-                        <h3 className="text-darkGray text-2xl font-semibold">Feature 1</h3>
-                        <p className="font-medium text-center text-lg md:text-base">Follow other users and tail their bets</p>
+                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
+                        <img src="/public/icon2.png" />
                     </div>
+                </div>
+            </section> */}
+            <section className="w-full flex items-center justify-center bg-slate-800 md:justify-between">
+                <div className="hidden md:block">
+                    <img src="/public/icon3.png" />
+                </div>
+                <div className="flex flex-col gap-4 w-2/3 p-6 md:w-1/2 xl:w-1/4">
+                    <p className="text-white text-2xl font-semibold">Sign Up Now</p>
+                    <p className="text-white">Access advanced stats, top EV bets, and follow top sports bettors for free!</p>
+                    <Link to="/register" className="w-40 flex px-4 py-2 items-center justify-center border-2 border-white text-white rounded-lg hover:bg-white hover:text-slate-800">Sign Up</Link>
+                </div>
+                <div className="hidden md:block">
+                    <img src="/public/icon4.png" />
                 </div>
             </section>
         </main>
