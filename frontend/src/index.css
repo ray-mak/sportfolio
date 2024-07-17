@@ -60,6 +60,7 @@ tbody.parlay-upcoming-tr tr:nth-last-child(3) td:nth-child(3) {
 @media (max-width: 768px) {
     .navbar {
         position: fixed;
+        z-index: 10;
     }
 
     .nav-menu {
