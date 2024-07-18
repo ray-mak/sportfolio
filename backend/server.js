@@ -6,22 +6,32 @@ const corsOptions = require('./config/corsOptions')
 const { logger } = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
 const cookieParser = require('cookie-parser')
-const usersRoutes = require('./routes/usersRoutes')
-const mmaMLRoutes = require('./routes/mmaMLRoutes')
-const eventResultRoutes = require('./routes/eventResultRoutes')
-const userMLStatsRoutes = require('./routes/userMLStatsRoutes')
-const authRoutes = require('./routes/authRoutes')
-const userProfileStatsRoutes = require('./routes/userProfileStatsRoutes')
-const mmaEventRoutes = require('./routes/mmaEventRoutes')
-const mmaPropRoutes = require('./routes/mmaPropRoutes')
-const mmaParlayRoutes = require('./routes/mmaParlayRoutes')
-const eventSummaryRoutes = require('./routes/eventSummaryRoutes')
-const fighterRoutes = require("./routes/fighterRoutes")
+const React = require('react')
+const ReactDOMServer = require('react-dom/server')
+const fs = require('fs')
+const path = require('path')
 
 const app = express()
 
 app.use(logger)
 app.use(cors(corsOptions))
+
+app.use(express.static(path.resolve(__dirname, '../frontend/dist')))
+
+app.get('/', (req, res) => {
+    const App = require('../frontend/src/App').default
+    const html = ReactDOMServer.renderToString(React.createElement(App))
+
+    fs.readFile(path.resolve(__dirname, '../frontend/dist/index.html'), 'utf-8', (err, data) => {
+        if (err) {
+            console.error("Error reading index.html", err)
+            return res.status(500).send("Internal Server Error")
+        }
+
+        const document = data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+        res.send(document)
+    })
+})
 
 //middleware
 app.use(express.json())
@@ -32,17 +42,17 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use('/auth', authRoutes)
-app.use('/api/users', usersRoutes)
-app.use('/api/mmamlbets', mmaMLRoutes)
-app.use('/api/eventresults', eventResultRoutes)
-app.use('/api/usermlstats', userMLStatsRoutes)
-app.use('/api/userprofilestats', userProfileStatsRoutes)
-app.use('/api/mmaevents', mmaEventRoutes)
-app.use('/api/mmapropbets', mmaPropRoutes)
-app.use('/api/mmaparlays', mmaParlayRoutes)
-app.use('/api/eventsummary', eventSummaryRoutes)
-app.use('/api/fighters', fighterRoutes)
+app.use('/auth', require('./routes/authRoutes'))
+app.use('/api/users', require('./routes/usersRoutes'))
+app.use('/api/mmamlbets', require('./routes/mmaMLRoutes'))
+app.use('/api/eventresults', require('./routes/eventResultRoutes'))
+app.use('/api/usermlstats', require('./routes/userMLStatsRoutes'))
+app.use('/api/userprofilestats', require('./routes/userProfileStatsRoutes'))
+app.use('/api/mmaevents', require('./routes/mmaEventRoutes'))
+app.use('/api/mmapropbets', require('./routes/mmaPropRoutes'))
+app.use('/api/mmaparlays', require('./routes/mmaParlayRoutes'))
+app.use('/api/eventsummary', require('./routes/eventSummaryRoutes'))
+app.use('/api/fighters', require("./routes/fighterRoutes"))
 
 app.use(errorHandler)
 
