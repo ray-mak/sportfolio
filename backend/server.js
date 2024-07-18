@@ -6,32 +6,12 @@ const corsOptions = require('./config/corsOptions')
 const { logger } = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
 const cookieParser = require('cookie-parser')
-const React = require('react')
-const ReactDOMServer = require('react-dom/server')
-const fs = require('fs')
-const path = require('path')
 
 const app = express()
 
 app.use(logger)
 app.use(cors(corsOptions))
 
-app.use(express.static(path.resolve(__dirname, '../frontend/dist')))
-
-app.get('/', (req, res) => {
-    const App = require('../frontend/src/App').default
-    const html = ReactDOMServer.renderToString(React.createElement(App))
-
-    fs.readFile(path.resolve(__dirname, '../frontend/dist/index.html'), 'utf-8', (err, data) => {
-        if (err) {
-            console.error("Error reading index.html", err)
-            return res.status(500).send("Internal Server Error")
-        }
-
-        const document = data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
-        res.send(document)
-    })
-})
 
 //middleware
 app.use(express.json())
