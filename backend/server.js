@@ -6,6 +6,7 @@ const corsOptions = require('./config/corsOptions')
 const { logger } = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
 const cookieParser = require('cookie-parser')
+const path = require('path')
 
 const app = express()
 
