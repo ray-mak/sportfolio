@@ -258,7 +258,6 @@ const AddPropForm = ({ events }) => {
 
     const submitData = async (e) => {
         e.preventDefault()
-        console.log(formData)
         await addNewMMAPropBet({
             user: id,
             betType: "prop",

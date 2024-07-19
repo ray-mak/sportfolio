@@ -2,7 +2,6 @@ import { useState } from "react"
 import React from "react"
 
 const UserUpcomingEvents = ({ data }) => {
-    console.log(data)
     const [expandedNote, setExpandedNote] = useState(null)
 
     const toggleNote = (id) => {

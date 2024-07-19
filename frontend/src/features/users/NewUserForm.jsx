@@ -120,7 +120,6 @@ const NewUserForm = () => {
             console.log("Incomplete!")
         }
     }
-    console.log(isValid)
 
     return (
         <div className="flex justify-center">

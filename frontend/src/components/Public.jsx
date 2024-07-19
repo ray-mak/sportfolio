@@ -34,23 +34,9 @@ const Public = () => {
                     <p>Follow other users and tail their bets</p>
                 </div>
             </section>
-            {/* <section className="flex flex-col justify-center items-center w-full bg-lightGray p-10 gap-8">
-                <h2 className="text-3xl font-semibold">Features Heading</h2>
-                <div className="flex flex-col gap-8 md:flex-row md:gap-12 xl:w-4/5 2xl:w-2/3">
-                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
-                        <img src="/public/icon1.png" />
-                    </div>
-                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
-                        <img src="/public/icon3.png" />
-                    </div>
-                    <div className="flex flex-col justify-center items-center bg-white rounded-lg">
-                        <img src="/public/icon2.png" />
-                    </div>
-                </div>
-            </section> */}
             <section className="w-full flex items-center justify-center bg-slate-800 md:justify-between">
                 <div className="hidden md:block">
-                    <img src="/public/icon3.png" />
+                    <img src="/icon3.png" />
                 </div>
                 <div className="flex flex-col gap-4 w-2/3 p-6 md:w-1/2 xl:w-1/4">
                     <p className="text-white text-2xl font-semibold">Sign Up Now</p>
@@ -58,7 +44,7 @@ const Public = () => {
                     <Link to="/register" className="w-40 flex px-4 py-2 items-center justify-center border-2 border-white text-white rounded-lg hover:bg-white hover:text-slate-800">Sign Up</Link>
                 </div>
                 <div className="hidden md:block">
-                    <img src="/public/icon4.png" />
+                    <img src="/icon4.png" />
                 </div>
             </section>
         </main>
