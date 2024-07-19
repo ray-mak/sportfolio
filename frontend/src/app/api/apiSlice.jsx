@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { setCredentials } from "../../features/auth/authSlice"
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:3500/',
+    baseUrl: 'http://sportfolio-api.onrender.com/',
     //include credentials so that we will always send the cookie that contains the refresh token
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
