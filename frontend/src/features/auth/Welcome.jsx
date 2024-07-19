@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useGetUserResultsQuery } from "../users/userMMAEventsApiSlice"
 import ClipLoader from "react-spinners/ClipLoader"
@@ -7,7 +6,6 @@ import UserMMAEvents from "../users/UserMMAEvents"
 import UserUpcomingEvents from "../users/UserUpcomingEvents"
 import UserStatsSummary from "../users/UserStatsSummary"
 import LineChartMMA from "../../components/LineChartMMA"
-import PieChartMMA from "../../components/PieChartMMA"
 
 const Welcome = () => {
     const { id } = useAuth()
@@ -20,7 +18,6 @@ const Welcome = () => {
         isError,
         error
     } = useGetUserResultsQuery({ id })
-    console.log(id)
 
     let content
 

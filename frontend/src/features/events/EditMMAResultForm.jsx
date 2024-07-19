@@ -52,7 +52,6 @@ const EditMMAResultForm = ({ mmaResult }) => {
     const day = date.getDate()
     const year = date.getFullYear()
     const convertedDate = `${month}/${day}/${year}`
-    console.log(matchupResults)
 
     const resultsInputs = mmaResult.matchups.map((object, index) => {
         const fighterA = matchupResults[index].matchup.split(" vs ")[0].trim()
