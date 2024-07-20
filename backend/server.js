@@ -6,7 +6,6 @@ const corsOptions = require('./config/corsOptions')
 const { logger } = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
 const cookieParser = require('cookie-parser')
-const path = require('path')
 
 const app = express()
 
@@ -20,11 +19,6 @@ app.use(cookieParser())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
-})
-
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 })
 
 //routes
