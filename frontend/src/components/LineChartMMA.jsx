@@ -131,7 +131,6 @@ const LineChartMMA = ({ data }) => {
         ]
     }
 
-    console.log(totalData)
     return (
         <Line options={options} data={chartData} height={200} />
     )

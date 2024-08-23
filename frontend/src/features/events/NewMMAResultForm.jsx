@@ -73,11 +73,8 @@ const NewMMAResultForm = ({ events }) => {
             eventDate: eventData.eventDate,
             matchups: matchupResults
         }
-        console.log(dataToSubmit)
         await addNewMMAResult(dataToSubmit)
     }
-
-    console.log(eventToLog, eventData, matchupResults)
 
     const eventOptions = events.map(object => (<option key={object._id} value={object.eventName}>{object.eventName}</option>))
 

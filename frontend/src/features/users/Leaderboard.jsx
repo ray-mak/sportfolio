@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { selectUserById, useGetUsersQuery } from "./usersApiSlice"
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 //this is a users list, but this will be used for the leaderboard, which will have the users username and profits and additional stats
@@ -30,7 +31,17 @@ const Leaderboard = () => {
 
     let content
 
-    if (isLoading) content = <p>Loading...</p>
+    if (isLoading) content = (
+        <div className="flex h-screen items-center justify-center">
+            <div className="flex flex-col gap-4 items-center rounded-lg shadow-xl -mt-40 p-6">
+                <ClipLoader
+                    color="rgb(14 116 144)"
+                    size={100}
+                />
+                <p>Loading</p>
+            </div>
+        </div>
+    )
 
     if (isError) {
         content = <p>{error?.data?.message}</p>

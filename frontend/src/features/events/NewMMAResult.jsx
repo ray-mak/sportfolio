@@ -7,7 +7,6 @@ const NewMMAResult = () => {
     let content
     if (isLoading) content = <p>Loading...</p>
     if (isError) content = <p>{errorMessage}</p>
-    console.log(eventsWithNoResults)
 
     if (!isLoading && !isError) {
         content = (

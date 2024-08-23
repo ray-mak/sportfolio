@@ -251,7 +251,7 @@ const AddMMAPickForm = ({ events }) => {
         isValid.odds ? setFormError(prevState => ({ ...prevState, odds: false })) : setFormError(prevState => ({ ...prevState, odds: true }))
 
         const canSave = Object.values(isValid).every(Boolean)
-        console.log(formData)
+
 
         if (canSave) setShowConfirmation(true)
     }

@@ -40,8 +40,6 @@ function App() {
           <Route path=":id" element={<EventSummary />} />
         </Route>
 
-        <Route path="addfighter" element={<NewFighterForm />} />
-
         {/* protected routes */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
@@ -70,6 +68,8 @@ function App() {
               <Route path=":id" element={<EditMMAResult />} />
               <Route path="newmmaresult" element={<NewMMAResult />} />
             </Route>
+
+            <Route path="addfighter" element={<NewFighterForm />} />
           </Route>
         </Route>
         {/* end protected routes */}

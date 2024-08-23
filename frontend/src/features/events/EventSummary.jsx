@@ -241,7 +241,6 @@ const EventSummary = () => {
         )
     }
 
-    console.log(data)
     return content
 }
 
