@@ -16,7 +16,6 @@ const EditProfile = () => {
     }] = useUpdateUserMutation()
 
     const { id, username, email, displayName } = useAuth()
-    console.log(displayName, email)
 
     const navigate = useNavigate()
 

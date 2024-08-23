@@ -9,7 +9,6 @@ const EditMMAResult = () => {
 
 
     const mmaResult = useSelector(state => selectMMAResultById(state, id))
-    console.log(mmaResult)
 
     const content = mmaResult ? <EditMMAResultForm mmaResult={mmaResult} /> : <p>Loading...</p>
     return content

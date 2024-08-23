@@ -25,7 +25,6 @@ const MMAResultsList = () => {
     if (isSuccess) {
         const entities = Object.values(data.entities)
         const sortedEntities = entities.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate))
-        console.log(sortedEntities)
 
         const tableContent = sortedEntities.map(event => {
             const date = new Date(event.eventDate)

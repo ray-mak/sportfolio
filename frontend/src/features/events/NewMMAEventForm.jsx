@@ -84,7 +84,6 @@ const NewMMAEventForm = () => {
             eventDate: timeDate.toUTCString(),
             matchups: matchupsArray
         }
-        console.log(dataToSubmit)
 
         const canSubmit = Object.values(formData).every(Boolean)
 

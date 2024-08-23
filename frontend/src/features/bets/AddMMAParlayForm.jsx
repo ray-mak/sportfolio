@@ -385,7 +385,6 @@ const AddMMAParlayForm = ({ events }) => {
             betAmount: formData.betAmount,
             parlayInfo: parlayData
         }
-        console.log(dataToSubmit)
         await addNewMMAParlay(dataToSubmit)
     }
 

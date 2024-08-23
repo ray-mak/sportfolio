@@ -2,14 +2,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { setCredentials } from "../../features/auth/authSlice"
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://sportfolio-api.vercel.app/",
-  //include credentials so that we will always send the cookie that contains the refresh token
-  credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token
 
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`)
+    baseUrl: 'https://sportfolio-api.onrender.com/',
+    //include credentials so that we will always send the cookie that contains the refresh token
+    credentials: 'include',
+    prepareHeaders: (headers, { getState }) => {
+        const token = getState().auth.token
+
+        if (token) {
+            headers.set("authorization", `Bearer ${token}`)
+        }
+        return headers
     }
     return headers
   },
